@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PulseX — Fitness Tracker (React Practice Template)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg0: #0a0a0f;
+    --bg1: #111118;
+    --bg2: #18181f;
+    --bg3: #22222c;
+    --bg4: #2e2e3a;
+    --text1: #f0f0f5;
+    --text2: #a0a0b8;
+    --text3: #7e7e9a;
+    --accent: #6c63ff;
+    --accent2: #a78bfa;
+    --green: #22d3a8;
+    --red: #f87171;
+    --amber: #fbbf24;
+    --blue: #38bdf8;
+    --border: rgba(255,255,255,0.07);
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg0);
+    color: var(--text1);
+    min-height: 100vh;
+    display: flex;
+    overflow-x: hidden;
+  }
+
+  /* COMPONENT: Sidebar Styles */
+  .sidebar {
+    width: 72px;
+    background: var(--bg1);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0;
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    z-index: 100;
+    gap: 8px;
+  }
+  .logo {
+    width: 38px; height: 38px;
+    background: var(--accent);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 28px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .nav-item {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: var(--text3);
+    font-size: 20px;
+    position: relative;
+    border: none;
+    background: none;
+  }
+  .nav-item:hover { background: var(--bg3); color: var(--text2); }
+  .nav-item.active { background: rgba(108,99,255,0.15); color: var(--accent); }
+  .nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: -1px; top: 50%; transform: translateY(-50%);
+    width: 3px; height: 20px;
+    background: var(--accent);
+    border-radius: 0 3px 3px 0;
+  }
+  .sidebar-bottom { margin-top: auto; }
+  .avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 500; color: #fff;
+    cursor: pointer;
+  }
+
+  /* Main Wrapper */
+  .main {
+    margin-left: 72px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* COMPONENT: Header Styles */
+  .header {
+    padding: 28px 32px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .header-left h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text1);
+  }
+  .header-left p { font-size: 14px; color: var(--text3); margin-top: 4px; }
+  .header-right { display: flex; gap: 10px; align-items: center; }
+  .badge-dot {
+    width: 8px; height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--green);
+  }
+  .btn {
+    padding: 9px 18px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--text2);
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .btn:hover { background: var(--bg3); color: var(--text1); }
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: #5a52e8; }
+
+  /* Content Wrapper */
+  .content { padding: 24px 32px 40px; flex: 1; }
+
+  /* COMPONENT: Date Strip Styles */
+  .date-strip {
+    display: flex; gap: 8px; margin-bottom: 28px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .date-chip {
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    font-size: 13px; color: var(--text3);
+    cursor: pointer; transition: all 0.2s;
+    display: flex; flex-direction: column; align-items: center; gap: 1px;
+    min-width: 55px;
+  }
+  .date-chip span:first-child { font-size: 11px; color: var(--text3); }
+  .date-chip span:last-child { font-size: 15px; font-weight: 500; color: var(--text2); }
+  .date-chip.today {
+    background: rgba(108,99,255,0.15);
+    border-color: rgba(108,99,255,0.4);
+  }
+  .date-chip.today span:last-child { color: var(--accent2); }
+
+  /* COMPONENT: Stats Grid Styles */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: var(--bg1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.12); }
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  
+  .stat-card.steps::after { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .stat-card.cal::after { background: linear-gradient(90deg, #f97316, var(--amber)); }
+  .stat-card.active-min::after { background: linear-gradient(90deg, var(--amber), var(--red)); }
+  .stat-card.sleep::after { background: linear-gradient(90deg, var(--blue), #818cf8); }
+
+  .stat-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+  .stat-card.steps .stat-icon { background: rgba(108,99,255,0.15); color: var(--accent2); }
+  .stat-card.cal .stat-icon { background: rgba(249,115,22,0.15); color: #fb923c; }
+  .stat-card.active-min .stat-icon { background: rgba(251,191,36,0.15); color: var(--amber); }
+  .stat-card.sleep .stat-icon { background: rgba(56,189,248,0.15); color: var(--blue); }
+
+  .stat-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px; font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label { font-size: 12px; color: var(--text3); margin-bottom: 12px; }
+  .stat-progress-track {
+    background: var(--bg3);
+    border-radius: 4px;
+    height: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .stat-progress-fill {
+    height: 100%; border-radius: 4px;
+  }
+  .stat-card.steps .stat-progress-fill { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .stat-card.cal .stat-progress-fill { background: linear-gradient(90deg, #f97316, var(--amber)); }
+  .stat-card.active-min .stat-progress-fill { background: linear-gradient(90deg, var(--amber), var(--red)); }
+  .stat-card.sleep .stat-progress-fill { background: linear-gradient(90deg, var(--blue), #818cf8); }
+  .stat-meta { font-size: 11px; color: var(--text3); }
+  .stat-meta span { color: var(--green); }
+
+  /* Universal Card Layout */
+  .card {
+    background: var(--bg1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+  }
+  .card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 600;
+    color: var(--text1);
+  }
+  .chip {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text3);
+  }
+
+  /* COMPONENT: Workouts & Nutrition Section (Wide Grid) */
+  .wide-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  
+  /* Workouts List Styles */
+  .workout-item {
+    display: flex; align-items: center; gap: 14px; padding: 12px 8px;
+    border-bottom: 1px solid var(--border); transition: background 0.15s; border-radius: var(--radius-sm);
+  }
+  .workout-item:last-child { border-bottom: none; }
+  .workout-item:hover { background: var(--bg2); }
+  .wo-icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .wo-info { flex: 1; }
+  .wo-name { font-size: 14px; font-weight: 500; color: var(--text1); }
+  .wo-sub { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  .wo-right { text-align: right; }
+  .wo-cal { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 600; }
+  .wo-dur { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+  /* Nutrition Widgets Styles */
+  .macro-item { margin-bottom: 14px; }
+  .macro-item:last-child { margin-bottom: 0; }
+  .macro-top { display: flex; justify-content: space-between; margin-bottom: 5px; }
+  .macro-name { font-size: 12px; color: var(--text2); }
+  .macro-nums { font-size: 12px; color: var(--text3); }
+  .macro-track { height: 5px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .macro-fill { height: 100%; border-radius: 3px; }
+
+  /* Responsive Media Queries */
+  @media (max-width: 1200px) { .wide-row { grid-template-columns: 1fr; } }
+  @media (max-width: 992px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%; height: 60px; flex-direction: row; padding: 0 16px;
+      top: auto; bottom: 0; right: 0; border-right: none; border-top: 1px solid var(--border);
+      justify-content: space-around;
+    }
+    .logo { display: none; }
+    .nav-item.active::before {
+      left: 50%; top: auto; bottom: -1px; transform: translateX(-50%);
+      width: 20px; height: 3px; border-radius: 3px 3px 0 0;
+    }
+    .main { margin-left: 0; padding-bottom: 60px; }
+    .header { padding: 20px 16px 0; }
+    .content { padding: 16px 16px 30px; }
+  }
+  @media (max-width: 480px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .header-right { width: 100%; }
+    .header-right .btn { flex: 1; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+  <nav class="sidebar">
+    <div class="logo">P</div>
+    <button class="nav-item active" title="Dashboard">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    </button>
+    <button class="nav-item" title="Activity">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    </button>
+    <button class="nav-item" title="Workouts">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M6 4v16M18 4v16M3 12h18M3 7h3M3 17h3M18 7h3M18 17h3"/></svg>
+    </button>
+    <button class="nav-item" title="Sleep">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+    <button class="nav-item sidebar-bottom" title="Settings">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+    </button>
+    <div class="avatar">АИ</div>
+  </nav>
+
+  <div class="main">
+    
+    <div class="header">
+      <div class="header-left">
+        <h1>Привет, Алексей 👋</h1>
+        <p>Вторник, 27 мая 2025 · Неделя 22</p>
+      </div>
+      <div class="header-right">
+        <div class="badge-dot"></div>
+        <button class="btn">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          Статистика
+        </button>
+        <button class="btn btn-primary">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          Начать тренировку
+        </button>
+      </div>
+    </div>
+
+    <div class="content">
+      
+      <div class="date-strip">
+        <div class="date-chip"><span>ПН</span><span>21</span></div>
+        <div class="date-chip"><span>ВТ</span><span>22</span></div>
+        <div class="date-chip"><span>СР</span><span>23</span></div>
+        <div class="date-chip"><span>ЧТ</span><span>24</span></div>
+        <div class="date-chip"><span>ПТ</span><span>25</span></div>
+        <div class="date-chip"><span>СБ</span><span>26</span></div>
+        <div class="date-chip today"><span>ВС</span><span>27</span></div>
+      </div>
+
+      <div class="stats-grid">
+        
+        <div class="stat-card steps">
+          <div class="stat-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 4v4l3 3-3 5-4-2-2 4"/><circle cx="13" cy="3" r="1" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="stat-value">8 432</div>
+          <div class="stat-label">Шагов сегодня</div>
+          <div class="stat-progress-track">
+            <div class="stat-progress-fill" style="width: 84%"></div>
+          </div>
+          <div class="stat-meta">84% от цели · <span>+12% vs вчера</span></div>
+        </div>
+
+        <div class="stat-card cal">
+          <div class="stat-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10c0-2-3-6-3-6s-1 4-4 4-3-8-3-8z"/></svg>
+          </div>
+          <div class="stat-value">542</div>
+          <div class="stat-label">Ккал сожжено</div>
+          <div class="stat-progress-track">
+            <div class="stat-progress-fill" style="width: 54%"></div>
+          </div>
+          <div class="stat-meta">54% от цели · <span>активные зоны: 32 мин</span></div>
+        </div>
+
+        <div class="stat-card active-min">
+          <div class="stat-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div class="stat-value">42 / 60</div>
+          <div class="stat-label">Активных минут</div>
+          <div class="stat-progress-track">
+            <div class="stat-progress-fill" style="width: 70%"></div>
+          </div>
+          <div class="stat-meta">Осталось: <span>18 мин до цели</span></div>
+        </div>
+
+        <div class="stat-card sleep">
+          <div class="stat-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          </div>
+          <div class="stat-value">7:24</div>
+          <div class="stat-label">Часов сна</div>
+          <div class="stat-progress-track">
+            <div class="stat-progress-fill" style="width: 92%"></div>
+          </div>
+          <div class="stat-meta">Качество: <span>отличное · глубокий: 2:10</span></div>
+        </div>
+
+      </div>
+
+      <div class="wide-row">
+        
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Последние тренировки</span>
+            <span class="chip" style="color:var(--accent2);border-color:rgba(108,99,255,0.3)">Все →</span>
+          </div>
+          
+          <div class="workout-item">
+            <div class="wo-icon" style="background:rgba(108,99,255,0.12)">🏃</div>
+            <div class="wo-info">
+              <div class="wo-name">Утренняя пробежка</div>
+              <div class="wo-sub">5.4 км · ср. пульс 142 уд/мин</div>
+            </div>
+            <div class="wo-right">
+              <div class="wo-cal" style="color:#fb923c">320 ккал</div>
+              <div class="wo-dur">32:14</div>
+            </div>
+          </div>
+
+          <div class="workout-item">
+            <div class="wo-icon" style="background:rgba(34,211,168,0.1)">🏋️</div>
+            <div class="wo-info">
+              <div class="wo-name">Силовая тренировка</div>
+              <div class="wo-sub">Верхняя часть тела · 8 упражнений</div>
+            </div>
+            <div class="wo-right">
+              <div class="wo-cal" style="color:#fb923c">185 ккал</div>
+              <div class="wo-dur">48:00</div>
+            </div>
+          </div>
+
+          <div class="workout-item">
+            <div class="wo-icon" style="background:rgba(56,189,248,0.1)">🚴</div>
+            <div class="wo-info">
+              <div class="wo-name">Велоезда</div>
+              <div class="wo-sub">18.2 км · 210 м набор высоты</div>
+            </div>
+            <div class="wo-right">
+              <div class="wo-cal" style="color:#fb923c">410 ккал</div>
+              <div class="wo-dur">1:02:30</div>
+            </div>
+          </div>
+
+          <div class="workout-item">
+            <div class="wo-icon" style="background:rgba(251,191,36,0.1)">🧘</div>
+            <div class="wo-info">
+              <div class="wo-name">Йога</div>
+              <div class="wo-sub">Растяжка и восстановление</div>
+            </div>
+            <div class="wo-right">
+              <div class="wo-cal" style="color:#fb923c">85 ккал</div>
+              <div class="wo-dur">30:00</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Питание</span>
+            <div style="display:flex;align-items:baseline;gap:4px">
+              <span style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700">1840</span>
+              <span style="font-size:12px;color:var(--text3)">/ 2400 ккал</span>
+            </div>
+          </div>
+          
+          <div class="macro-row">
+            <div class="macro-item">
+              <div class="macro-top">
+                <span class="macro-name">Белки</span>
+                <span class="macro-nums">118г / 160г</span>
+              </div>
+              <div class="macro-track">
+                <div class="macro-fill" style="width: 73%; background: var(--blue)"></div>
+              </div>
+            </div>
+
+            <div class="macro-item">
+              <div class="macro-top">
+                <span class="macro-name">Углеводы</span>
+                <span class="macro-nums">220г / 280г</span>
+              </div>
+              <div class="macro-track">
+                <div class="macro-fill" style="width: 78%; background: var(--amber)"></div>
+              </div>
+            </div>
+
+            <div class="macro-item">
+              <div class="macro-top">
+                <span class="macro-name">Жиры</span>
+                <span class="macro-nums">56г / 80г</span>
+              </div>
+              <div class="macro-track">
+                <div class="macro-fill" style="width: 70%; background: var(--green)"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

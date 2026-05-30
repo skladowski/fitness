@@ -1,13 +1,10 @@
-import { StatCard } from "./components/StatCard";
+import { DashboardPage } from './pages/dashboard/DashboardPage';
+import './App.css';
 
 function App() {
-  statsDate
   return (
-
+    <DashboardPage />
   );
 }
-statsDate.map((item) => {
-  return(
-    <StatCard key={item.id} {...item} />
-  );
-})
+
+export default App;

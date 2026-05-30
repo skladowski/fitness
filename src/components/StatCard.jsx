@@ -4,7 +4,7 @@ export function StatCard({
   label,
   statProgress,
   widthPercent,
-  percentFromYesterday,
+  meta,
   type,
 }) {
   return (
@@ -20,7 +20,7 @@ export function StatCard({
 
         </div>
       </div>
-      <div className="stat-meta">{statProgress} <span> {percentFromYesterday} vs вчера</span></div>
+      <div className="stat-meta">{statProgress} <span> {meta} vs вчера</span></div>
     </div>
   );
 }

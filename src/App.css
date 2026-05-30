@@ -1,95 +1,12 @@
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg0: #0a0a0f;
-    --bg1: #111118;
-    --bg2: #18181f;
-    --bg3: #22222c;
-    --bg4: #2e2e3a;
-    --text1: #f0f0f5;
-    --text2: #a0a0b8;
-    --text3: #7e7e9a;
-    --accent: #6c63ff;
-    --accent2: #a78bfa;
-    --green: #22d3a8;
-    --red: #f87171;
-    --amber: #fbbf24;
-    --blue: #38bdf8;
-    --border: rgba(255,255,255,0.07);
-    --radius: 16px;
-    --radius-sm: 10px;
-  }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg0);
-    color: var(--text1);
-    min-height: 100vh;
-    display: flex;
-    overflow-x: hidden;
-  }
-
-  /* COMPONENT: Sidebar Styles */
-  .sidebar {
-    width: 72px;
-    background: var(--bg1);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 24px 0;
-    position: fixed;
-    top: 0; left: 0; bottom: 0;
-    z-index: 100;
-    gap: 8px;
-  }
-  .logo {
-    width: 38px; height: 38px;
-    background: var(--accent);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 28px;
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 16px;
-    color: #fff;
-    letter-spacing: -0.5px;
-  }
-  .nav-item {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    transition: background 0.2s;
-    color: var(--text3);
-    font-size: 20px;
-    position: relative;
-    border: none;
-    background: none;
-  }
-  .nav-item:hover { background: var(--bg3); color: var(--text2); }
-  .nav-item.active { background: rgba(108,99,255,0.15); color: var(--accent); }
-  .nav-item.active::before {
-    content: '';
-    position: absolute;
-    left: -1px; top: 50%; transform: translateY(-50%);
-    width: 3px; height: 20px;
-    background: var(--accent);
-    border-radius: 0 3px 3px 0;
-  }
-  .sidebar-bottom { margin-top: auto; }
-  .avatar {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 500; color: #fff;
-    cursor: pointer;
-  }
-
+  .app-layout {
+  flex-direction: row; /* можно вообще не писать, это дефолт */
+  min-height: 100vh;
+  display: flex;
+  flex: 1;
+}
+  
   /* Main Wrapper */
   .main {
-    margin-left: 72px;
     flex: 1;
     display: flex;
     flex-direction: column;

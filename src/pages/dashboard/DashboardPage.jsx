@@ -1,12 +1,9 @@
-import { Sidebar } from '../../components/Sidebar.jsx'
 import { statsData } from '../../mocks/StatsData.jsx';
 import { StatCard } from '../../components/StatCard.jsx';
 
 export function DashboardPage() {
   return ( 
-    <>
-      <Sidebar />
-      <div className="main">
+      <>
         <div className="header">
           <div className="header-left">
             <h1>Привет, Илья 👋</h1>
@@ -141,7 +138,6 @@ export function DashboardPage() {
             </div>
           </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+  )
 }

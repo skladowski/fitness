@@ -23,7 +23,7 @@
     gap: 16px;
   }
   .header-left h1 {
-    font-family: 'Syne', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 26px;
     font-weight: 700;
     letter-spacing: -0.5px;
@@ -164,7 +164,7 @@
     margin-bottom: 20px;
   }
   .card-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 15px; font-weight: 600;
     color: var(--text1);
   }
@@ -207,9 +207,9 @@
   /* Nutrition Widgets Styles */
   .macro-item { margin-bottom: 14px; }
   .macro-item:last-child { margin-bottom: 0; }
-  .macro-top { display: flex; justify-content: space-between; margin-bottom: 5px; }
-  .macro-name { font-size: 12px; color: var(--text2); }
-  .macro-nums { font-size: 12px; color: var(--text3); }
+  .macro-top { display: flex; justify-content: space-between; margin-bottom: 5px; align-items: flex-end }
+  .macro-name { font-size: 16px; color: var(--text2); }
+  .macro-nums { font-size: 14px; color: var(--text3); font-variant-numeric: tabular-nums; }
   .macro-track { height: 5px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
   .macro-fill { height: 100%; border-radius: 3px; }
 

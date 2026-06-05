@@ -1,6 +1,5 @@
 import { WorkoutItem } from "./WorkoutItem";
 import { WorkoutsData } from "../mocks/WorkoutsData";
-
 export function WorkoutsCard() {
   return (
     <div className="card">

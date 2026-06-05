@@ -1,0 +1,64 @@
+/* Главный контейнер компонента */
+.period-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Блок навигации (стрелки и дата) */
+.period-navigation {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Кнопки-стрелки */
+.period-navigation .btn {
+  padding: 7px 12px;
+}
+
+/* Текущая дата */
+.period-current {
+  font-size: 14px;
+  color: var(--text2);
+  font-weight: 500;
+  min-width: 100px;
+  text-align: center;
+}
+
+/* Твои существующие стили */
+.period-tabs {
+  display: flex; 
+  gap: 4px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 4px;
+  width: fit-content;
+}
+
+.period-tab {
+  padding: 7px 18px; 
+  border-radius: 9px;
+  font-size: 13px; 
+  font-weight: 500;
+  cursor: pointer; 
+  transition: all 0.2s;
+  color: var(--text3); 
+  border: none; 
+  background: none;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.period-tab:hover { 
+  color: var(--text2); 
+}
+
+.period-tab.active {
+  background: var(--accent); 
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(108,99,255,0.35);
+}

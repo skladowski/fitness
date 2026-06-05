@@ -1,9 +1,9 @@
-export function Header() {
+export function Header({ title, subtitle }) {
   return (
 <div className="header">
           <div className="header-left">
-            <h1>Привет, Илья 👋</h1>
-            <p>Вторник, 27 мая 2026 · Неделя 22</p>
+            <h1>{title}</h1>
+            <p>{subtitle}</p>
           </div>
           <div className="header-right">
             <div className="badge-dot"></div>

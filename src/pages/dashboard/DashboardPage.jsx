@@ -7,7 +7,7 @@ import { DateStrip } from '../../components/DateStrip.jsx';
 export function DashboardPage() {
   return ( 
       <>
-        <Header />
+        <Header title="Привет, Илья 👋" subtitle="Вторник, 27 мая 2026" />
         <div className="content">
          <DateStrip />
          <StatsGrid />

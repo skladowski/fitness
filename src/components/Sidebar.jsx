@@ -8,9 +8,9 @@ export function Sidebar() {
       <NavLink to="/dashboard" className="nav-item" title="Dashboard">
         <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>
       </NavLink>
-      <button className="nav-item" title="Activity">
+      <NavLink to="/activity" className="nav-item" title="Activity">
         <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>
-      </button>
+      </NavLink>
       <NavLink to="/history" className="nav-item" title="Workouts">
         <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24"><path d="M6 4v16M18 4v16M3 12h18M3 7h3M3 17h3M18 7h3M18 17h3" /></svg>
       </NavLink>

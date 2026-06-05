@@ -1,0 +1,9 @@
+
+  /* Nutrition Widgets Styles */
+  .macro-item { margin-bottom: 14px; }
+  .macro-item:last-child { margin-bottom: 0; }
+  .macro-top { display: flex; justify-content: space-between; margin-bottom: 5px; align-items: flex-end }
+  .macro-name { font-size: 16px; color: var(--text2); }
+  .macro-nums { font-size: 14px; color: var(--text3); font-variant-numeric: tabular-nums; }
+  .macro-track { height: 5px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .macro-fill { height: 100%; border-radius: 3px; }

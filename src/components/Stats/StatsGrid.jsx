@@ -1,4 +1,4 @@
-import { statsData } from "../mocks/StatsData";
+import { statsData } from "../../mocks/StatsData";
 import { StatCard } from "./StatCard";
 
 export function StatsGrid() {

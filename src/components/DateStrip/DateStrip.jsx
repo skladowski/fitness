@@ -1,3 +1,4 @@
+import './DateStrip.css'
 export function DateStrip() {
   return (
     <div className="date-strip">

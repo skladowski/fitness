@@ -1,5 +1,6 @@
 import { WorkoutItem } from "./WorkoutItem";
-import { WorkoutsData } from "../mocks/WorkoutsData";
+import { WorkoutsData } from "../../mocks/WorkoutsData";
+import './WorkOut.css'
 export function WorkoutsCard() {
   return (
     <div className="card">

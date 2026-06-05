@@ -1,5 +1,6 @@
-import { NutritionData } from "../mocks/NutritionData";
+import { NutritionData } from "../../mocks/NutritionData";
 import { NutritionItem } from "./NutritionItem";
+import './Nutrition.css'
 
 export function NutritionCard() {
   return (

@@ -1,3 +1,4 @@
+import './Header.css'
 export function Header({ title, subtitle }) {
   return (
 <div className="header">

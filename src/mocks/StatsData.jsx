@@ -14,7 +14,7 @@ export const statsData = [
     label: 'Ккал сожжено',
     value: '542',
     widthPercent: 54,
-    meta: '', // здесь не надо
+    meta: '4%',
     icon: <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10c0-2-3-6-3-6s-1 4-4 4-3-8-3-8z"/></svg>
   },
   {

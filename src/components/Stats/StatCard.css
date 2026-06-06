@@ -31,7 +31,7 @@
     width: 36px; height: 36px;
     border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 16px;
   }
   .stat-card.steps .stat-icon { background: rgba(108,99,255,0.15); color: var(--accent2); }
@@ -42,7 +42,7 @@
  .stat-value {
   /* Было: font-family: 'Syne', sans-serif; */
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-  font-size: 32px; /* Можно немного увеличить, так как DM Sans визуально чуть компактнее */
+  font-size: 25px; /* Можно немного увеличить, так как DM Sans визуально чуть компактнее */
   font-weight: 700;
   letter-spacing: -0.5px; /* Уменьшим сжатие, чтобы цифры дышали */
   line-height: 1;
@@ -65,3 +65,14 @@
   .stat-card.sleep .stat-progress-fill { background: linear-gradient(90deg, var(--blue), #818cf8); }
   .stat-meta { font-size: 11px; color: var(--text3); }
   .stat-meta span { color: var(--green); }
+
+
+  .stat-card.horizontal {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    
+  }
+  .stat-info {
+   
+  }

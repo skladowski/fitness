@@ -7,21 +7,26 @@ export function StatCard({
   widthPercent,
   meta,
   type,
+  variant
 }) {
   return (
-    <div className={`stat-card ${type}`}  >
+    <div className={`stat-card ${type} ${variant ? variant:''} `}  >
       <div className="stat-icon">
         {icon}
       </div>
+      
+      <div className='stat-info'>
       <div className="stat-value">{value}</div>
       <div className="stat-label">{label}</div>
-      <div className="stat-progress-track">
+      </div>
+      
+      { variant !== 'horizontal' && (<div className={`stat-progress-track`}>
         <div className="stat-progress-fill" style={
           { width: `${widthPercent}%`}}>
 
         </div>
-      </div>
-      <div className="stat-meta">{statProgress} <span> {meta} vs вчера</span></div>
+      </div>)}
+      <div className="stat-meta">{statProgress} { variant !== 'horizontal' && <span> {meta} vs вчера</span> }</div>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { PeriodSelector } from "../../components/PeriodSelector/PeriodSelector";
 export function HistoryPage() {
   return (
   <div className="main">
-    <Header title="История активности" subtitle='абве' />
+    <Header title="История активности" subtitle='Current day' />
     <div className="content">
       <PeriodSelector /> 
       

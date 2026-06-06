@@ -1,14 +1,16 @@
-import './PeriodSelector.css';
+import './PeriodSelector.css'; 
+import { useState } from 'react';
 
-export function PeriodSelector() {
+const daysOfPeriod = ['День', 'Неделя', 'Месяц', '3 Мес.', 'Год' ]
+
+export function PeriodSelector({ activePeriod }) {
+  const [current, setCurrent] = useState(activePeriod);
   return (
     <div className="period-selector">
       <div className="period-tabs">
-        <button className="period-tab">День</button>
-        <button className="period-tab">Неделя</button>
-        <button className="period-tab active">Месяц</button>
-        <button className="period-tab">3 мес.</button>
-        <button className="period-tab">Год</button>
+        {daysOfPeriod.map((item) => (
+          <button onClick={() => setCurrent(item)} key={item} className={`period-tab ${item === current ? 'active' : ''}`}>{item}</button> 
+        ))}
       </div>
       
       <div className="period-navigation">

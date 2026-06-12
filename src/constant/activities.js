@@ -37,7 +37,9 @@ export const activities = {
     label: "Калории",
     icon: "🔥",
     color: "#fb923c",
-    unit: "Ккал",
+    metrics: {
+      burned: { label: "Сожжено", unit: "Ккал" },
+    },
   },
   WALK: {
     label: "Шаги за день",
@@ -55,6 +57,39 @@ export const activities = {
       protein: { label: "Белки", color: "#38bdf8", unit: "г" },
       carbs: { label: "Углеводы", color: "#fbbf24", unit: "г" },
       fat: { label: "Жиры", color: "#34d399", unit: "г" },
+    },
+  },
+  STEPS: {
+    label: "Шаги за день",
+    icon: "🚶",
+    color: "rgba(124, 118, 238, 0.12)",
+    metrics: {
+      steps: { label: "Шаги", unit: "шагов" },
+      duration: { label: "Время", unit: "мин" },
+    },
+  },
+  SLEEP: {
+    label: "Сон",
+    icon: "😴",
+    color: "rgba(0,0,0,0.1)",
+    metrics: {
+      total: { label: "Сна", unit: " Часов" },
+    },
+  },
+  ACTIVE_MINUTES: {
+    label: "Активные минуты ",
+    icon: "⚡",
+    color: "rgba(0,0,0,0.1)",
+    metrics: {
+      active: { label: "Активных", unit: "Минут" },
+    },
+  },
+  TRAINING_COUNT: {
+    label: "Тренировки",
+    icon: "📅",
+    color: "rgba(0,0,0,0.1)",
+    metrics: {
+      number: { label: "Сессий", unit: "тр." },
     },
   },
 };

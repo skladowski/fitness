@@ -1,39 +1,63 @@
 export const WorkoutsData = [
   {
-    id: `1`,
-    type: 'Утренняя пробежка',
-    meta: '5.4 км · ср. пульс 142 уд/мин',
-    kcalColor: '#fb923c',
-    backgroundColor: 'rgba(74, 65, 241, 0.12)',
-    burnedKcal: '320 ккал',
-    time: '32:14',
-    icon:  '🏃',
-  },{
-    id: `2`,
-    type: 'Силовая тренировка',
-    meta: 'Верхняя часть тела · 8 упражнений',
-    kcalColor: '#fb923c',
-    backgroundColor: 'rgba(31, 141, 113, 0.1)',
-    burnedKcal: '185 ккал',
-    time: '48:00',
-    icon:  '🏋️',
-  },{
-    id: `3`,
-    type: 'Велоезда',
-    meta: '18.2 км · 210 м набор высоты',
-    kcalColor: '#fb923c',
-    backgroundColor: 'rgba(29, 119, 158, 0.1)',
-    burnedKcal: '410 ккал',
-    time: '1:02:30',
-    icon:  '🚴',
-  },{
-    id: `4`,
-    type: 'Йога',
-    meta: 'Растяжка и восстановление',
-    kcalColor: '#fb923c',
-    backgroundColor: 'rgba(251,191,36,0.1)',
-    burnedKcal: '85 ккал',
-    time: '30:00',
-    icon:  '🧘',
+    id: "uuid-1",
+    type: "RUN",
+    title: "Пробежка",
+    metrics: {
+      burnedKcal: { current: 320, target: null },
+      duration: { current: 1934, target: null },
+    },
   },
-]
+  {
+    id: "uuid-2",
+    type: "POWER",
+    exercises: [
+      {
+        id: "uuid-21",
+        name: "Жим гантелей",
+        sets: [
+          {
+            id: "uuid-211",
+            weight: 20,
+            reps: 10,
+          },
+        ],
+      },
+      {
+        id: "uuid-22",
+        name: "Брусья",
+        sets: [
+          {
+            id: "uuid-221",
+            weight: 25,
+            reps: 10,
+          },
+        ],
+      },
+    ],
+    title: "Силовая Тренировка",
+    metrics: {
+      burnedKcal: { current: 185, target: null },
+      duration: { current: 2880, target: null },
+    },
+  },
+
+  {
+    id: "uuid-3",
+    type: "CYCLING",
+    title: "Велоезда",
+    metrics: {
+      burnedKcal: { current: 410, target: null },
+      duration: { current: 3720, target: null },
+    },
+  },
+  {
+    id: "uuid-4",
+    type: "YOGA",
+    title: "Йога",
+    metrics: {
+      burnedKcal: { current: 85, target: null },
+      duration: { current: 1800, target: null },
+    },
+  },
+];

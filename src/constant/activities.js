@@ -1,11 +1,23 @@
+import { secondsToHours } from "../utils/formatters";
+import { secondsToMinutes } from "../utils/formatters";
+import { metersToKilometers } from "../utils/formatters";
+
 export const activities = {
   RUN: {
     label: "Бег",
     icon: "🏃",
     color: "rgba(74, 65, 241, 0.12)",
     metrics: {
-      distance: { label: "Дистанция", unit: "км" },
-      duration: { label: "Время", unit: "мин" },
+      distance: {
+        label: "Дистанция",
+        unit: "км",
+        transform: metersToKilometers,
+      },
+      duration: {
+        label: "Время",
+        unit: "мин",
+        transform: secondsToMinutes,
+      },
     },
   },
   POWER: {
@@ -13,7 +25,11 @@ export const activities = {
     icon: "🏋️",
     color: "rgba(31, 141, 113, 0.1)",
     metrics: {
-      duration: { label: "Время", unit: "мин" },
+      duration: {
+        label: "Время",
+        unit: "мин",
+        transform: secondsToMinutes,
+      },
     },
   },
   CYCLING: {
@@ -21,8 +37,16 @@ export const activities = {
     icon: "🚴",
     color: "rgba(29, 119, 158, 0.1)",
     metrics: {
-      distance: { label: "Дистанция", unit: "км" },
-      duration: { label: "Время", unit: "мин" },
+      distance: {
+        label: "Дистанция",
+        unit: "км",
+        transform: metersToKilometers,
+      },
+      duration: {
+        label: "Время",
+        unit: "мин",
+        transform: secondsToMinutes,
+      },
     },
   },
   YOGA: {
@@ -30,7 +54,11 @@ export const activities = {
     icon: "🧘",
     color: "rgba(251,191,36,0.1)",
     metrics: {
-      duration: { label: "Время", unit: "мин" },
+      duration: {
+        label: "Время",
+        unit: "мин",
+        transform: secondsToMinutes,
+      },
     },
   },
   CALORIES: {
@@ -46,8 +74,16 @@ export const activities = {
     icon: "🚶",
     color: "rgba(124, 118, 238, 0.12)",
     metrics: {
-      distance: { label: "Дистанция", unit: "км" },
-      duration: { label: "Время", unit: "мин" },
+      distance: {
+        label: "Дистанция",
+        unit: "км",
+        transform: metersToKilometers,
+      },
+      duration: {
+        label: "Время",
+        unit: "мин",
+        transform: secondsToMinutes,
+      },
     },
   },
   NUTRITION: {
@@ -65,7 +101,11 @@ export const activities = {
     color: "rgba(124, 118, 238, 0.12)",
     metrics: {
       steps: { label: "Шаги", unit: "шагов" },
-      duration: { label: "Время", unit: "мин" },
+      duration: {
+        label: "Время",
+        unit: "мин",
+        transform: secondsToMinutes,
+      },
     },
   },
   SLEEP: {
@@ -73,7 +113,11 @@ export const activities = {
     icon: "😴",
     color: "rgba(0,0,0,0.1)",
     metrics: {
-      total: { label: "Сна", unit: " Часов" },
+      total: {
+        label: "Сна",
+        unit: " Часов",
+        transform: secondsToHours,
+      },
     },
   },
   ACTIVE_MINUTES: {
@@ -81,7 +125,11 @@ export const activities = {
     icon: "⚡",
     color: "rgba(0,0,0,0.1)",
     metrics: {
-      active: { label: "Активных", unit: "Минут" },
+      active: {
+        label: "Активных",
+        unit: "Минут",
+        transform: secondsToMinutes,
+      },
     },
   },
   TRAINING_COUNT: {

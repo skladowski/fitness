@@ -23,8 +23,8 @@
   }
   
   .stat-card.steps::after { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
-  .stat-card.cal::after { background: linear-gradient(90deg, #f97316, var(--amber)); }
-  .stat-card.active-min::after { background: linear-gradient(90deg, var(--amber), var(--red)); }
+  .stat-card.calories::after { background: linear-gradient(90deg, #f97316, var(--amber)); }
+  .stat-card.active_minutes::after { background: linear-gradient(90deg, var(--amber), var(--red)); }
   .stat-card.sleep::after { background: linear-gradient(90deg, var(--blue), #818cf8); }
 
   .stat-icon {
@@ -35,8 +35,8 @@
     margin-bottom: 16px;
   }
   .stat-card.steps .stat-icon { background: rgba(108,99,255,0.15); color: var(--accent2); }
-  .stat-card.cal .stat-icon { background: rgba(249,115,22,0.15); color: #fb923c; }
-  .stat-card.active-min .stat-icon { background: rgba(251,191,36,0.15); color: var(--amber); }
+  .stat-card.calories .stat-icon { background: rgba(249,115,22,0.15); color: #fb923c; }
+  .stat-card.active_minutes .stat-icon { background: rgba(251,191,36,0.15); color: var(--amber); }
   .stat-card.sleep .stat-icon { background: rgba(56,189,248,0.15); color: var(--blue); }
 
  .stat-value {
@@ -60,11 +60,13 @@
     height: 100%; border-radius: 4px;
   }
   .stat-card.steps .stat-progress-fill { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
-  .stat-card.cal .stat-progress-fill { background: linear-gradient(90deg, #f97316, var(--amber)); }
-  .stat-card.active-min .stat-progress-fill { background: linear-gradient(90deg, var(--amber), var(--red)); }
+  .stat-card.calories .stat-progress-fill { background: linear-gradient(90deg, #f97316, var(--amber)); }
+  .stat-card.active_minutes .stat-progress-fill { background: linear-gradient(90deg, var(--amber), var(--red)); }
   .stat-card.sleep .stat-progress-fill { background: linear-gradient(90deg, var(--blue), #818cf8); }
   .stat-meta { font-size: 11px; color: var(--text3); }
-  .stat-meta span { color: var(--green); }
+  .stat-meta .positive { color: var(--green); }
+  .stat-meta .negative { color: var(--red); }
+  .stat-meta .neutral { color: var(--grey);}
 
 
   .stat-card.horizontal {
@@ -75,4 +77,12 @@
   }
   .stat-info {
    
+  }
+
+  .unit {
+    font-size: 14px;
+    margin-left: 4px;
+  }
+  .number {
+    font-size: 32px
   }

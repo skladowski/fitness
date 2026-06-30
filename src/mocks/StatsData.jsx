@@ -13,13 +13,13 @@ export const statsData = [
     type: "CALORIES",
     trend: 8,
     metrics: {
-      burned: { current: 542, target: null },
+      burned: { current: 542, target: 2200 },
     },
   },
   {
     id: "uuid-3",
     type: "ACTIVE_MINUTES",
-    trend: 18,
+    trend: -18,
     metrics: {
       active: { current: 2700, target: 3600 },
     },

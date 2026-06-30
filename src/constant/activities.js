@@ -123,6 +123,7 @@ export const activities = {
   ACTIVE_MINUTES: {
     label: "Активные минуты ",
     icon: "⚡",
+    showRatio: true,
     color: "rgba(0,0,0,0.1)",
     metrics: {
       active: {

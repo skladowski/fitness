@@ -1,20 +1,27 @@
 export function NutritionItem({
-  id,
   label,
   current,
   target,
-  unit, // граммы 
+  type,
+  unit, // граммы
   color,
 }) {
-  const progress = (current / target) * 100
+  const progress = target > 0 ? Math.min((current / target) * 100, 100) : 0;
   return (
-    <div className={`macro-item ${id}`}>
+    <div className={`macro-item ${type}`}>
       <div className="macro-top">
         <span className="macro-name">{label}</span>
-        <span className="macro-nums">{current}{unit} / {target}{unit}</span>
+        <span className="macro-nums">
+          {Math.round(current)}
+          {unit} / {target}
+          <span> {unit} </span>
+        </span>
       </div>
       <div className="macro-track">
-        <div className="macro-fill" style={{ width: progress + '%', background: color }}></div>
+        <div
+          className="macro-fill"
+          style={{ width: progress + "%", background: color }}
+        ></div>
       </div>
     </div>
   );

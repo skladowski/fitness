@@ -1,23 +1,41 @@
 import { NutritionData } from "../../mocks/NutritionData";
 import { NutritionItem } from "./NutritionItem";
-import './Nutrition.css'
+import { activities } from "../../constant/activities";
+import "./Nutrition.css";
 
 export function NutritionCard() {
+  const currentDayData = NutritionData[0];
+
+  const metricKeys = Object.keys(currentDayData.metrics).filter(
+    (metricName) => metricName !== "calories",
+  );
+  const calories = currentDayData.metrics.calories;
   return (
     <div className="card">
       <div className="card-header">
         <span className="card-title">Питание</span>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '16px', lineHeight: 1, fontWeight: '700' }}>1840</span>
-          <span style={{ fontSize: '16px', lineHeight: 1 , color: 'var(--text3)' }}>/ 2400 ккал</span>
+        <div className="header-wrapper">
+          <span className="header-value">{calories.current}</span>
+          <span className="header-target">/ {calories.target}</span>
         </div>
       </div>
 
       <div className="macro-row">
-
-        {NutritionData.map((item) => (
-          <NutritionItem key={item.id} {...item} />
-        ))}
+        {metricKeys.map((key) => {
+          const config = activities.NUTRITION.metrics[key];
+          const data = currentDayData.metrics[key];
+          return (
+            <NutritionItem
+              key={key}
+              label={config.label}
+              color={config.color}
+              unit={config.unit}
+              type={key}
+              current={data.current}
+              target={data.target}
+            />
+          );
+        })}
       </div>
     </div>
   );

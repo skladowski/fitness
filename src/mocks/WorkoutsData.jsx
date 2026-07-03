@@ -3,6 +3,7 @@ export const WorkoutsData = [
     id: "uuid-1",
     type: "RUN",
     title: "Пробежка",
+    timestamp: "2026-07-03T14:30:00Z",
     metrics: {
       burnedKcal: { current: 320, target: null },
       duration: { current: 1934, target: null },
@@ -11,6 +12,7 @@ export const WorkoutsData = [
   {
     id: "uuid-2",
     type: "POWER",
+    timestamp: "2026-07-02T14:30:00Z",
     exercises: [
       {
         id: "uuid-21",
@@ -45,6 +47,7 @@ export const WorkoutsData = [
   {
     id: "uuid-3",
     type: "CYCLING",
+    timestamp: "2026-07-01T11:30:00Z",
     title: "Велоезда",
     metrics: {
       burnedKcal: { current: 410, target: null },
@@ -55,6 +58,7 @@ export const WorkoutsData = [
     id: "uuid-4",
     type: "YOGA",
     title: "Йога",
+    timestamp: "2026-06-29T16:35:00Z",
     metrics: {
       burnedKcal: { current: 85, target: null },
       duration: { current: 1800, target: null },

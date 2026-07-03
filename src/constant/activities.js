@@ -18,6 +18,11 @@ export const activities = {
         unit: "мин",
         transform: secondsToMinutes,
       },
+      burnedKcal: {
+        label: "Калории",
+        unit: "ккал",
+        transform: "",
+      },
     },
   },
   POWER: {

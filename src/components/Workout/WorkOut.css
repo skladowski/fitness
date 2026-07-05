@@ -33,3 +33,16 @@
   border-radius: 12px;
 }
 
+.see-all-link {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--accent2);
+    border-color: rgba(108,99,255,0.3);
+    text-decoration: none
+  }
+  .workout-list {
+   flex-direction: column;
+    display: flex;
+  }

@@ -17,7 +17,7 @@ export function WorkoutsCard() {
         </span>
       </div>
 
-      {WorkoutsData.map((item) => (
+      {WorkoutsData.slice(0, 4).map((item) => (
         <WorkoutItem key={item.id} {...item} />
       ))}
     </div>

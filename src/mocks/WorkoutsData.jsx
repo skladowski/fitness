@@ -3,8 +3,10 @@ export const WorkoutsData = [
     id: "uuid-1",
     type: "RUN",
     title: "Пробежка",
-    timestamp: "2026-07-03T14:30:00Z",
+    timestamp: "2026-02-03T14:30:00Z",
     metrics: {
+      distance: { current: 5400, target: null },
+      heartRate: { current: 142, target: null },
       burnedKcal: { current: 320, target: null },
       duration: { current: 1934, target: null },
     },
@@ -50,6 +52,7 @@ export const WorkoutsData = [
     timestamp: "2026-07-01T11:30:00Z",
     title: "Велоезда",
     metrics: {
+      distance: { current: 5400, target: null },
       burnedKcal: { current: 410, target: null },
       duration: { current: 3720, target: null },
     },
@@ -58,6 +61,7 @@ export const WorkoutsData = [
     id: "uuid-4",
     type: "YOGA",
     title: "Йога",
+    description: "Растяжка и восстановление",
     timestamp: "2026-06-29T16:35:00Z",
     metrics: {
       burnedKcal: { current: 85, target: null },

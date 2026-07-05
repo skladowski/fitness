@@ -6,7 +6,7 @@ export const activities = {
   RUN: {
     label: "Бег",
     icon: "🏃",
-    color: "rgba(74, 65, 241, 0.12)",
+    color: "rgba(182, 179, 240, 0.1)",
     metrics: {
       distance: {
         label: "Дистанция",
@@ -14,15 +14,18 @@ export const activities = {
         transform: metersToKilometers,
       },
       duration: {
+        isPrimary: true,
         label: "Время",
         unit: "мин",
         transform: secondsToMinutes,
       },
       burnedKcal: {
+        isPrimary: true,
         label: "Калории",
         unit: "ккал",
         transform: "",
       },
+      heartRate: { label: "Пульс", unit: "уд/мин" },
     },
   },
   POWER: {
@@ -31,9 +34,24 @@ export const activities = {
     color: "rgba(31, 141, 113, 0.1)",
     metrics: {
       duration: {
+        isPrimary: true,
         label: "Время",
         unit: "мин",
         transform: secondsToMinutes,
+      },
+      burnedKcal: {
+        isPrimary: true,
+        label: "Калории",
+        unit: "ккал",
+        transform: "",
+      },
+      exercisesCount: {
+        label: "Упражнений",
+        unit: "упр.",
+      },
+      totalVolume: {
+        label: "Объем",
+        unit: "кг",
       },
     },
   },
@@ -48,9 +66,14 @@ export const activities = {
         transform: metersToKilometers,
       },
       duration: {
+        isPrimary: true,
         label: "Время",
         unit: "мин",
         transform: secondsToMinutes,
+      },
+      avgSpeed: {
+        label: "Среднее значение",
+        unit: "ср. знач.",
       },
     },
   },
@@ -60,6 +83,7 @@ export const activities = {
     color: "rgba(251,191,36,0.1)",
     metrics: {
       duration: {
+        isPrimary: true,
         label: "Время",
         unit: "мин",
         transform: secondsToMinutes,
@@ -71,13 +95,13 @@ export const activities = {
     icon: "🔥",
     color: "#fb923c",
     metrics: {
-      burned: { label: "Сожжено", unit: "Ккал" },
+      burned: { label: "Сожжено", unit: "ккал" },
     },
   },
   WALK: {
     label: "Шаги за день",
     icon: "🚶",
-    color: "rgba(124, 118, 238, 0.12)",
+    color: "rgba(124, 118, 238, 0.1)",
     metrics: {
       distance: {
         label: "Дистанция",
@@ -85,6 +109,7 @@ export const activities = {
         transform: metersToKilometers,
       },
       duration: {
+        isPrimary: true,
         label: "Время",
         unit: "мин",
         transform: secondsToMinutes,
@@ -103,10 +128,11 @@ export const activities = {
   STEPS: {
     label: "Шаги за день",
     icon: "🚶",
-    color: "rgba(124, 118, 238, 0.12)",
+    color: "rgba(124, 118, 238, 0.1)",
     metrics: {
       steps: { label: "Шаги", unit: "шагов" },
       duration: {
+        isPrimary: true,
         label: "Время",
         unit: "мин",
         transform: secondsToMinutes,

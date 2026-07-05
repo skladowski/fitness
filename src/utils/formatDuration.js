@@ -1,8 +1,8 @@
 export const formatDuration = (seconds) => {
-  const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
-
+  const hours = Math.floor(seconds / 3600);
+  const remainingMinutes = Math.floor((seconds % 3600) / 60);
   const paddedSeconds = String(remainingSeconds).padStart(2, "0");
-
-  return `${minutes}:${paddedSeconds}`;
+  const paddedMinutes = String(remainingMinutes).padStart(2, "0");
+  return `${hours ? `${hours}:` : ""}${paddedMinutes}:${paddedSeconds}`;
 };

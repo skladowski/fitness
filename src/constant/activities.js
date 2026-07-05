@@ -51,7 +51,7 @@ export const activities = {
       },
       totalVolume: {
         label: "Объем",
-        unit: "кг",
+        unit: "кг тоннажа",
       },
     },
   },

@@ -52,6 +52,7 @@ export const WorkoutsData = [
     timestamp: "2026-07-01T11:30:00Z",
     title: "Велоезда",
     metrics: {
+      avgSpeed: { current: 23, target: null },
       distance: { current: 5400, target: null },
       burnedKcal: { current: 410, target: null },
       duration: { current: 3720, target: null },

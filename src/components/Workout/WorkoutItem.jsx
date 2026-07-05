@@ -1,7 +1,14 @@
 import { activities } from "../../constant/activities";
 import { formatDuration } from "../../utils/formatDuration";
 import { formatRelativeDate } from "../../utils/formatRelativeDate";
-export function WorkoutItem({ type, metrics, timestamp, title, exercises }) {
+export function WorkoutItem({
+  type,
+  metrics,
+  timestamp,
+  title,
+  exercises,
+  description,
+}) {
   const localMetrics = { ...metrics };
   const activityConfig = activities[type];
   if (!activityConfig) return null;
@@ -11,6 +18,7 @@ export function WorkoutItem({ type, metrics, timestamp, title, exercises }) {
   const kcal = localMetrics.burnedKcal.current;
   const kcalColor = activities.CALORIES.color;
   const kcalUnit = activities.CALORIES.metrics.burned.unit;
+
   let totalVolume = null;
   if (type === "POWER" && exercises) {
     totalVolume = exercises.reduce((total, exercises) => {
@@ -40,6 +48,7 @@ export function WorkoutItem({ type, metrics, timestamp, title, exercises }) {
     })
     .filter(Boolean)
     .join(" · ");
+  const subtitle = [description, formattedMetrics].filter(Boolean).join("·");
   return (
     <div className={`workout-item ${type.toLowerCase()}`}>
       <div className="wo-icon" style={{ background: color }}>
@@ -47,7 +56,7 @@ export function WorkoutItem({ type, metrics, timestamp, title, exercises }) {
       </div>
       <div className="wo-info">
         <div className="wo-name">{title || label}</div>
-        <div className="wo-sub">{formattedMetrics}</div>
+        <div className="wo-sub">{subtitle}</div>
         <div className="wo-time"> {formattedTime}</div>
       </div>
       <div className="wo-right">

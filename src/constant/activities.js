@@ -73,7 +73,7 @@ export const activities = {
       },
       avgSpeed: {
         label: "Среднее значение",
-        unit: "ср. знач.",
+        unit: "км/ч",
       },
     },
   },

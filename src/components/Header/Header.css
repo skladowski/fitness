@@ -22,9 +22,10 @@
     border-radius: 50%;
     box-shadow: 0 0 8px var(--green);
   }
-  .btn {
+  .header-btn {
     padding: 9px 18px;
     border-radius: 10px;
+    text-decoration: none;
     border: 1px solid var(--border);
     background: var(--bg2);
     color: var(--text2);
@@ -34,10 +35,10 @@
     transition: all 0.2s;
     display: flex; align-items: center; gap: 6px;
   }
-  .btn:hover { background: var(--bg3); color: var(--text1); }
-  .btn-primary {
+  .header-btn:hover { background: var(--bg3); color: var(--text1); }
+  .header-btn-primary {
     background: var(--accent);
     border-color: var(--accent);
     color: #fff;
   }
-  .btn-primary:hover { background: #5a52e8; }
+  .header-btn-primary:hover { background: #5a52e8; }

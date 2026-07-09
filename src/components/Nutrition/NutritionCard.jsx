@@ -4,6 +4,7 @@ import "./Nutrition.css";
 
 export function NutritionCard({ nutrition }) {
   const currentDayData = nutrition;
+  if (!nutrition) return null;
 
   const metricKeys = Object.keys(currentDayData.metrics).filter(
     (metricName) => metricName !== "calories",

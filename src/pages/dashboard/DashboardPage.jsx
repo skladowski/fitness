@@ -9,16 +9,15 @@ import { NutritionData } from "../../mocks/NutritionData.jsx";
 
 const TODAY = "2026-07-07";
 
-const todayStats =
-  statsData.find((element) => element.date === TODAY)?.stats || [];
-const todayWorkouts = WorkoutsData.flatMap((day) => day.workouts)
-  .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-  .slice(0, 4);
-const todayNutrition = NutritionData.find((element) => element.date === TODAY)
-  ?.nutrition[0];
-
 export function DashboardPage() {
   const today = getDisplayDate(new Date());
+  const todayStats =
+    statsData.find((element) => element.date === TODAY)?.stats || [];
+  const todayWorkouts = WorkoutsData.flatMap((day) => day.workouts)
+    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+    .slice(0, 4);
+  const todayNutrition = NutritionData.find((element) => element.date === TODAY)
+    ?.nutrition[0];
   return (
     <>
       <Header title="Привет, Илья 👋" subtitle={today} />

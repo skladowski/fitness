@@ -17,13 +17,16 @@ export function StatsGrid({ stats }) {
         const widthPercent = rawData.target
           ? Math.min((rawData.current / rawData.target) * 100, 100) // считаем проценты
           : 0;
+        const realWidthPercent = rawData.target
+          ? (rawData.current / rawData.target) * 100
+          : 0;
 
         const formattedValue = config.showRatio
           ? `${secondsToMinutes(rawData.current)} / ${secondsToMinutes(rawData.target)}`
           : finalValue.toLocaleString("ru-RU"); // проверяем нужно ли нам вставлять 45/60, или просто форматировать числа
 
         const goalText = rawData.target
-          ? `${Math.round(widthPercent)}% от цели`
+          ? `${Math.round(realWidthPercent)}% от цели`
           : ""; // создаем тренд от цели
 
         const trendText = `${item.trend > 0 ? "+" : ""} ${item.trend}% vs вчера `; // создаем тренд от вчера

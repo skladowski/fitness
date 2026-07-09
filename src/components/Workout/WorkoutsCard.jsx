@@ -1,11 +1,8 @@
 import { WorkoutItem } from "./WorkoutItem";
-import { WorkoutsData } from "../../mocks/WorkoutsData";
 import "./WorkOut.css";
 import { Link } from "react-router-dom";
-export function WorkoutsCard() {
-  const recentWorkouts = [...WorkoutsData]
-    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-    .slice(0, 4);
+export function WorkoutsCard({ workouts }) {
+  const recentWorkouts = [...workouts];
 
   return (
     <div className="card">

@@ -1,12 +1,11 @@
-import { statsData } from "../../mocks/StatsData";
 import { StatCard } from "./StatCard";
 import { secondsToMinutes } from "../../utils/formatters.js";
 import { activities } from "../../constant/activities.js";
 
-export function StatsGrid() {
+export function StatsGrid({ stats }) {
   return (
     <div className="stats-grid">
-      {statsData.map((item) => {
+      {stats.map((item) => {
         const config = activities[item.type]; // достаем объект-конфиг
         const mKey = Object.keys(item.metrics)[0]; // достаем имя метрики
         const metricsConfig = config.metrics[mKey]; // достаем метрику из конфига

@@ -1,10 +1,9 @@
-import { NutritionData } from "../../mocks/NutritionData";
 import { NutritionItem } from "./NutritionItem";
 import { activities } from "../../constant/activities";
 import "./Nutrition.css";
 
-export function NutritionCard() {
-  const currentDayData = NutritionData[0];
+export function NutritionCard({ nutrition }) {
+  const currentDayData = nutrition;
 
   const metricKeys = Object.keys(currentDayData.metrics).filter(
     (metricName) => metricName !== "calories",

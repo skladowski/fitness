@@ -1,7 +1,6 @@
 export const HistoryDataMonth = [
   {
     id: "uuid-1",
-    label: "Шагов за месяц",
     type: "STEPS",
     trend: 12,
     metrics: {
@@ -10,7 +9,7 @@ export const HistoryDataMonth = [
   },
   {
     id: "uuid-2",
-    label: "Ккал сожжено",
+
     type: "CALORIES",
     trend: 12,
     metrics: {
@@ -19,7 +18,7 @@ export const HistoryDataMonth = [
   },
   {
     id: "uuid-3",
-    label: "Тренировок",
+
     type: "TRAINING_COUNT",
     trend: 3,
     metrics: {
@@ -28,7 +27,7 @@ export const HistoryDataMonth = [
   },
   {
     id: "uuid-4",
-    label: "Часов активности",
+
     type: "ACTIVE_MINUTES",
     trend: -4,
     metrics: {

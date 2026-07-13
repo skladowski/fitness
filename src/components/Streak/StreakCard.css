@@ -1,0 +1,20 @@
+/* ── STREAK CARD ── */
+.streak-card {
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px;
+  animation: fadeUp 0.5s ease both; animation-delay: 0.22s;
+}
+.streak-number {
+  font-family: 'Syne', sans-serif;
+  font-size: 56px; font-weight: 800; letter-spacing: -3px;
+  color: var(--accent2); line-height: 1;
+  margin: 8px 0 4px;
+}
+.streak-label { font-size: 13px; color: var(--text3); margin-bottom: 20px; }
+.streak-days { display: flex; gap: 6px; }
+.streak-day {
+  flex: 1; height: 6px; border-radius: 3px;
+  background: var(--bg3); transition: background 0.3s;
+}
+.streak-day.done { background: var(--accent); }
+.streak-day.today { background: var(--accent2); box-shadow: 0 0 8px rgba(167,139,250,0.5); }

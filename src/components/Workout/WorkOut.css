@@ -46,3 +46,14 @@
    flex-direction: column;
     display: flex;
   }
+  .week-days{
+    font-size: 10px;
+    color: var(--text3)
+  }
+  .week-days-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+
+

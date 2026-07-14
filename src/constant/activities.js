@@ -99,7 +99,7 @@ export const activities = {
     },
   },
   WALK: {
-    label: "Шаги за день",
+    label: "Шаги",
     icon: "🚶",
     color: "rgba(124, 118, 238, 0.1)",
     metrics: {
@@ -126,7 +126,7 @@ export const activities = {
     },
   },
   STEPS: {
-    label: "Шаги за день",
+    label: "Шаги",
     icon: "🚶",
     color: "rgba(124, 118, 238, 0.1)",
     metrics: {

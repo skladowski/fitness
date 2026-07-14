@@ -5,15 +5,26 @@ import { WorkoutItem } from "../../components/Workout/WorkoutItem";
 import { WorkoutsData } from "../../mocks/WorkoutsData";
 import { HistoryDataMonth } from "../../mocks/HistoryData";
 import { PeriodSelector } from "../../components/PeriodSelector/PeriodSelector";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { activities } from "../../constant/activities";
 import "./historyPage.css";
+import { calculateStreak } from "../../utils/formatters";
 export function HistoryPage() {
-  const allWorkouts = WorkoutsData.flatMap((day) => day.workouts).sort(
-    (a, b) => new Date(b.timestamp) - new Date(a.timestamp),
-  );
+  const allWorkouts = useMemo(() => {
+    return WorkoutsData.flatMap((day) => day.workouts).sort(
+      (a, b) => new Date(b.timestamp) - new Date(a.timestamp),
+    );
+  }, []);
   const [activePeriod, setActivePeriod] = useState("Месяц");
-
+  const [visibleWorkouts, setVisibleWorkouts] = useState(5);
+  const dictionary = {
+    День: "день",
+    Неделя: "неделю",
+    Месяц: "месяц",
+    "3 Мес.": "3 мес.",
+    Год: "год",
+  };
+  const streak = calculateStreak(allWorkouts);
   return (
     <div className="main">
       <Header title="История активности" subtitle="Current day" />
@@ -35,7 +46,7 @@ export function HistoryPage() {
                 variant={"horizontal"}
                 value={current}
                 icon={icon}
-                label={label}
+                label={`${label} за ${dictionary[activePeriod]}`}
                 type={item.type}
                 trendText={trendText}
               />
@@ -45,14 +56,21 @@ export function HistoryPage() {
         <div className="history-grid">
           <div className="card">
             <h3>Журнал тренировок</h3>
-            {allWorkouts.map((workout) => (
+            {allWorkouts.slice(0, visibleWorkouts).map((workout) => (
               <WorkoutItem key={workout.id} {...workout} />
             ))}
+            {allWorkouts.length > visibleWorkouts && (
+              <button onClick={() => setVisibleWorkouts(visibleWorkouts + 5)}>
+                {" "}
+                Показать еще
+              </button>
+            )}
           </div>
+
           <StreakCard
-            currentStreak={5}
+            currentStreak={streak}
             recordStreak={12}
-            weekData={[true, true, false, true, false, false, false]}
+            weekData={[true, true, true, true, true, true, false]}
           />
         </div>
       </div>

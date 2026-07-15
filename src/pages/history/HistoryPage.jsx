@@ -3,12 +3,31 @@ import { StreakCard } from "../../components/Streak/StreakCard";
 import { StatCard } from "../../components/Stats/StatCard";
 import { WorkoutItem } from "../../components/Workout/WorkoutItem";
 import { WorkoutsData } from "../../mocks/WorkoutsData";
-import { HistoryDataMonth } from "../../mocks/HistoryData";
+import { HistoryDataYear } from "../../mocks/HistoryDataYear";
+import { HistoryData3Month } from "../../mocks/HistoryData3Month";
+import { HistoryDataMonth } from "../../mocks/HistoryDataMonth";
+import { HistoryDataWeek } from "../../mocks/HistoryDataWeek";
+import { HistoryDataDay } from "../../mocks/HistoryDataDay";
 import { PeriodSelector } from "../../components/PeriodSelector/PeriodSelector";
+import { EmptyState } from "../../components/EmptyState/EmptyState";
 import { useState, useMemo } from "react";
 import { activities } from "../../constant/activities";
-import "./historyPage.css";
+import "./HistoryPage.css";
 import { calculateStreak } from "../../utils/formatters";
+const dictionary = {
+  День: "день",
+  Неделя: "неделю",
+  Месяц: "месяц",
+  "3 Мес.": "3 мес.",
+  Год: "год",
+};
+const periodDataMap = {
+  День: HistoryDataDay,
+  Неделя: HistoryDataWeek,
+  Месяц: HistoryDataMonth,
+  "3 Мес.": HistoryData3Month,
+  Год: HistoryDataYear,
+};
 export function HistoryPage() {
   const allWorkouts = useMemo(() => {
     return WorkoutsData.flatMap((day) => day.workouts).sort(
@@ -17,14 +36,9 @@ export function HistoryPage() {
   }, []);
   const [activePeriod, setActivePeriod] = useState("Месяц");
   const [visibleWorkouts, setVisibleWorkouts] = useState(5);
-  const dictionary = {
-    День: "день",
-    Неделя: "неделю",
-    Месяц: "месяц",
-    "3 Мес.": "3 мес.",
-    Год: "год",
-  };
-  const streak = calculateStreak(allWorkouts);
+
+  const streak = calculateStreak(allWorkouts, "2026-07-15");
+  const activeStats = periodDataMap[activePeriod] || [];
   return (
     <div className="main">
       <Header title="История активности" subtitle="Current day" />
@@ -34,24 +48,28 @@ export function HistoryPage() {
           onPeriodChange={setActivePeriod}
         />
         <div className="stats-grid">
-          {HistoryDataMonth.map((item) => {
-            const activityConfig = activities[item.type];
-            const { icon, label } = activityConfig;
-            const current = Object.values(item.metrics)[0].current;
-            const trendText =
-              item.trend > 0 ? `+${item.trend}%` : `${item.trend}%`;
-            return (
-              <StatCard
-                key={item.id}
-                variant={"horizontal"}
-                value={current}
-                icon={icon}
-                label={`${label} за ${dictionary[activePeriod]}`}
-                type={item.type}
-                trendText={trendText}
-              />
-            );
-          })}
+          {activeStats.length === 0 ? (
+            <EmptyState />
+          ) : (
+            activeStats.map((item) => {
+              const activityConfig = activities[item.type];
+              const { icon, label } = activityConfig;
+              const current = Object.values(item.metrics)[0].current;
+              const trendText =
+                item.trend > 0 ? `+${item.trend}%` : `${item.trend}%`;
+              return (
+                <StatCard
+                  key={item.id}
+                  variant={"horizontal"}
+                  value={current}
+                  icon={icon}
+                  label={`${label} за ${dictionary[activePeriod]}`}
+                  type={item.type}
+                  trendText={trendText}
+                />
+              );
+            })
+          )}
         </div>
         <div className="history-grid">
           <div className="card">
@@ -60,7 +78,10 @@ export function HistoryPage() {
               <WorkoutItem key={workout.id} {...workout} />
             ))}
             {allWorkouts.length > visibleWorkouts && (
-              <button onClick={() => setVisibleWorkouts(visibleWorkouts + 5)}>
+              <button
+                className="add-more-button"
+                onClick={() => setVisibleWorkouts(visibleWorkouts + 5)}
+              >
                 {" "}
                 Показать еще
               </button>

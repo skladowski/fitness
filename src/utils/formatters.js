@@ -19,14 +19,14 @@ export function getDisplayDate(date) {
   return dateString.charAt(0).toUpperCase() + dateString.slice(1);
 }
 
-export function calculateStreak(workouts) {
+export function calculateStreak(workouts, anchorDate = new Date()) {
   const uniqueDatesRaw = workouts.map((trainingObject) => {
     const date = new Date(trainingObject.timestamp);
     return date.toDateString(); // новый массив строк-дат, где могут быть повторы
   });
   const uniqueDates = [...new Set(uniqueDatesRaw)]; // убираем дубликаты и возвращаем в обычный массив
   uniqueDates.sort((a, b) => new Date(b) - new Date(a)); // сортируем по дате новизне
-  const today = new Date(); // создаем сегодняшнюю дату
+  const today = new Date(anchorDate); // создаем сегодняшнюю дату
   let streak = 0;
 
   for (let i = 0; i < uniqueDates.length; i++) {

@@ -1,0 +1,41 @@
+.empty-state-card {
+  position: relative;
+  background: #14141c;
+  border: 1px solid #22222e;
+  border-radius: 16px;
+  padding: 0px 32px;
+  padding-bottom: 20px;
+  grid-column: 1 / -1;
+  min-height: 1px;
+  display: flex;             
+  flex-direction: column;    
+  align-items: center;     
+  justify-content: center;   
+  text-align: center;      
+  gap: 16px;
+  overflow: hidden;
+}
+
+.empty-state-card__title {
+  color: #e4e4ec;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center; 
+}
+
+.empty-state-card__description {
+  color: #6b6f8a;
+  font-size: 13px;
+  text-align: center;
+  max-width: 320px;
+}
+.empty-state-card__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: #1c1c28;
+  border: 1px solid #2a2a38;
+  display: flex;        
+  align-items: center;  
+  justify-content: center;
+}

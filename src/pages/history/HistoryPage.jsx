@@ -9,11 +9,14 @@ import { HistoryDataMonth } from "../../mocks/HistoryDataMonth";
 import { HistoryDataWeek } from "../../mocks/HistoryDataWeek";
 import { HistoryDataDay } from "../../mocks/HistoryDataDay";
 import { PeriodSelector } from "../../components/PeriodSelector/PeriodSelector";
+import { PersonalRecordCard } from "../../components/PersonalRecord/PersonalRecordCard";
 import { EmptyState } from "../../components/EmptyState/EmptyState";
 import { useState, useMemo } from "react";
 import { activities } from "../../constant/activities";
 import "./HistoryPage.css";
 import { calculateStreak } from "../../utils/formatters";
+import { getPersonalRecords } from "../../utils/records";
+import { all } from "axios";
 const dictionary = {
   День: "день",
   Неделя: "неделю",
@@ -39,6 +42,8 @@ export function HistoryPage() {
 
   const streak = calculateStreak(allWorkouts, "2026-07-15");
   const activeStats = periodDataMap[activePeriod] || [];
+
+  const records = getPersonalRecords(allWorkouts);
   return (
     <div className="main">
       <Header title="История активности" subtitle="Current day" />
@@ -87,12 +92,14 @@ export function HistoryPage() {
               </button>
             )}
           </div>
-
-          <StreakCard
-            currentStreak={streak}
-            recordStreak={12}
-            weekData={[true, true, true, true, true, true, false]}
-          />
+          <div>
+            <StreakCard
+              currentStreak={streak}
+              recordStreak={12}
+              weekData={[true, true, true, true, true, true, false]}
+            />
+            <PersonalRecordCard records={records} />
+          </div>
         </div>
       </div>
     </div>

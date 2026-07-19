@@ -6,7 +6,7 @@ export const WorkoutsData = [
       {
         id: "w-15-1",
         type: "RUN",
-        title: "Финиш стрика: Темповый бег",
+        title: "Бег",
         timestamp: "2026-07-15T09:00:00Z",
         metrics: {
           distance: { current: 6200, target: 6000 },
@@ -31,7 +31,7 @@ export const WorkoutsData = [
             name: "Приседания со штангой",
             sets: [
               { id: "s-14-1", weight: 60, reps: 10 },
-              { id: "s-14-2", weight: 65, reps: 8 },
+              { id: "s-14-2", weight: 65, reps: 10 },
             ],
           },
         ],

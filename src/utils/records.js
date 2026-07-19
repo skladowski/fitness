@@ -2,15 +2,18 @@ import { metersToKilometers } from "./formatters";
 
 function calculateVolume(workout) {
   if (workout.type !== "POWER") return 0;
-  return workout.exercises.reduce((total, ex) => {
+  return workout.exercises.reduce((total, exercise) => {
     return (
       total +
-      ex.sets.reduce((subTotal, set) => subTotal + set.weight * set.reps, 0)
+      exercise.sets.reduce(
+        (subTotal, set) => subTotal + set.weight * set.reps,
+        0,
+      )
     );
   }, 0);
 }
 
-function findMaxWorkout(workouts, { filterFn, getValueFn, unit }) {
+function findMaxWorkout(workouts, { filterFn, getValueFn, unit, title }) {
   const filtered = workouts.filter(filterFn);
 
   if (filtered.length === 0) return null;
@@ -24,11 +27,13 @@ function findMaxWorkout(workouts, { filterFn, getValueFn, unit }) {
 
   return {
     type: record.type,
+    title: title,
     value: formattedValue,
     unit: unit,
     date: new Date(record.timestamp).toLocaleDateString("ru-RU", {
       day: "numeric",
-      month: "long",
+      month: "short",
+      year: "numeric",
     }),
   };
 }
@@ -37,6 +42,7 @@ function findMaxByDistance(workouts, type) {
   return findMaxWorkout(workouts, {
     filterFn: (w) => w.type === type,
     getValueFn: (w) => w.metrics.distance.current,
+    title: "· макс. дистанция",
     unit: "км",
   });
 }
@@ -45,6 +51,7 @@ function findMaxByVolume(workouts) {
   return findMaxWorkout(workouts, {
     filterFn: (w) => w.type === "POWER",
     getValueFn: (w) => calculateVolume(w),
+    title: "· макс. тоннаж",
     unit: "кг",
   });
 }

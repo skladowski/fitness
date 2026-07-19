@@ -13,7 +13,9 @@ export function PersonalRecordCard({ records }) {
           <div className="pr-item" key={record.type}>
             <span className="pr-icon">{activities[record.type].icon}</span>
             <div className="pr-info">
-              <div className="pr-name">{activities[record.type].label}</div>
+              <div className="pr-name">
+                {activities[record.type].label} {record.title}
+              </div>
               <div className="pr-date">{record.date}</div>
             </div>
             <div>

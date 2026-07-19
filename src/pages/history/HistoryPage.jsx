@@ -16,7 +16,6 @@ import { activities } from "../../constant/activities";
 import "./HistoryPage.css";
 import { calculateStreak } from "../../utils/formatters";
 import { getPersonalRecords } from "../../utils/records";
-import { all } from "axios";
 const dictionary = {
   День: "день",
   Неделя: "неделю",
@@ -42,8 +41,9 @@ export function HistoryPage() {
 
   const streak = calculateStreak(allWorkouts, "2026-07-15");
   const activeStats = periodDataMap[activePeriod] || [];
-
-  const records = getPersonalRecords(allWorkouts);
+  const records = useMemo(() => {
+    return getPersonalRecords(allWorkouts);
+  }, [allWorkouts]);
   return (
     <div className="main">
       <Header title="История активности" subtitle="Current day" />

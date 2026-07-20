@@ -9,6 +9,7 @@ import { HistoryDataMonth } from "../../mocks/HistoryDataMonth";
 import { HistoryDataWeek } from "../../mocks/HistoryDataWeek";
 import { HistoryDataDay } from "../../mocks/HistoryDataDay";
 import { PeriodSelector } from "../../components/PeriodSelector/PeriodSelector";
+import { Charts } from "../../components/Charts/Charts";
 import { PersonalRecordCard } from "../../components/PersonalRecord/PersonalRecordCard";
 import { EmptyState } from "../../components/EmptyState/EmptyState";
 import { useState, useMemo } from "react";
@@ -16,6 +17,8 @@ import { activities } from "../../constant/activities";
 import "./HistoryPage.css";
 import { calculateStreak } from "../../utils/formatters";
 import { getPersonalRecords } from "../../utils/records";
+import { statsData } from "../../mocks/StatsData";
+import { getChartDataByType } from "../../utils/transformStatsForChart";
 const dictionary = {
   День: "день",
   Неделя: "неделю",
@@ -29,6 +32,13 @@ const periodDataMap = {
   Месяц: HistoryDataMonth,
   "3 Мес.": HistoryData3Month,
   Год: HistoryDataYear,
+};
+const periodDaysMap = {
+  День: 1,
+  Неделя: 7,
+  Месяц: 30,
+  "3 Мес.": 90,
+  Год: 365,
 };
 export function HistoryPage() {
   const allWorkouts = useMemo(() => {
@@ -44,6 +54,14 @@ export function HistoryPage() {
   const records = useMemo(() => {
     return getPersonalRecords(allWorkouts);
   }, [allWorkouts]);
+  const periodStatsData = statsData.slice(0, periodDaysMap[activePeriod]);
+  const stepsChartData = getChartDataByType(
+    periodStatsData,
+    "STEPS",
+    "steps",
+  ).reverse();
+  console.log(stepsChartData);
+
   return (
     <div className="main">
       <Header title="История активности" subtitle="Current day" />
@@ -76,6 +94,7 @@ export function HistoryPage() {
             })
           )}
         </div>
+        <Charts data={stepsChartData} />
         <div className="history-grid">
           <div className="card">
             <h3>Журнал тренировок</h3>

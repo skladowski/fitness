@@ -26,6 +26,7 @@
   .stat-card.calories::after { background: linear-gradient(90deg, #f97316, var(--amber)); }
   .stat-card.active_minutes::after { background: linear-gradient(90deg, var(--amber), var(--red)); }
   .stat-card.sleep::after { background: linear-gradient(90deg, var(--blue), #818cf8); }
+    .stat-card.training_count::after { background: linear-gradient(90deg, #3a95eb, #2f70c5); }
 
   .stat-icon {
     width: 36px; height: 36px;
@@ -38,9 +39,9 @@
   .stat-card.calories .stat-icon { background: rgba(249,115,22,0.15); color: #fb923c; }
   .stat-card.active_minutes .stat-icon { background: rgba(251,191,36,0.15); color: var(--amber); }
   .stat-card.sleep .stat-icon { background: rgba(56,189,248,0.15); color: var(--blue); }
+  .stat-card.training_count .stat-icon { background: rgba(16, 233, 248, 0.15); color: #3a95eb; }
 
  .stat-value {
-  /* Было: font-family: 'Syne', sans-serif; */
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
   font-size: 25px; /* Можно немного увеличить, так как DM Sans визуально чуть компактнее */
   font-weight: 700;

@@ -5,7 +5,8 @@
   animation: fadeUp 0.5s ease both; animation-delay: 0.22s;
 }
 .streak-number {
-  font-family: 'Syne', sans-serif;
+    font-family: 'DM Sans', sans-serif;
+
   font-size: 56px; font-weight: 800; letter-spacing: -3px;
   color: var(--accent2); line-height: 1;
   margin: 8px 0 4px;

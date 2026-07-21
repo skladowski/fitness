@@ -1,7 +1,4 @@
 import {
-  CartesianGrid,
-  Line,
-  LineChart,
   XAxis,
   YAxis,
   Tooltip,
@@ -10,27 +7,51 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import "./Charts.css";
-import { LineChartIcon } from "lucide-react";
-export function Charts({ data }) {
+export function Charts({ data, activeMetric, onMetricChange, goal }) {
+  const total = data.reduce((totalValue, currentValue) => {
+    return totalValue + currentValue.value;
+  }, 0);
+  const averageDay = Math.round(total / data.length);
+  const bestDay = Math.max(...data.map((item) => item.value));
+  const daysAboveGoal = data.filter((item) => {
+    return item.value >= goal;
+  }).length;
+  const dictionaryMetrics = {
+    Шаги: "шагов",
+    Ккал: "калорий",
+    Сон: "сна",
+  };
   return (
     <div className="card">
       <div className="card-header">
-        <span className="card-title">Динамика шагов</span>
+        <span className="card-title">
+          Динамика {dictionaryMetrics[activeMetric]}
+        </span>
         <div className="card-controls">
-          <button className="chip active-chip">Шаги</button>
-          <button className="chip">Ккал</button>
-          <button className="chip">Пульс</button>
-        </div>
-      </div>
-
-      <div className="chart-legend">
-        <div className="legend-item">
-          <span className="legend-dot legend-dot-fact"></span>
-          Факт
-        </div>
-        <div className="legend-item">
-          <span className="legend-dot legend-dot-target"></span>
-          Цель
+          <button
+            className={`chip ${"Шаги" === activeMetric ? "active-chip" : ""}`}
+            onClick={() => {
+              onMetricChange("Шаги");
+            }}
+          >
+            Шаги
+          </button>
+          <button
+            className={`chip ${"Ккал" === activeMetric ? "active-chip" : ""}`}
+            onClick={() => {
+              onMetricChange("Ккал");
+            }}
+          >
+            Ккал
+          </button>
+          <button
+            className={`chip ${"Сон" === activeMetric ? "active-chip" : ""}`}
+            onClick={() => {
+              onMetricChange("Сон");
+            }}
+          >
+            Сон
+          </button>
         </div>
       </div>
       <ResponsiveContainer width="100%" height={200}>
@@ -57,19 +78,23 @@ export function Charts({ data }) {
       <div className="card-stats">
         <div className="stat-item">
           <div className="stat-label">Лучший день</div>
-          <div className="stat-value stat-value-accent">14 320</div>
+          <div className="stat-value stat-value-accent">
+            {bestDay.toLocaleString("ru-RU")}
+          </div>
         </div>
         <div className="stat-item">
           <div className="stat-label">Среднее/день</div>
-          <div className="stat-value">8 973</div>
+          <div className="stat-value">{averageDay.toLocaleString("ru-RU")}</div>
         </div>
         <div className="stat-item">
           <div className="stat-label">Дней ≥ цели</div>
-          <div className="stat-value stat-value-green">19 / 27</div>
+          <div className="stat-value stat-value-green">
+            {daysAboveGoal} / {data.length}
+          </div>
         </div>
         <div className="stat-item">
           <div className="stat-label">Итого</div>
-          <div className="stat-value">247 194</div>
+          <div className="stat-value">{total.toLocaleString("ru-RU")}</div>
         </div>
       </div>
     </div>

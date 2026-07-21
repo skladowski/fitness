@@ -18,7 +18,8 @@ import "./HistoryPage.css";
 import { calculateStreak } from "../../utils/formatters";
 import { getPersonalRecords } from "../../utils/records";
 import { statsData } from "../../mocks/StatsData";
-import { getChartDataByType } from "../../utils/transformStatsForChart";
+import { getChartDataByType } from "../../utils/chartAdapters";
+import { secondsToHours } from "../../utils/formatters";
 const dictionary = {
   День: "день",
   Неделя: "неделю",
@@ -40,6 +41,16 @@ const periodDaysMap = {
   "3 Мес.": 90,
   Год: 365,
 };
+const metricConfigMap = {
+  Шаги: { type: "STEPS", metricKey: "steps", goal: 7300 },
+  Ккал: { type: "CALORIES", metricKey: "burned", goal: 1900 },
+  Сон: {
+    type: "SLEEP",
+    metricKey: "total",
+    transform: secondsToHours,
+    goal: 8,
+  },
+};
 export function HistoryPage() {
   const allWorkouts = useMemo(() => {
     return WorkoutsData.flatMap((day) => day.workouts).sort(
@@ -48,19 +59,20 @@ export function HistoryPage() {
   }, []);
   const [activePeriod, setActivePeriod] = useState("Месяц");
   const [visibleWorkouts, setVisibleWorkouts] = useState(5);
-
+  const [activeMetric, setActiveMetric] = useState("Шаги");
   const streak = calculateStreak(allWorkouts, "2026-07-15");
   const activeStats = periodDataMap[activePeriod] || [];
   const records = useMemo(() => {
     return getPersonalRecords(allWorkouts);
   }, [allWorkouts]);
   const periodStatsData = statsData.slice(0, periodDaysMap[activePeriod]);
-  const stepsChartData = getChartDataByType(
+  const { type, metricKey, transform, goal } = metricConfigMap[activeMetric];
+  const chartData = getChartDataByType(
     periodStatsData,
-    "STEPS",
-    "steps",
+    type,
+    metricKey,
+    transform,
   ).reverse();
-  console.log(stepsChartData);
 
   return (
     <div className="main">
@@ -94,7 +106,12 @@ export function HistoryPage() {
             })
           )}
         </div>
-        <Charts data={stepsChartData} />
+        <Charts
+          data={chartData}
+          activeMetric={activeMetric}
+          onMetricChange={setActiveMetric}
+          goal={goal}
+        />
         <div className="history-grid">
           <div className="card">
             <h3>Журнал тренировок</h3>

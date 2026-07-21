@@ -15,12 +15,6 @@
   gap: 6px;
 }
 
-.active-chip {
-  background: rgba(108, 99, 255, 0.12);
-  color: var(--accent2);
-  border-color: rgba(108, 99, 255, 0.3);
-}
-
 .legend-dot-fact {
   background: var(--accent);
 }
@@ -46,7 +40,8 @@
 }
 
 .stat-value {
-  font-family: 'Syne', sans-serif;
+     font-family: 'DM Sans', sans-serif;
+
   font-size: 16px;
   font-weight: 700;
 }
@@ -57,4 +52,16 @@
 
 .stat-value-green {
   color: var(--green);
+}
+.chip {
+  font-size: 11px; padding: 4px 10px;
+  border-radius: 20px; border: 1px solid var(--border);
+  color: var(--text3); cursor: pointer;
+  background: none; font-family: 'DM Sans', sans-serif;
+}
+
+.active-chip {
+  background: rgba(108, 99, 255, 0.12);
+  color: var(--accent2);
+  border-color: rgba(108, 99, 255, 0.3);
 }

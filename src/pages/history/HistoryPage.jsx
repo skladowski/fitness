@@ -76,7 +76,7 @@ export function HistoryPage() {
 
   return (
     <div className="main">
-      <Header title="История активности" subtitle="Current day" />
+      <Header title="История активности" subtitle="2" />
       <div className="content">
         <PeriodSelector
           activePeriod={activePeriod}
@@ -106,29 +106,32 @@ export function HistoryPage() {
             })
           )}
         </div>
-        <Charts
-          data={chartData}
-          activeMetric={activeMetric}
-          onMetricChange={setActiveMetric}
-          goal={goal}
-        />
-        <div className="history-grid">
-          <div className="card">
-            <h3>Журнал тренировок</h3>
-            {allWorkouts.slice(0, visibleWorkouts).map((workout) => (
-              <WorkoutItem key={workout.id} {...workout} />
-            ))}
-            {allWorkouts.length > visibleWorkouts && (
-              <button
-                className="add-more-button"
-                onClick={() => setVisibleWorkouts(visibleWorkouts + 5)}
-              >
-                {" "}
-                Показать еще
-              </button>
-            )}
+        <div className="history-layout">
+          <div className="left-column">
+            <div className="card">
+              <Charts
+                data={chartData}
+                activeMetric={activeMetric}
+                onMetricChange={setActiveMetric}
+                goal={goal}
+              />
+            </div>
+            <div className="card">
+              <h3>Журнал тренировок</h3>
+              {allWorkouts.slice(0, visibleWorkouts).map((workout) => (
+                <WorkoutItem key={workout.id} {...workout} />
+              ))}
+              {allWorkouts.length > visibleWorkouts && (
+                <button
+                  className="add-more-button"
+                  onClick={() => setVisibleWorkouts(visibleWorkouts + 5)}
+                >
+                  Показать еще
+                </button>
+              )}
+            </div>
           </div>
-          <div>
+          <div className="right-column">
             <StreakCard
               currentStreak={streak}
               recordStreak={12}

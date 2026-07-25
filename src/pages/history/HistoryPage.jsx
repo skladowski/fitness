@@ -108,14 +108,13 @@ export function HistoryPage() {
         </div>
         <div className="history-layout">
           <div className="left-column">
-            <div className="card">
-              <Charts
-                data={chartData}
-                activeMetric={activeMetric}
-                onMetricChange={setActiveMetric}
-                goal={goal}
-              />
-            </div>
+            <Charts
+              data={chartData}
+              activeMetric={activeMetric}
+              onMetricChange={setActiveMetric}
+              goal={goal}
+            />
+
             <div className="card">
               <h3>Журнал тренировок</h3>
               {allWorkouts.slice(0, visibleWorkouts).map((workout) => (

@@ -1,9 +1,15 @@
 export function transformStatsForChart(statsData, { getValueFn, transform }) {
-  const transformedData = statsData.map((day) => {
+  const transformedData = statsData.map((day, index) => {
+    const showMonth =
+      index === statsData.length - 1 ||
+      new Date(day.date).getMonth() !==
+        new Date(statsData[index + 1].date).getMonth();
+
     return {
-      name: new Date(day.date).toLocaleDateString("ru-RU", {
-        day: "numeric",
-      }),
+      name: new Date(day.date).toLocaleDateString(
+        "ru-RU",
+        showMonth ? { day: "numeric", month: "short" } : { day: "numeric" },
+      ),
       value: transform(getValueFn(day.stats)),
     };
   });

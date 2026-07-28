@@ -1,4 +1,5 @@
 import { Header } from "../../components/Header/Header";
+import { DefaultHeaderActions } from "../../components/Header/DefaultHeaderActions";
 import { StreakCard } from "../../components/Streak/StreakCard";
 import { StatCard } from "../../components/Stats/StatCard";
 import { WorkoutItem } from "../../components/Workout/WorkoutItem";
@@ -20,6 +21,12 @@ import { getPersonalRecords } from "../../utils/records";
 import { statsData } from "../../mocks/StatsData";
 import { getChartDataByType } from "../../utils/chartAdapters";
 import { secondsToHours } from "../../utils/formatters";
+const today = new Date().toLocaleDateString("ru-RU", {
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
 const dictionary = {
   День: "день",
   Неделя: "неделю",
@@ -76,7 +83,9 @@ export function HistoryPage() {
 
   return (
     <div className="main">
-      <Header title="История активности" subtitle="2" />
+      <Header title="История активности" subtitle={today}>
+        <DefaultHeaderActions />
+      </Header>
       <div className="content">
         <PeriodSelector
           activePeriod={activePeriod}

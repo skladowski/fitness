@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PulseX — Профиль</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg0: #0a0a0f;
+  --bg1: #111118;
+  --bg2: #18181f;
+  --bg3: #22222c;
+  --bg4: #2e2e3a;
+  --text1: #f0f0f5;
+  --text2: #a0a0b8;
+  --text3: #7e7e9a;
+  --accent:  #6c63ff;
+  --accent2: #a78bfa;
+  --green:  #22d3a8;
+  --red:    #f87171;
+  --amber:  #fbbf24;
+  --blue:   #38bdf8;
+  --orange: #fb923c;
+  --border: rgba(255,255,255,0.07);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg0);
+  color: var(--text1);
+  min-height: 100vh;
+  display: flex;
+  overflow-x: hidden;
+}
+
+/* ─── SIDEBAR ─────────────────────────── */
+.sidebar {
+  width: 72px;
+  background: var(--bg1);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  gap: 8px;
+}
+.logo {
+  width: 38px; height: 38px;
+  background: var(--accent);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 28px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 16px;
+  color: #fff; letter-spacing: -0.5px;
+  text-decoration: none;
+}
+.nav-item {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background 0.2s;
+  color: var(--text3);
+  position: relative;
+}
+.nav-item:hover { background: var(--bg3); color: var(--text2); }
+.nav-item.active { background: rgba(108,99,255,0.15); color: var(--accent); }
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: -1px; top: 50%; transform: translateY(-50%);
+  width: 3px; height: 20px;
+  background: var(--accent);
+  border-radius: 0 3px 3px 0;
+}
+.sidebar-bottom { margin-top: auto; }
+.avatar-sm {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 500; color: #fff; cursor: pointer;
+  border: 2px solid var(--accent);
+}
+
+/* ─── MAIN ────────────────────────────── */
+.main {
+  margin-left: 72px;
+  flex: 1;
+  display: flex; flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ─── HEADER ──────────────────────────── */
+.header {
+  padding: 28px 32px 0;
+  display: flex; align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.header-left h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px; font-weight: 700;
+  letter-spacing: -0.5px;
+}
+.header-left p { font-size: 14px; color: var(--text3); margin-top: 4px; }
+.header-right { display: flex; gap: 10px; align-items: center; }
+.btn {
+  padding: 9px 18px; border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg2); color: var(--text2);
+  font-size: 13px; font-family: 'DM Sans', sans-serif;
+  cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; gap: 6px;
+}
+.btn:hover { background: var(--bg3); color: var(--text1); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-primary:hover { background: #5a52e8; }
+.btn-danger { border-color: rgba(248,113,113,0.3); color: var(--red); }
+.btn-danger:hover { background: rgba(248,113,113,0.08); }
+
+/* ─── CONTENT ─────────────────────────── */
+.content { padding: 28px 32px 56px; flex: 1; }
+
+/* ─── PROFILE HERO ────────────────────── */
+.profile-hero {
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.45s ease both;
+}
+/* subtle ambient glow behind avatar */
+.profile-hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: -60px;
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.avatar-wrap {
+  position: relative; flex-shrink: 0;
+}
+.avatar-lg {
+  width: 96px; height: 96px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 32px; font-weight: 800; color: #fff;
+  border: 3px solid rgba(108,99,255,0.4);
+  box-shadow: 0 0 0 6px rgba(108,99,255,0.08);
+}
+.avatar-edit {
+  position: absolute; bottom: 0; right: 0;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--bg3);
+  border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background 0.2s;
+  color: var(--text2);
+}
+.avatar-edit:hover { background: var(--bg4); }
+.hero-info { flex: 1; min-width: 0; }
+.hero-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 24px; font-weight: 700; letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+.hero-handle { font-size: 13px; color: var(--text3); margin-bottom: 12px; }
+.hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.badge {
+  font-size: 11px; padding: 4px 10px; border-radius: 20px;
+  font-weight: 500; display: flex; align-items: center; gap: 4px;
+}
+.badge-level { background: rgba(108,99,255,0.15); color: var(--accent2); border: 1px solid rgba(108,99,255,0.25); }
+.badge-streak { background: rgba(251,191,36,0.12); color: var(--amber); border: 1px solid rgba(251,191,36,0.2); }
+.badge-verified { background: rgba(34,211,168,0.12); color: var(--green); border: 1px solid rgba(34,211,168,0.2); }
+.hero-bio { font-size: 14px; color: var(--text2); line-height: 1.6; max-width: 480px; }
+.hero-stats {
+  display: flex; flex-direction: column; gap: 12px;
+  min-width: 200px; padding-left: 28px;
+  border-left: 1px solid var(--border);
+}
+.hs-item { display: flex; flex-direction: column; gap: 2px; }
+.hs-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 700; letter-spacing: -0.5px;
+}
+.hs-label { font-size: 11px; color: var(--text3); }
+
+/* ─── TABS ────────────────────────────── */
+.tabs {
+  display: flex; gap: 2px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+.tab {
+  padding: 10px 18px;
+  font-size: 13px; font-weight: 500;
+  color: var(--text3); cursor: pointer;
+  border: none; background: none;
+  font-family: 'DM Sans', sans-serif;
+  transition: color 0.2s;
+  position: relative;
+}
+.tab:hover { color: var(--text2); }
+.tab.active { color: var(--text1); }
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px 2px 0 0;
+}
+
+/* ─── MAIN GRID ───────────────────────── */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 20px;
+}
+
+/* ─── CARD ────────────────────────────── */
+.card {
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  animation: fadeUp 0.5s ease both;
+}
+.card-header {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px; font-weight: 600;
+}
+.chip {
+  font-size: 11px; padding: 4px 10px;
+  border-radius: 20px; border: 1px solid var(--border);
+  color: var(--text3); cursor: pointer; background: none;
+  font-family: 'DM Sans', sans-serif; transition: all 0.15s;
+}
+.chip:hover { border-color: rgba(255,255,255,0.15); color: var(--text2); }
+
+/* ─── GOALS ───────────────────────────── */
+.goals-list { display: flex; flex-direction: column; gap: 14px; }
+.goal-item {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.goal-item:hover { border-color: rgba(255,255,255,0.12); background: var(--bg3); }
+.goal-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.goal-left { display: flex; align-items: center; gap: 10px; }
+.goal-icon {
+  width: 34px; height: 34px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.goal-name { font-size: 13px; font-weight: 500; }
+.goal-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.goal-right { text-align: right; }
+.goal-pct {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px; font-weight: 700;
+}
+.goal-deadline { font-size: 10px; color: var(--text3); margin-top: 2px; }
+.goal-bar { height: 5px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+.goal-fill { height: 100%; border-radius: 3px; transition: width 1.3s cubic-bezier(0.16,1,0.3,1); }
+
+/* ─── FORM FIELDS ─────────────────────── */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+.form-field.full { grid-column: 1 / -1; }
+.form-label { font-size: 11px; color: var(--text3); font-weight: 500; text-transform: uppercase; letter-spacing: 0.4px; }
+.form-input {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 14px; color: var(--text1);
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.form-input:focus { border-color: rgba(108,99,255,0.5); box-shadow: 0 0 0 3px rgba(108,99,255,0.08); }
+.form-input::placeholder { color: var(--text3); }
+select.form-input { cursor: pointer; }
+.form-divider {
+  grid-column: 1 / -1;
+  height: 1px; background: var(--border);
+  margin: 4px 0;
+}
+.unit-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+.unit-chip {
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text3);
+  font-size: 12px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+  text-align: center; font-family: 'DM Sans', sans-serif;
+}
+.unit-chip.on {
+  background: rgba(108,99,255,0.12);
+  border-color: rgba(108,99,255,0.35);
+  color: var(--accent2);
+}
+
+/* ─── SIDE PANEL ──────────────────────── */
+.side-panel { display: flex; flex-direction: column; gap: 16px; }
+
+/* ─── BODY METRICS ────────────────────── */
+.metrics-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.metric-tile {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  transition: border-color 0.2s;
+}
+.metric-tile:hover { border-color: rgba(255,255,255,0.12); }
+.mt-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 700; letter-spacing: -0.5px;
+  line-height: 1;
+}
+.mt-label { font-size: 11px; color: var(--text3); margin-top: 4px; }
+.mt-delta { font-size: 10px; margin-top: 6px; font-weight: 500; }
+.mt-delta.up { color: var(--red); }
+.mt-delta.down { color: var(--green); }
+.mt-delta.neutral { color: var(--text3); }
+
+/* BMI bar */
+.bmi-bar-wrap { margin-top: 14px; }
+.bmi-labels { display: flex; justify-content: space-between; margin-bottom: 6px; }
+.bmi-label { font-size: 9px; color: var(--text3); }
+.bmi-track {
+  height: 6px; border-radius: 4px;
+  background: linear-gradient(90deg,
+    var(--blue) 0%, var(--blue) 22%,
+    var(--green) 22%, var(--green) 50%,
+    var(--amber) 50%, var(--amber) 70%,
+    var(--red) 70%);
+  position: relative;
+}
+.bmi-pointer {
+  position: absolute; top: 50%; transform: translate(-50%, -50%);
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--text1);
+  border: 2px solid var(--bg0);
+  box-shadow: 0 0 6px rgba(108,99,255,0.5);
+}
+
+/* ─── ACHIEVEMENTS ────────────────────── */
+.achievements-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.ach-tile {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 6px; padding: 12px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  cursor: pointer; transition: all 0.2s;
+  position: relative;
+}
+.ach-tile:hover { border-color: rgba(255,255,255,0.12); transform: translateY(-2px); }
+.ach-tile.locked { opacity: 0.4; }
+.ach-icon { font-size: 24px; line-height: 1; }
+.ach-name { font-size: 9px; color: var(--text3); text-align: center; line-height: 1.3; }
+.ach-tile.gold .ach-icon { filter: drop-shadow(0 0 6px rgba(251,191,36,0.5)); }
+.ach-tile.purple .ach-icon { filter: drop-shadow(0 0 6px rgba(167,139,250,0.5)); }
+.ach-tile.green .ach-icon { filter: drop-shadow(0 0 6px rgba(34,211,168,0.4)); }
+.ach-new {
+  position: absolute; top: 4px; right: 4px;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 6px var(--accent);
+}
+
+/* ─── CONNECTED DEVICES ───────────────── */
+.device-list { display: flex; flex-direction: column; gap: 10px; }
+.device-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer; transition: border-color 0.2s;
+}
+.device-item:hover { border-color: rgba(255,255,255,0.12); }
+.device-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.device-info { flex: 1; }
+.device-name { font-size: 13px; font-weight: 500; }
+.device-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.device-status {
+  font-size: 10px; padding: 3px 8px; border-radius: 20px; font-weight: 500;
+}
+.device-status.online { background: rgba(34,211,168,0.1); color: var(--green); }
+.device-status.offline { background: rgba(255,255,255,0.05); color: var(--text3); }
+
+/* ─── TOGGLE ──────────────────────────── */
+.toggle-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.toggle-row:last-child { border-bottom: none; }
+.toggle-label { font-size: 13px; }
+.toggle-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.toggle {
+  width: 40px; height: 22px; border-radius: 11px;
+  background: var(--bg3); cursor: pointer;
+  position: relative; transition: background 0.25s; flex-shrink: 0;
+}
+.toggle.on { background: var(--accent); }
+.toggle::after {
+  content: '';
+  position: absolute; top: 3px; left: 3px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--text1);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+.toggle.on::after { transform: translateX(18px); }
+
+/* ─── DANGER ZONE ─────────────────────── */
+.danger-zone {
+  border-color: rgba(248,113,113,0.15);
+}
+.danger-zone .card-title { color: var(--red); }
+
+/* ─── ANIMATIONS ──────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── SCROLLBAR ───────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg0); }
+::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 5px; }
+
+/* ─── RESPONSIVE ──────────────────────── */
+@media (max-width: 1100px) {
+  .main-grid { grid-template-columns: 1fr; }
+  .side-panel { display: grid; grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%; height: 60px; flex-direction: row;
+    padding: 0 16px; top: auto; bottom: 0;
+    border-right: none; border-top: 1px solid var(--border);
+    justify-content: space-around;
+  }
+  .logo { display: none; }
+  .nav-item.active::before {
+    left: 50%; top: auto; bottom: -1px; transform: translateX(-50%);
+    width: 20px; height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .main { margin-left: 0; padding-bottom: 60px; }
+  .header { padding: 20px 16px 0; }
+  .content { padding: 16px 16px 32px; }
+  .profile-hero { flex-direction: column; }
+  .hero-stats { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 16px; flex-direction: row; flex-wrap: wrap; gap: 20px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-field.full { grid-column: auto; }
+  .side-panel { grid-template-columns: 1fr; }
+  .achievements-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 420px) {
+  .achievements-grid { grid-template-columns: repeat(4, 1fr); }
+  .metrics-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <a class="logo">Px</a>
+  <div class="nav-item" title="Dashboard">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+  </div>
+  <div class="nav-item" title="История">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+  </div>
+  <div class="nav-item" title="Тренировки">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M6 4v16M18 4v16M3 12h18M3 7h3M3 17h3M18 7h3M18 17h3"/></svg>
+  </div>
+  <div class="nav-item" title="Сон">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+  </div>
+  <div class="nav-item sidebar-bottom" title="Настройки">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+  </div>
+  <div class="avatar-sm active nav-item" title="Профиль">АИ</div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="header">
+    <div class="header-left">
+      <h1>Профиль</h1>
+      <p>Вторник, 27 мая 2026 · Неделя 22</p>
+    </div>
+    <div class="header-right">
+      <button class="btn">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Экспорт данных
+      </button>
+      <button class="btn btn-primary" id="saveBtn">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Сохранить
+      </button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- PROFILE HERO -->
+    <div class="profile-hero">
+      <div class="avatar-wrap">
+        <div class="avatar-lg">АИ</div>
+        <div class="avatar-edit" title="Изменить фото">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+      </div>
+
+      <div class="hero-info">
+        <div class="hero-name">Алексей Иванов</div>
+        <div class="hero-handle">@alexey_fit · Москва, Россия</div>
+      
+        <div class="hero-bio">Любитель бега и велоспорта. Тренируюсь 4× в неделю. Цель на 2026 — первый полумарафон и 5000 км на велосипеде.</div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hs-item">
+          <span class="hs-val" style="color:var(--accent2)">18</span>
+          <span class="hs-label">Тренировок в мае</span>
+        </div>
+        <div class="hs-item">
+          <span class="hs-val" style="color:var(--green)">247 194</span>
+          <span class="hs-label">Шагов за месяц</span>
+        </div>
+        <div class="hs-item">
+          <span class="hs-val" style="color:var(--amber)">21</span>
+          <span class="hs-label">Дней подряд</span>
+        </div>
+        <div class="hs-item">
+          <span class="hs-val" style="color:var(--blue)">14 820</span>
+          <span class="hs-label">Ккал за месяц</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab active" data-tab="info">Личные данные</button>
+      <button class="tab" data-tab="goals">Физические показатели</button>
+      <button class="tab" data-tab="achievements">Цели</button>
+    </div>
+
+    <!-- TAB: INFO -->
+    <div id="tab-info" class="tab-content">
+      <div class="main-grid">
+        <!-- LEFT -->
+        <div style="display:flex; flex-direction:column; gap:16px;">
+
+          <!-- Personal info -->
+          <div class="card" style="animation-delay:0.05s">
+            <div class="card-header">
+              <span class="card-title">Личная информация</span>
+              <span class="chip">Редактировать</span>
+            </div>
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="form-label">Имя</label>
+                <input class="form-input" type="text" value="Алексей" placeholder="Имя">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Фамилия</label>
+                <input class="form-input" type="text" value="Иванов" placeholder="Фамилия">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Никнейм</label>
+                <input class="form-input" type="text" value="@alexey_fit" placeholder="@никнейм">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Дата рождения</label>
+                <input class="form-input" type="date" value="1993-08-15">
+              </div>
+              <div class="form-field full">
+                <label class="form-label">Email</label>
+                <input class="form-input" type="email" value="alexey@example.com" placeholder="email@example.com">
+              </div>
+              <div class="form-field full">
+                <label class="form-label">О себе</label>
+                <textarea class="form-input" rows="3" style="resize:vertical;">Любитель бега и велоспорта. Тренируюсь 4× в неделю. Цель на 2026 — первый полумарафон и 5000 км на велосипеде.</textarea>
+              </div>
+              <div class="form-field">
+                <label class="form-label">Город</label>
+                <input class="form-input" type="text" value="Москва" placeholder="Город">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Страна</label>
+                <select class="form-input">
+                  <option selected>Россия</option>
+                  <option>Казахстан</option>
+                  <option>Беларусь</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Physical params -->
+          <div class="card" style="animation-delay:0.1s">
+            <div class="card-header">
+              <span class="card-title">Физические параметры</span>
+            </div>
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="form-label">Рост</label>
+                <input class="form-input" type="number" value="182" placeholder="см">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Вес</label>
+                <input class="form-input" type="number" value="78" placeholder="кг">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Пол</label>
+                <select class="form-input">
+                  <option selected>Мужской</option>
+                  <option>Женский</option>
+                  <option>Другой</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="form-label">Уровень активности</label>
+                <select class="form-input">
+                  <option>Низкий</option>
+                  <option selected>Умеренный</option>
+                  <option>Высокий</option>
+                  <option>Профессиональный</option>
+                </select>
+              </div>
+              <div class="form-divider"></div>
+              <div class="form-field full">
+                <label class="form-label">Единицы измерения</label>
+                <div class="unit-row">
+                  <button class="unit-chip on">Метрическая</button>
+                  <button class="unit-chip">Имперская</button>
+                  <button class="unit-chip">Смешанная</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fitness profile -->
+          <div class="card" style="animation-delay:0.15s">
+            <div class="card-header">
+              <span class="card-title">Фитнес-профиль</span>
+            </div>
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="form-label">Основная цель</label>
+                <select class="form-input">
+                  <option>Похудение</option>
+                  <option selected>Поддержание формы</option>
+                  <option>Набор массы</option>
+                  <option>Выносливость</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="form-label">Предпочтения</label>
+                <select class="form-input">
+                  <option selected>Бег + велосипед</option>
+                  <option>Силовые</option>
+                  <option>HIIT</option>
+                  <option>Смешанные</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="form-label">Цель по шагам / день</label>
+                <input class="form-input" type="number" value="10000">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Цель по ккал / день</label>
+                <input class="form-input" type="number" value="2400">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Целевой сон (ч)</label>
+                <input class="form-input" type="number" value="8" min="4" max="12">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Дней тренировок / нед.</label>
+                <input class="form-input" type="number" value="4" min="1" max="7">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: side panel -->
+        <div class="side-panel">
+
+          <!-- Body metrics -->
+          <div class="card" style="animation-delay:0.08s">
+            <div class="card-header">
+              <span class="card-title">Параметры тела</span>
+              <span class="chip">Обновить</span>
+            </div>
+            <div class="metrics-grid">
+              <div class="metric-tile">
+                <div class="mt-val">78.4</div>
+                <div class="mt-label">Вес, кг</div>
+                <div class="mt-delta down">↓ 0.6 кг за мес.</div>
+              </div>
+              <div class="metric-tile">
+                <div class="mt-val">23.6</div>
+                <div class="mt-label">ИМТ</div>
+                <div class="mt-delta neutral">Норма</div>
+              </div>
+              <div class="metric-tile">
+                <div class="mt-val">17.2%</div>
+                <div class="mt-label">Жир тела</div>
+                <div class="mt-delta down">↓ 0.4%</div>
+              </div>
+              <div class="metric-tile">
+                <div class="mt-val">64.8</div>
+                <div class="mt-label">Мышцы, кг</div>
+                <div class="mt-delta up">↑ 0.3 кг</div>
+              </div>
+              <div class="metric-tile">
+                <div class="mt-val">92</div>
+                <div class="mt-label">Грудь, см</div>
+                <div class="mt-delta neutral">= стабильно</div>
+              </div>
+              <div class="metric-tile">
+                <div class="mt-val">80</div>
+                <div class="mt-label">Талия, см</div>
+                <div class="mt-delta down">↓ 1 см</div>
+              </div>
+            </div>
+            <!-- BMI bar -->
+            <div class="bmi-bar-wrap">
+              <div class="bmi-labels">
+                <span class="bmi-label">Дефицит</span>
+                <span class="bmi-label">Норма</span>
+                <span class="bmi-label">Избыток</span>
+                <span class="bmi-label">Ожирение</span>
+              </div>
+              <div class="bmi-track">
+                <!-- BMI 23.6 → position ≈ 46% of 16-40 range -->
+                <div class="bmi-pointer" style="left: 46%"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: GOALS -->
+    <div id="tab-goals" class="tab-content" style="display:none">
+      <div class="card" style="animation-delay:0.05s">
+        <div class="card-header">
+          <span class="card-title">Активные цели</span>
+          <button class="btn btn-primary" style="font-size:12px;padding:7px 14px;">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Добавить цель
+          </button>
+        </div>
+        <div class="goals-list">
+          <div class="goal-item">
+            <div class="goal-top">
+              <div class="goal-left">
+                <div class="goal-icon" style="background:rgba(108,99,255,0.12)">🏃</div>
+                <div>
+                  <div class="goal-name">Полумарафон</div>
+                  <div class="goal-sub">Пробежать 21.1 км · Московский марафон 2026</div>
+                </div>
+              </div>
+              <div class="goal-right">
+                <div class="goal-pct" style="color:var(--accent2)">72%</div>
+                <div class="goal-deadline">до 14 сент.</div>
+              </div>
+            </div>
+            <div class="goal-bar"><div class="goal-fill" style="width:72%;background:linear-gradient(90deg,var(--accent),var(--accent2))"></div></div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-top">
+              <div class="goal-left">
+                <div class="goal-icon" style="background:rgba(56,189,248,0.12)">🚴</div>
+                <div>
+                  <div class="goal-name">5 000 км на велосипеде</div>
+                  <div class="goal-sub">3 410 км пройдено · годовая цель</div>
+                </div>
+              </div>
+              <div class="goal-right">
+                <div class="goal-pct" style="color:var(--blue)">68%</div>
+                <div class="goal-deadline">до 31 дек.</div>
+              </div>
+            </div>
+            <div class="goal-bar"><div class="goal-fill" style="width:68%;background:linear-gradient(90deg,var(--blue),#818cf8)"></div></div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-top">
+              <div class="goal-left">
+                <div class="goal-icon" style="background:rgba(34,211,168,0.12)">⚖️</div>
+                <div>
+                  <div class="goal-name">Вес — 75 кг</div>
+                  <div class="goal-sub">Сейчас 78.4 кг · цель −3.4 кг</div>
+                </div>
+              </div>
+              <div class="goal-right">
+                <div class="goal-pct" style="color:var(--green)">41%</div>
+                <div class="goal-deadline">до 1 авг.</div>
+              </div>
+            </div>
+            <div class="goal-bar"><div class="goal-fill" style="width:41%;background:var(--green)"></div></div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-top">
+              <div class="goal-left">
+                <div class="goal-icon" style="background:rgba(251,191,36,0.12)">🔥</div>
+                <div>
+                  <div class="goal-name">Серия 30 дней</div>
+                  <div class="goal-sub">21 день подряд · личный рекорд 34 дня</div>
+                </div>
+              </div>
+              <div class="goal-right">
+                <div class="goal-pct" style="color:var(--amber)">70%</div>
+                <div class="goal-deadline">9 дней до цели</div>
+              </div>
+            </div>
+            <div class="goal-bar"><div class="goal-fill" style="width:70%;background:var(--amber)"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- TAB: DEVICES -->
+    <!-- TAB: PRIVACY -->
+  
+  </div>
+</div>
+
+<script>
+/* ── TABS ── */
+const tabs = document.querySelectorAll('.tab');
+const contents = document.querySelectorAll('.tab-content');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const id = 'tab-' + tab.dataset.tab;
+    contents.forEach(c => c.style.display = 'none');
+    const target = document.getElementById(id);
+    if (target) { target.style.display = ''; }
+  });
+});
+
+/* ── UNIT CHIPS ── */
+document.querySelectorAll('.unit-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    chip.closest('.unit-row').querySelectorAll('.unit-chip').forEach(c => c.classList.remove('on'));
+    chip.classList.add('on');
+  });
+});
+
+/* ── SAVE BUTTON ── */
+const saveBtn = document.getElementById('saveBtn');
+saveBtn.addEventListener('click', () => {
+  const orig = saveBtn.innerHTML;
+  saveBtn.innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Сохранено`;
+  saveBtn.style.background = 'var(--green)';
+  saveBtn.style.borderColor = 'var(--green)';
+  setTimeout(() => {
+    saveBtn.innerHTML = orig;
+    saveBtn.style.background = '';
+    saveBtn.style.borderColor = '';
+  }, 2000);
+});
+
+/* ── ACHIEVEMENTS ── */
+const achs = [
+  { icon:'🏅', name:'Первая тренировка', done:true, cls:'gold' },
+  { icon:'🔥', name:'7 дней подряд', done:true, cls:'gold' },
+  { icon:'💯', name:'100 тренировок', done:true, cls:'purple', isNew:true },
+  { icon:'🚀', name:'10 000 шагов', done:true, cls:'green' },
+  { icon:'🌅', name:'Ранняя пташка', done:true, cls:'gold' },
+  { icon:'🏃', name:'Первые 5 км', done:true, cls:'purple' },
+  { icon:'🚴', name:'100 км вело', done:true, cls:'green' },
+  { icon:'⚡', name:'HIIT-мастер', done:true, cls:'gold', isNew:true },
+  { icon:'🧘', name:'Йога 10×', done:false, cls:'' },
+  { icon:'🏋️', name:'Силовой месяц', done:false, cls:'' },
+  { icon:'🌊', name:'Плавание 5×', done:false, cls:'' },
+  { icon:'🥇', name:'Полумарафон', done:false, cls:'' },
+  { icon:'🌙', name:'Ночная пробежка', done:false, cls:'' },
+  { icon:'❄️', name:'Зимний воин', done:false, cls:'' },
+  { icon:'🏔️', name:'Горный трейл', done:false, cls:'' },
+  { icon:'💎', name:'Год без пропусков', done:false, cls:'' },
+];
+const grid = document.getElementById('achGrid');
+achs.forEach(a => {
+  const el = document.createElement('div');
+  el.className = `ach-tile${a.cls ? ' ' + a.cls : ''}${!a.done ? ' locked' : ''}`;
+  el.innerHTML = `
+    ${a.isNew ? '<span class="ach-new"></span>' : ''}
+    <span class="ach-icon">${a.icon}</span>
+    <span class="ach-name">${a.name}</span>
+  `;
+  grid.appendChild(el);
+});
+</script>
+</body>
+</html>

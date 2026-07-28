@@ -4,6 +4,7 @@ import { Sidebar } from "./components/Sidebar/Sidebar";
 
 import "./App.css";
 import { HistoryPage } from "./pages/history/HistoryPage";
+import { GoalsPage } from "./pages/goal/GoalsPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           {<Route path="/" element={<Navigate to="/dashboard" replace />} />}
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/history" element={<HistoryPage />} />
+          <Route path="/goals" element={<GoalsPage />} />
           <Route
             path="/profile"
             element={<div> Страница в разработке с </div>}

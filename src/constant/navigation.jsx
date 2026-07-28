@@ -28,8 +28,8 @@ export const NAV_LINKS = [
   },
   {
     id: "uuid-3",
-    path: "/activity",
-    label: "activity",
+    path: "/goals",
+    label: "goals",
     icon: (
       <svg
         width="20"
@@ -39,7 +39,9 @@ export const NAV_LINKS = [
         strokeWidth="1.8"
         viewBox="0 0 24 24"
       >
-        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+        <circle cx="12" cy="12" r="9" />
+        <circle cx="12" cy="12" r="5" />
+        <circle cx="12" cy="12" r="1" fill="currentColor" />
       </svg>
     ),
   },
@@ -62,8 +64,8 @@ export const NAV_LINKS = [
   },
   {
     id: "uuid-5",
-    path: "/sleep",
-    label: "sleep",
+    path: "/activity",
+    label: "activity",
     icon: (
       <svg
         width="20"
@@ -73,7 +75,11 @@ export const NAV_LINKS = [
         strokeWidth="1.8"
         viewBox="0 0 24 24"
       >
-        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M22 12h-4l-3 9L9 3l-3 9H2"
+        />
       </svg>
     ),
   },

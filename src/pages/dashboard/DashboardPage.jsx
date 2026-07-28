@@ -2,6 +2,7 @@ import { StatsGrid } from "../../components/Stats/StatsGrid.jsx";
 import { WorkoutsCard } from "../../components/Workout/WorkoutsCard.jsx";
 import { NutritionCard } from "../../components/Nutrition/NutritionCard.jsx";
 import { Header } from "../../components/Header/Header.jsx";
+import { DefaultHeaderActions } from "../../components/Header/DefaultHeaderActions.jsx";
 import { getDisplayDate } from "../../utils/formatters.js";
 import { statsData } from "../../mocks/StatsData.jsx";
 import { WorkoutsData } from "../../mocks/WorkoutsData.jsx";
@@ -20,7 +21,9 @@ export function DashboardPage() {
     ?.nutrition[0];
   return (
     <>
-      <Header title="Привет, Илья 👋" subtitle={today} />
+      <Header title="Привет, Илья 👋" subtitle={today}>
+        <DefaultHeaderActions></DefaultHeaderActions>
+      </Header>
       <div className="content">
         <StatsGrid stats={todayStats} />
         <div className="wide-row">

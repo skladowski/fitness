@@ -17,7 +17,6 @@ export function SummaryCard({ goals }) {
     CALORIES: "день",
     ACTIVE_MINUTES: "день",
     SLEEP: "день",
-    TRAINING_COUNT: "нед.",
   };
   return (
     <div className="summary-bar">

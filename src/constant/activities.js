@@ -142,7 +142,7 @@ export const activities = {
   SLEEP: {
     label: "Сон",
     icon: "😴",
-    color: "rgba(0,0,0,0.1)",
+    color: "rgba(56,189,248,0.15)",
     metrics: {
       total: {
         label: "Сна",
@@ -155,7 +155,7 @@ export const activities = {
     label: "Активные минуты ",
     icon: "⚡",
     showRatio: true,
-    color: "rgba(0,0,0,0.1)",
+    color: "rgba(11, 165, 127, 0.47)",
     metrics: {
       active: {
         label: "Активных",

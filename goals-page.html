@@ -142,7 +142,7 @@ body {
 /* ─── GOALS GRID ─── */
 .goals-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   margin-bottom: 16px;
 }
@@ -167,7 +167,6 @@ body {
 .goal-card.cal::after    { background: linear-gradient(90deg, #f97316, var(--amber)); }
 .goal-card.active::after { background: linear-gradient(90deg, var(--green), #6ee7c9); }
 .goal-card.sleep::after  { background: linear-gradient(90deg, var(--blue), #818cf8); }
-.goal-card.workouts::after { background: linear-gradient(90deg, var(--red), var(--orange)); }
 
 .gc-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
 .gc-icon {
@@ -264,41 +263,6 @@ input[type="range"].gc-slider::-moz-range-thumb {
 .gc-progress-label b { color: var(--text2); font-weight: 500; }
 .gc-track { height: 6px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
 .gc-fill { height: 100%; border-radius: 4px; transition: width 0.5s cubic-bezier(0.16,1,0.3,1); }
-
-/* ── WORKOUTS / WEEK — mini weekly activity chart ── */
-.week-chart {
-  display: flex;
-  align-items: flex-end;
-  gap: 6px;
-  height: 44px;
-  margin-bottom: 16px;
-}
-.week-chart-col {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  height: 100%;
-  justify-content: flex-end;
-}
-.week-chart-bar {
-  width: 100%;
-  border-radius: 3px 3px 0 0;
-  background: var(--bg3);
-  transition: height 0.4s cubic-bezier(0.16,1,0.3,1), background 0.3s;
-  min-height: 3px;
-}
-.week-chart-bar.done {
-  background: linear-gradient(180deg, var(--orange), var(--red));
-}
-.week-chart-bar.today {
-  box-shadow: 0 0 0 1.5px rgba(248,113,113,0.5);
-}
-.week-chart-label {
-  font-size: 9px;
-  color: var(--text3);
-}
 
 /* ─── RECOMMENDED BANNER ─── */
 .reco-banner {
@@ -423,13 +387,6 @@ input[type="range"].gc-slider::-moz-range-thumb {
         <div>
           <div class="sb-val" id="sumSleep">8</div>
           <div class="sb-label">часов сна</div>
-        </div>
-      </div>
-      <div class="sb-item">
-        <div class="sb-icon" style="background:rgba(248,113,113,0.12);color:var(--red)">🏋️</div>
-        <div>
-          <div class="sb-val" id="sumWorkouts">4</div>
-          <div class="sb-label">трен. / нед.</div>
         </div>
       </div>
     </div>
@@ -583,65 +540,13 @@ input[type="range"].gc-slider::-moz-range-thumb {
         <div class="gc-track"><div class="gc-fill" id="sleepFill" style="width:90%;background:linear-gradient(90deg,var(--blue),#818cf8)"></div></div>
       </div>
 
-      <!-- ══ WORKOUTS / WEEK ══ -->
-      <div class="goal-card workouts">
-        <div class="gc-head">
-          <div class="gc-icon" style="background:rgba(248,113,113,0.12);color:var(--red)">
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 4v16M18 4v16M3 12h18M3 7h3M3 17h3M18 7h3M18 17h3"/></svg>
-          </div>
-          <div>
-            <div class="gc-title">Тренировки</div>
-            <div class="gc-sub">Дней в неделю</div>
-          </div>
-        </div>
-
-        <div class="gc-display">
-          <span class="gc-number" id="workoutsNumber" style="color:var(--red)">4</span>
-          <span class="gc-unit">трен. / нед.</span>
-        </div>
-
-        <!-- stepper -->
-        <div class="gc-input-row">
-          <button class="gc-stepper" onclick="stepWorkouts(-1)">−</button>
-          <input class="gc-num-input" id="workoutsInput" type="number" value="4" min="1" max="7" readonly>
-          <button class="gc-stepper" onclick="stepWorkouts(1)">+</button>
-        </div>
-
-        <!-- mini weekly chart -->
-
-        <div class="gc-progress-label">
-          <span>На этой неделе: <b>3 из 4</b></span>
-          <span id="workoutsPct">75%</span>
-        </div>
-        <div class="gc-track"><div class="gc-fill" id="workoutsFill" style="width:75%;background:linear-gradient(90deg,var(--red),var(--orange))"></div></div>
-      </div>
-
-      <!-- ══ INFO CARD (fills 6th grid slot) ══ -->
-      <div class="goal-card" style="display:flex; flex-direction:column; justify-content:center;">
-        <div class="gc-head" style="margin-bottom:12px;">
-          <div class="gc-icon" style="background:rgba(255,255,255,0.06);color:var(--text2)">
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          </div>
-          <div>
-            <div class="gc-title">Как это работает</div>
-          </div>
-        </div>
-        <div style="font-size:12px; color:var(--text2); line-height:1.7;">
-          Настройте цели ползунками или пресетами — изменения применяются сразу. Прогресс на карточках считается от сегодняшних показателей. После сохранения новые значения появятся на главном дашборде.
-        </div>
-        <div class="reco-banner">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
-          Калории автоматически синхронизируются с TDEE в профиле
-        </div>
-      </div>
-
     </div>
   </div>
 </div>
 
 <script>
 /* ── STATE ── */
-const ACTUALS = { steps: 8432, cal: 1840, active: 42, sleep: 7.2, workouts: 3 };
+const ACTUALS = { steps: 8432, cal: 1840, active: 42, sleep: 7.2 };
 
 const CONFIG = {
   steps:    { numId:'stepsNumber',    sliderId:'stepsSlider',    fillId:'stepsFill',    pctId:'stepsPct',    sumId:'sumSteps',    fmt: v => Math.round(v).toLocaleString('ru-RU') },
@@ -673,57 +578,12 @@ function setPreset(key, val) {
   onSlider(key, val);
 }
 
-/* ── WEEKLY ACTIVITY CHART (replaces day picker) ── */
-const weekLabels = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
-// фактические данные: была ли тренировка в этот день на текущей неделе
-const weekActivity = [true, false, true, false, true, false, false];
-const todayIndex = 4; // Пт — текущий день
-const workoutsDone = weekActivity.filter(Boolean).length;
-
-function renderWeekChart() {
-  const wrap = document.getElementById('weekChart');
-  if (!wrap) return;
-  wrap.innerHTML = '';
-  weekLabels.forEach((label, i) => {
-    const done = weekActivity[i];
-    const isToday = i === todayIndex;
-    const col = document.createElement('div');
-    col.className = 'week-chart-col';
-    col.innerHTML = `
-      <div class="week-chart-bar${done ? ' done' : ''}${isToday ? ' today' : ''}" style="height:${done ? '100%' : '18%'}"></div>
-      <span class="week-chart-label">${label}</span>
-    `;
-    wrap.appendChild(col);
-  });
-}
-
-/* ── WORKOUTS STEPPER ── */
-function stepWorkouts(delta) {
-  const inp = document.getElementById('workoutsInput');
-  let val = parseInt(inp.value) + delta;
-  val = Math.min(7, Math.max(1, val));
-  inp.value = val;
-  document.getElementById('workoutsNumber').textContent = val;
-  document.getElementById('sumWorkouts').textContent = val;
-
-  const pct = Math.min(100, Math.round((workoutsDone / val) * 100));
-  document.getElementById('workoutsFill').style.width = pct + '%';
-  document.getElementById('workoutsPct').textContent = pct + '%';
-  document.querySelector('#workoutsPct').parentElement.querySelector('b').textContent = `${workoutsDone} из ${val}`;
-}
-
 /* ── RESET ── */
 function resetDefaults() {
   setPreset('steps', 10000);
   setPreset('cal', 2400);
   setPreset('active', 45);
   setPreset('sleep', 8);
-  document.getElementById('workoutsInput').value = 4;
-  document.getElementById('workoutsNumber').textContent = 4;
-  document.getElementById('sumWorkouts').textContent = 4;
-  const pct = Math.min(100, Math.round((workoutsDone / 4) * 100));
-  document.getElementById('workoutsFill').style.width = pct + '%';
-  document.getElementById('workoutsPct').textContent = pct + '%';
 }
 
 /* ── SAVE ── */
@@ -738,8 +598,6 @@ function handleSave() {
   }, 2200);
 }
 
-/* ── INIT ── */
-renderWeekChart();
 </script>
 </body>
 </html>

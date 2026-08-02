@@ -16,7 +16,7 @@ export function WorkoutItem({
   const formattedTime = formatRelativeDate(timestamp);
   const formattedDuration = formatDuration(localMetrics.duration.current);
   const kcal = localMetrics.burnedKcal.current;
-  const kcalColor = activities.CALORIES.color;
+  const kcalColor = activities.CALORIES.textColor;
   const kcalUnit = activities.CALORIES.metrics.burned.unit;
 
   let totalVolume = null;

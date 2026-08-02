@@ -3,6 +3,7 @@ export const goalConfig = {
     slider: {
       min: 2000,
       max: 25000,
+      step: 500,
     },
     presets: [
       {
@@ -27,6 +28,7 @@ export const goalConfig = {
     slider: {
       min: 1200,
       max: 4000,
+      step: 50,
     },
     presets: [
       {
@@ -47,6 +49,7 @@ export const goalConfig = {
     slider: {
       min: 10,
       max: 180,
+      step: 5,
     },
     presets: [
       {
@@ -71,6 +74,7 @@ export const goalConfig = {
     slider: {
       min: 5,
       max: 10,
+      step: 0.5,
     },
     presets: [
       {

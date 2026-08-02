@@ -14,8 +14,8 @@
   position: absolute; top: 0; left: 0; right: 0; height: 2px;
 }
 .goal-card.steps::after  { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
-.goal-card.cal::after    { background: linear-gradient(90deg, #f97316, var(--amber)); }
-.goal-card.active::after { background: linear-gradient(90deg, var(--green), #6ee7c9); }
+.goal-card.calories::after    { background: linear-gradient(90deg, #f97316, var(--amber)); }
+.goal-card.active_minutes::after { background: linear-gradient(90deg, var(--green), #6ee7c9); }
 .goal-card.sleep::after  { background: linear-gradient(90deg, var(--blue), #818cf8); }
 
 .gc-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }

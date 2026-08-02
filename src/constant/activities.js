@@ -93,7 +93,8 @@ export const activities = {
   CALORIES: {
     label: "Калории",
     icon: "🔥",
-    color: "#fb923c",
+    color: "rgba(249,115,22,0.15)",
+    textColor: "rgba(249,115,22, 1)",
     metrics: {
       burned: { label: "Сожжено", unit: "ккал" },
     },
@@ -102,6 +103,7 @@ export const activities = {
     label: "Шаги",
     icon: "🚶",
     color: "rgba(124, 118, 238, 0.1)",
+    textColor: "rgba(124, 118, 238, 1)",
     metrics: {
       distance: {
         label: "Дистанция",
@@ -129,6 +131,7 @@ export const activities = {
     label: "Шаги",
     icon: "🚶",
     color: "rgba(124, 118, 238, 0.1)",
+    textColor: "rgba(124, 118, 238, 1)",
     metrics: {
       steps: { label: "Шаги", unit: "шагов" },
       duration: {
@@ -143,6 +146,7 @@ export const activities = {
     label: "Сон",
     icon: "😴",
     color: "rgba(56,189,248,0.15)",
+    textColor: "rgba(56,189,248,1)",
     metrics: {
       total: {
         label: "Сна",
@@ -156,6 +160,7 @@ export const activities = {
     icon: "⚡",
     showRatio: true,
     color: "rgba(11, 165, 127, 0.47)",
+    textColor: "rgba(11, 165, 127, 1)",
     metrics: {
       active: {
         label: "Активных",

@@ -30,6 +30,13 @@ export function GoalsPage() {
       presets: goalConfig[key].presets,
     };
   });
+  function handleSave() {
+    setGoal(draftGoals);
+    localStorage.setItem("goals", JSON.stringify(draftGoals));
+  }
+  function handleReset() {
+    setDraftGoals(Goals);
+  }
   return (
     <div className="main">
       <Header
@@ -38,7 +45,10 @@ export function GoalsPage() {
           "Настройте дневные и недельные показатели — они появятся на дашборде"
         }
       >
-        <GoalsHeaderActions></GoalsHeaderActions>
+        <GoalsHeaderActions
+          handleSave={handleSave}
+          handleReset={handleReset}
+        ></GoalsHeaderActions>
       </Header>
       <div className="content">
         <SummaryCard goals={draftGoals}></SummaryCard>

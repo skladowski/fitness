@@ -1,8 +1,11 @@
 import { StatCard } from "./StatCard";
 import { secondsToMinutes } from "../../utils/formatters.js";
 import { activities } from "../../constant/activities.js";
+import { useContext } from "react";
+import { goalContext } from "../../context/goalContext.jsx";
 
 export function StatsGrid({ stats }) {
+  const { goal, setGoal } = useContext(goalContext);
   return (
     <div className="stats-grid">
       {stats?.map((item) => {
@@ -14,18 +17,18 @@ export function StatsGrid({ stats }) {
           ? metricsConfig.transform(rawData.current)
           : rawData.current;
         // условие ? значение_если_true : значение_если_false
-        const widthPercent = rawData.target
-          ? Math.min((rawData.current / rawData.target) * 100, 100) // считаем проценты
+        const widthPercent = goal[item.type]
+          ? Math.min((finalValue / goal[item.type]) * 100, 100) // считаем проценты
           : 0;
-        const realWidthPercent = rawData.target
-          ? (rawData.current / rawData.target) * 100
+        const realWidthPercent = goal[item.type]
+          ? (finalValue / goal[item.type]) * 100
           : 0;
 
         const formattedValue = config.showRatio
-          ? `${secondsToMinutes(rawData.current)} / ${secondsToMinutes(rawData.target)}`
+          ? `${finalValue} / ${goal[item.type]}`
           : finalValue.toLocaleString("ru-RU"); // проверяем нужно ли нам вставлять 45/60, или просто форматировать числа
 
-        const goalText = rawData.target
+        const goalText = goal[item.type]
           ? `${Math.round(realWidthPercent)}% от цели`
           : ""; // создаем тренд от цели
 

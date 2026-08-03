@@ -1,7 +1,7 @@
-export function GoalsHeaderActions() {
+export function GoalsHeaderActions({ handleSave, handleReset }) {
   return (
     <div style={{ display: "flex", gap: "10px" }}>
-      <button className="btn">
+      <button className="btn" onClick={handleReset}>
         <svg
           width="14"
           height="14"
@@ -16,7 +16,7 @@ export function GoalsHeaderActions() {
         Сбросить
       </button>
 
-      <button className="btn btn-primary">
+      <button className="btn btn-primary" onClick={handleSave}>
         <svg
           width="14"
           height="14"

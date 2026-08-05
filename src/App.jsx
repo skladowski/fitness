@@ -13,7 +13,7 @@ function App() {
         <Sidebar />
         <main className="main">
           <Routes>
-            {<Route path="/" element={<Navigate to="/dashboard" replace />} />}
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/history" element={<HistoryPage />} />
             <Route path="/goals" element={<GoalsPage />} />

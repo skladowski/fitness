@@ -53,7 +53,7 @@ export function GoalCard({
           return (
             <button
               key={item.label}
-              className="gc-preset"
+              className={`gc-preset ${item.value === value ? "active" : ""}  `}
               onClick={() => onGoalChange(type, item.value)}
             >
               {item.label}

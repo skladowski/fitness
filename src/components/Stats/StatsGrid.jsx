@@ -1,5 +1,4 @@
 import { StatCard } from "./StatCard";
-import { secondsToMinutes } from "../../utils/formatters.js";
 import { activities } from "../../constant/activities.js";
 import { useContext } from "react";
 import { goalContext } from "../../context/goalContext.jsx";

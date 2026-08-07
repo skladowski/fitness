@@ -40,7 +40,7 @@ export function GoalCard({
           max={max}
           step={step}
           value={value}
-          onChange={(e) => onGoalChange(type, e.target.value)}
+          onChange={(e) => onGoalChange(type, Number(e.target.value))}
         />
         <div className="gc-range-labels">
           <span>{min}</span>

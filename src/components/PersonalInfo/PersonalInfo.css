@@ -1,0 +1,9 @@
+.card-icon-custom {
+  background: rgba(108, 99, 255, 0.12);
+  color: var(--accent2);
+}
+
+.textarea-custom {
+  resize: vertical;
+  font-family: 'DM Sans', sans-serif;
+}

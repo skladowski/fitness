@@ -1,12 +1,15 @@
 import "./PersonalRecordCard.css";
 import { activities } from "../../constant/activities";
+import { getRecordWord } from "../../utils/formatters";
 
 export function PersonalRecordCard({ records }) {
   return (
     <div className="pr-card">
       <div className="card-header">
         <span className="card-title">Личные рекорды</span>
-        <span className="span-record">🏆{records.length} рекорда</span>
+        <span className="span-record">
+          🏆{records.length} {getRecordWord(records.length)}
+        </span>
       </div>
       <div className="pr-list">
         {records.map((record) => (

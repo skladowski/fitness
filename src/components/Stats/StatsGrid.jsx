@@ -31,7 +31,7 @@ export function StatsGrid({ stats }) {
           ? `${Math.round(realWidthPercent)}% от цели`
           : ""; // создаем тренд от цели
 
-        const trendText = `${item.trend > 0 ? "+" : ""} ${item.trend}% vs вчера `; // создаем тренд от вчера
+        const trendText = `${item.trend > 0 ? "+" : ""} ${item.trend}% vs вчера`; // создаем тренд от вчера
 
         // const metaText = [goalText, trendText].filter(Boolean).join(""); // соеденяем тренды в один большой
 

@@ -79,3 +79,7 @@
   border-color: var(--green) !important;
   animation: saved 0.3s ease;
 }
+.gha-wrapper {
+  display: flex;
+  gap: 10px;
+}

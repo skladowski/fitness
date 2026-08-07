@@ -4,7 +4,7 @@ export function StatCard({
   value,
   label,
   unit,
-  // statProgress,
+  statProgress,
   widthPercent,
   //meta,
   goalText,
@@ -12,11 +12,8 @@ export function StatCard({
   type,
   variant,
 }) {
-  const statusClass = trendText
-    ? trendText.startsWith("+")
-      ? "positive"
-      : "negative"
-    : "neutral"; // проверяем какой класс присвоить
+  const statusClass =
+    statProgress > 0 ? "positive" : statProgress < 0 ? "negative" : "neutral";
 
   return (
     <div

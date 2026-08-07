@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import "./Header.css";
 export function GoalsHeaderActions({ handleSave, handleReset }) {
   const [isSaved, setIsSaved] = useState(false);
 
@@ -12,7 +12,7 @@ export function GoalsHeaderActions({ handleSave, handleReset }) {
   }
 
   return (
-    <div style={{ display: "flex", gap: "10px" }}>
+    <div className="gha-wrapper">
       <button className="btn" onClick={handleReset}>
         <svg
           width="14"

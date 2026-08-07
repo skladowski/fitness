@@ -14,6 +14,7 @@ export function getDisplayDate(date) {
     weekday: "long",
     day: "numeric",
     month: "long",
+
     year: "numeric",
   });
   return dateString.charAt(0).toUpperCase() + dateString.slice(1);
@@ -41,4 +42,21 @@ export function calculateStreak(workouts, anchorDate = new Date()) {
     }
   }
   return streak;
+}
+export function lastOneNumber(param) {
+  return param % 10;
+}
+export function lastTwoNumbers(param) {
+  return param % 100;
+}
+export function getRecordWord(count) {
+  if ([11, 12, 13, 14].includes(lastTwoNumbers(count))) {
+    return "рекордов";
+  } else if (lastOneNumber(count) === 1) {
+    return "рекорд";
+  } else if ([2, 3, 4].includes(lastOneNumber(count))) {
+    return "рекорда";
+  } else {
+    return "рекордов";
+  }
 }

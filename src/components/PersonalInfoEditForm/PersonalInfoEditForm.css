@@ -1,0 +1,47 @@
+/* UserProfileCard.css */
+
+.card-icon-user {
+  background: rgba(108, 99, 255, 0.12);
+  color: var(--accent2);
+}
+
+.label-icon {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.label-icon svg {
+  flex-shrink: 0;
+}
+
+.form-textarea {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  color: var(--text1);
+  transition: border-color 0.2s, background 0.2s;
+  resize: vertical;
+  min-height: 84px;
+  line-height: 1.5;
+  outline: none;
+}
+
+.form-textarea::placeholder {
+  color: var(--text3);
+}
+
+.form-textarea:focus {
+  border-color: rgba(108, 99, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.08);
+}
+
+.form-hint-text {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 6px;
+}

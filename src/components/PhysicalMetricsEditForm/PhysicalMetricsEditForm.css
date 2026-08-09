@@ -1,0 +1,140 @@
+.radio-card-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.radio-card {
+  position: relative;
+}
+
+.radio-card input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.radio-card label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.radio-card input:checked + label {
+  background: rgba(108, 99, 255, 0.1);
+  border-color: var(--accent);
+}
+
+.rc-title {
+  font-size: 13px;
+  color: var(--text1);
+  font-weight: 500;
+}
+
+.rc-sub {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 2px;
+}
+
+.rc-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--text3);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-card input:checked + label .rc-check {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.radio-card input:checked + label .rc-check::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.preview-strip {
+  display: flex;
+  margin-top: 18px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.ps-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 8px;
+  gap: 3px;
+  border-right: 1px solid var(--border);
+}
+
+.ps-item:last-child {
+  border-right: none;
+}
+
+.ps-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.ps-val.green { color: var(--green); }
+.ps-val.accent { color: var(--accent2); }
+.ps-val.blue { color: var(--blue); }
+
+.ps-label {
+  font-size: 9.5px;
+  color: var(--text3);
+  text-align: center;
+}
+
+.form-hint-text {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 6px;
+}
+
+.preview-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 10px;
+}
+
+.card-icon-metrics {
+  background: rgba(34, 211, 168, 0.12);
+  color: var(--green);
+}
+
+@media (max-width: 768px) {
+  .preview-strip {
+    flex-wrap: wrap;
+  }
+  .ps-item {
+    flex: 1 1 33%;
+  }
+}

@@ -1,3 +1,4 @@
+import "./HistoryPage.css";
 import { Header } from "../../components/Header/Header";
 import { DefaultHeaderActions } from "../../components/Header/DefaultHeaderActions";
 import { StreakCard } from "../../components/Streak/StreakCard";
@@ -15,7 +16,6 @@ import { PersonalRecordCard } from "../../components/PersonalRecord/PersonalReco
 import { EmptyState } from "../../components/EmptyState/EmptyState";
 import { useState, useMemo } from "react";
 import { activities } from "../../constant/activities";
-import "./HistoryPage.css";
 import { calculateStreak } from "../../utils/formatters";
 import { getPersonalRecords } from "../../utils/records";
 import { statsData } from "../../mocks/StatsData";

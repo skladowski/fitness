@@ -5,7 +5,7 @@ import { Sidebar } from "./components/Sidebar/Sidebar";
 import { HistoryPage } from "./pages/history/HistoryPage";
 import { GoalsPage } from "./pages/goal/GoalsPage";
 import { GoalsProvider } from "./context/goalsProvider";
-import { ProfilePage } from "./pages/profile/ProfilePage";
+import { ProfileEditPage } from "./pages/profile/ProfileEditPage";
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
             <Route path="/history" element={<HistoryPage />} />
             <Route path="/goals" element={<GoalsPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile/edit" element={<ProfileEditPage />} />
             <Route
               path="/workout/new"
               element={<div> Страница в разработке </div>}

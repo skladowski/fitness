@@ -6,6 +6,7 @@ import { HistoryPage } from "./pages/history/HistoryPage";
 import { GoalsPage } from "./pages/goal/GoalsPage";
 import { GoalsProvider } from "./context/goalsProvider";
 import { ProfileEditPage } from "./pages/profile/ProfileEditPage";
+import { ProfilePage } from "./pages/profile/ProfilePage";
 
 function App() {
   return (

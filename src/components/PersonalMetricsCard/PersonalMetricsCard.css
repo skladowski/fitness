@@ -1,0 +1,203 @@
+/* PersonalMetricsCard.css */
+
+.card-icon-metrics {
+  background: rgba(34, 211, 168, 0.12);
+  color: var(--green);
+}
+
+/* Сетка базовых метрик */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.metric-tile {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+}
+
+.mt-val {
+  font-family: "Syne", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.mt-val.blue { color: var(--blue); }
+.mt-val.green { color: var(--green); }
+.mt-val.orange { color: var(--orange); }
+
+.mt-label {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 5px;
+}
+
+/* Секция ИМТ */
+.bmi-section {
+  margin-bottom: 18px;
+}
+
+.bmi-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.bmi-number {
+  font-family: "Syne", sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+
+.bmi-category {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--green);
+}
+
+.bmi-track {
+  height: 7px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--blue) 0%,
+    var(--blue) 22%,
+    var(--green) 22%,
+    var(--green) 50%,
+    var(--amber) 50%,
+    var(--amber) 72%,
+    var(--red) 72%
+  );
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.bmi-pointer {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--bg0);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.4);
+}
+
+.bmi-labels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bmi-label-item {
+  font-size: 9px;
+  color: var(--text3);
+  text-align: center;
+}
+
+/* Блок TDEE */
+.tdee-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-bottom: 18px;
+}
+
+.tdee-title {
+  font-size: 11px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 10px;
+}
+
+.tdee-value {
+  font-family: "Syne", sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--accent2);
+  line-height: 1;
+}
+
+.tdee-sub {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 5px;
+}
+
+.tdee-breakdown {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.tdee-chip {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--bg3);
+  color: var(--text3);
+}
+
+/* Состав тела */
+.comp-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.comp-item {
+  font-size: 12px;
+  color: var(--text2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.comp-item b {
+  color: var(--text1);
+}
+
+.comp-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.comp-dot.green { background: var(--green); }
+.comp-dot.orange { background: var(--orange); }
+
+.comp-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 5px;
+  overflow: hidden;
+  gap: 2px;
+}
+
+.comp-lean {
+  background: var(--green);
+  border-radius: 5px;
+}
+
+.comp-fat {
+  background: var(--orange);
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

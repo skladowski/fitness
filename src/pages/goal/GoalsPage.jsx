@@ -38,7 +38,7 @@ export function GoalsPage() {
     setDraftGoals(Goals);
   }
   return (
-    <div className="main">
+    <div>
       <Header
         title={"Цели"}
         subtitle={

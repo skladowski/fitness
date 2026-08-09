@@ -82,7 +82,7 @@ export function HistoryPage() {
   ).reverse();
 
   return (
-    <div className="main">
+    <div>
       <Header title="История активности" subtitle={today}>
         <DefaultHeaderActions />
       </Header>

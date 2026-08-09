@@ -19,7 +19,7 @@
   width: 80px; height: 80px; border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Syne', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 26px; font-weight: 800; color: #fff;
   border: 2px solid rgba(108,99,255,0.35);
   box-shadow: 0 0 0 5px rgba(108,99,255,0.07);
@@ -27,7 +27,7 @@
 }
 .hero-info { flex: 1; }
 .hero-name {
-  font-family: 'Syne', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 22px; font-weight: 700; letter-spacing: -0.4px;
 }
 .hero-sub { font-size: 13px; color: var(--text3); margin-top: 4px; margin-bottom: 12px; }
@@ -53,7 +53,7 @@
 }
 .hd-item:last-child { border-right: none; }
 .hd-val {
-  font-family: 'Syne', sans-serif;
+  font-family:'DM Sans', sans-serif;
   font-size: 20px; font-weight: 700; letter-spacing: -0.5px;
 }
 .hd-label { font-size: 10px; color: var(--text3); text-align: center; }

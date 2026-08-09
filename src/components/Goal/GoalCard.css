@@ -33,7 +33,7 @@
   margin-bottom: 16px;
 }
 .gc-number {
-  font-family: 'Syne', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 38px; font-weight: 800; letter-spacing: -1.5px;
   line-height: 1;
 }
@@ -85,7 +85,7 @@ input[type="range"].gc-slider::-moz-range-thumb {
 .gc-num-input {
   flex: 1; text-align: center;
   background: none; border: none; outline: none;
-  font-family: 'Syne', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 16px; font-weight: 700; color: var(--text1);
 }
 

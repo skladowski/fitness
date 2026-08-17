@@ -4,6 +4,7 @@ import { metersToKilometers } from "../utils/formatters";
 
 export const activities = {
   RUN: {
+    isSport: true,
     label: "Бег",
     icon: "🏃",
     color: "rgba(182, 179, 240, 0.1)",
@@ -29,6 +30,7 @@ export const activities = {
     },
   },
   POWER: {
+    isSport: true,
     label: "Силовая тренировка",
     icon: "🏋️",
     color: "rgba(31, 141, 113, 0.1)",
@@ -56,6 +58,7 @@ export const activities = {
     },
   },
   CYCLING: {
+    isSport: true,
     label: "Велоезда",
     icon: "🚴",
     color: "rgba(29, 119, 158, 0.1)",
@@ -78,9 +81,24 @@ export const activities = {
     },
   },
   YOGA: {
+    isSport: true,
     label: "Йога",
     icon: "🧘",
     color: "rgba(251,191,36,0.1)",
+    metrics: {
+      duration: {
+        isPrimary: true,
+        label: "Время",
+        unit: "мин",
+        transform: secondsToMinutes,
+      },
+    },
+  },
+  SWIMMING: {
+    isSport: true,
+    label: "Плавание",
+    icon: "🏊",
+    color: "rgba(74, 237, 248, 0.1)",
     metrics: {
       duration: {
         isPrimary: true,

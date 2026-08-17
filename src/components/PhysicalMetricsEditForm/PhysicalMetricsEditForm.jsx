@@ -1,6 +1,6 @@
 import "./PhysicalMetricsEditForm.css";
 
-export function PhysicalMetricsEditForm() {
+export function PhysicalMetricsEditForm({}) {
   return (
     <div className="card">
       <div className="card-header">

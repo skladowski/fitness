@@ -32,28 +32,24 @@ export function PhysicalMetricsCard() {
 
       <div className="metrics-grid">
         <div className="metric-tile">
-          <div className="mt-val" style={{ color: "var(--blue)" }}>
-            78.0
-          </div>
+          <div className="mt-val">78.0</div>
           <div className="mt-label">Вес, кг</div>
         </div>
         <div className="metric-tile">
-          <div className="mt-val" style={{ color: "var(--green)" }}>
-            23.5
-          </div>
+          <div className="mt-val">23.5</div>
           <div className="mt-label">ИМТ</div>
         </div>
         <div className="metric-tile">
-          <div className="mt-val" style={{ color: "var(--orange)" }}>
-            17.0%
-          </div>
+          <div className="mt-val">17.0%</div>
           <div className="mt-label">Жир тела</div>
         </div>
       </div>
 
       <div className="bmi-section">
         <div className="bmi-top">
-          <span className="bmi-number">23.5</span>
+          <span className="bmi-number" style={{ color: "var(--green)" }}>
+            23.5
+          </span>
           <span className="bmi-category" style={{ color: "var(--green)" }}>
             Норма
           </span>

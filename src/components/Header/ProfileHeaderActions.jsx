@@ -1,9 +1,10 @@
 import "./Header.css";
+import { NavLink } from "react-router-dom";
 
 export function ProfileHeaderActions() {
   return (
     <div className="gha-wrapper">
-      <button className="btn btn-primary" onClick={() => {}}>
+      <NavLink className="btn btn-primary" to={"/profile/edit"}>
         <svg
           width="14"
           height="14"
@@ -16,7 +17,7 @@ export function ProfileHeaderActions() {
           <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
         </svg>
         Редактировать профиль
-      </button>
+      </NavLink>
     </div>
   );
 }

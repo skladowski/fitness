@@ -1,6 +1,25 @@
 import "./PersonalInfoEditForm.css";
+import { activities } from "../../constant/activities";
 
-export function PersonalInfoEditForm() {
+const GENDERS = [
+  {
+    key: "male",
+    label: "Мужской",
+  },
+  {
+    key: "female",
+    label: "Женский",
+  },
+  {
+    key: "other",
+    label: "Другое",
+  },
+];
+
+const sportKeys = Object.keys(activities).filter(
+  (key) => activities[key].isSport,
+);
+export function PersonalInfoEditForm({ personalInfo, onChange }) {
   return (
     <div className="card">
       <div className="card-header">
@@ -34,7 +53,8 @@ export function PersonalInfoEditForm() {
             id="first-name"
             className="form-input"
             type="text"
-            defaultValue="Алексей"
+            value={personalInfo.firstName}
+            onChange={(e) => onChange("firstName", e.target.value)}
           />
         </div>
 
@@ -46,7 +66,8 @@ export function PersonalInfoEditForm() {
             id="last-name"
             className="form-input"
             type="text"
-            defaultValue="Иванов"
+            value={personalInfo.lastName}
+            onChange={(e) => onChange("lastName", e.target.value)}
           />
         </div>
 
@@ -71,7 +92,8 @@ export function PersonalInfoEditForm() {
             id="birth-date"
             className="form-input"
             type="date"
-            defaultValue="1994-03-14"
+            value={personalInfo.birthDate}
+            onChange={(e) => onChange("birthDate", e.target.value)}
           />
         </div>
 
@@ -94,22 +116,26 @@ export function PersonalInfoEditForm() {
             id="city"
             className="form-input"
             type="text"
-            defaultValue="Москва"
+            value={personalInfo.city}
+            onChange={(e) => onChange("city", e.target.value)}
           />
         </div>
 
         <div className="form-field full">
           <label className="form-label">Пол</label>
           <div className="sex-chips">
-            <button type="button" className="sex-chip on">
-              Мужской
-            </button>
-            <button type="button" className="sex-chip">
-              Женский
-            </button>
-            <button type="button" className="sex-chip">
-              Другое
-            </button>
+            {GENDERS.map((item) => {
+              return (
+                <button
+                  key={item.key}
+                  type="button"
+                  className={`${item.key === personalInfo.gender ? "sex-chip on" : "sex-chip"}`}
+                  onClick={() => onChange("gender", item.key)}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -132,7 +158,8 @@ export function PersonalInfoEditForm() {
             id="email"
             className="form-input"
             type="email"
-            defaultValue="alexey@example.com"
+            value={personalInfo.email}
+            onChange={(e) => onChange("email", e.target.value)}
           />
         </div>
 
@@ -144,7 +171,8 @@ export function PersonalInfoEditForm() {
             id="about"
             className="form-textarea"
             placeholder="Расскажите о своих целях и тренировках…"
-            defaultValue="Люблю бег и велоспорт. Тренируюсь 4× в неделю, готовлюсь к первому полумарафону."
+            value={personalInfo.aboutMe}
+            onChange={(e) => onChange("aboutMe", e.target.value)}
           />
           <span className="form-hint-text">
             Отображается на странице публичного профиля
@@ -154,21 +182,30 @@ export function PersonalInfoEditForm() {
         <div className="form-field full">
           <label className="form-label">Спортивные предпочтения</label>
           <div className="pref-chips">
-            <button type="button" className="pref-chip on">
-              🏃 Бег
-            </button>
-            <button type="button" className="pref-chip on">
-              🚴 Велоспорт
-            </button>
-            <button type="button" className="pref-chip">
-              🏊 Плавание
-            </button>
-            <button type="button" className="pref-chip">
-              🏋️ Силовые
-            </button>
-            <button type="button" className="pref-chip">
-              🧘 Йога
-            </button>
+            {sportKeys.map((key) => (
+              <button
+                key={key}
+                type="button"
+                className={
+                  personalInfo.fitnessPreferences.includes(key)
+                    ? "pref-chip on"
+                    : "pref-chip"
+                }
+                onClick={() => {
+                  if (personalInfo.fitnessPreferences.includes(key)) {
+                    const result = personalInfo.fitnessPreferences.filter(
+                      (pref) => pref != key,
+                    );
+                    return onChange("fitnessPreferences", result);
+                  } else {
+                    const result = [...personalInfo.fitnessPreferences, key];
+                    return onChange("fitnessPreferences", result);
+                  }
+                }}
+              >
+                {activities[key].icon} {activities[key].label}
+              </button>
+            ))}
           </div>
         </div>
       </div>

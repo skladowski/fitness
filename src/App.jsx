@@ -7,28 +7,31 @@ import { GoalsPage } from "./pages/goal/GoalsPage";
 import { GoalsProvider } from "./context/goalsProvider";
 import { ProfileEditPage } from "./pages/profile/ProfileEditPage";
 import { ProfilePage } from "./pages/profile/ProfilePage";
+import { ProfileProvider } from "./context/ProfileProvider";
 
 function App() {
   return (
-    <GoalsProvider>
-      <div className="app-layout">
-        <Sidebar />
-        <main className="main">
-          <Routes>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/history" element={<HistoryPage />} />
-            <Route path="/goals" element={<GoalsPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/profile/edit" element={<ProfileEditPage />} />
-            <Route
-              path="/workout/new"
-              element={<div> Страница в разработке </div>}
-            />
-          </Routes>
-        </main>
-      </div>
-    </GoalsProvider>
+    <ProfileProvider>
+      <GoalsProvider>
+        <div className="app-layout">
+          <Sidebar />
+          <main className="main">
+            <Routes>
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/history" element={<HistoryPage />} />
+              <Route path="/goals" element={<GoalsPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/profile/edit" element={<ProfileEditPage />} />
+              <Route
+                path="/workout/new"
+                element={<div> Страница в разработке </div>}
+              />
+            </Routes>
+          </main>
+        </div>
+      </GoalsProvider>
+    </ProfileProvider>
   );
 }
 

@@ -1,6 +1,45 @@
 import "./PhysicalMetricsEditForm.css";
+import {
+  calculateBMI,
+  getBMIStatus,
+  calculateTDEE,
+  calculateAge,
+} from "../../utils/healthMath";
 
-export function PhysicalMetricsEditForm({}) {
+const tabsDictionary = [
+  {
+    key: "Sedentary",
+    label: "Низкая",
+    sub: "Малоподвижный образ жизни, редкие тренировки",
+  },
+  {
+    key: "Moderate",
+    label: "Средняя",
+    sub: "Тренировки 3-5 раз в неделю",
+  },
+  {
+    key: "Active",
+    label: "Высокая",
+    sub: "Интенсивные тренировки 6-7 раз в неделю",
+  },
+];
+
+export function PhysicalMetricsEditForm({
+  bodyMetrics,
+  personalInfo,
+  onChange,
+}) {
+  const bmi = calculateBMI(bodyMetrics.weight, bodyMetrics.height);
+  const bmiStatus = getBMIStatus(bmi);
+  const age = calculateAge(personalInfo.birthDate);
+  const tdee = calculateTDEE(
+    bodyMetrics.weight,
+    bodyMetrics.height,
+    age,
+    bodyMetrics.levelActivity,
+    personalInfo.gender,
+  );
+
   return (
     <div className="card">
       <div className="card-header">
@@ -34,7 +73,8 @@ export function PhysicalMetricsEditForm({}) {
               id="height-input"
               className="form-input"
               type="number"
-              defaultValue="181"
+              value={bodyMetrics.height}
+              onChange={(e) => onChange("height", Number(e.target.value))}
             />
             <span className="input-unit">см</span>
           </div>
@@ -50,7 +90,8 @@ export function PhysicalMetricsEditForm({}) {
               className="form-input"
               type="number"
               step="0.1"
-              defaultValue="78.0"
+              value={bodyMetrics.weight}
+              onChange={(e) => onChange("weight", Number(e.target.value))}
             />
             <span className="input-unit">кг</span>
           </div>
@@ -66,7 +107,8 @@ export function PhysicalMetricsEditForm({}) {
               className="form-input"
               type="number"
               step="0.1"
-              defaultValue="17.0"
+              value={bodyMetrics.fatPercent}
+              onChange={(e) => onChange("fatPercent", Number(e.target.value))}
             />
             <span className="input-unit">%</span>
           </div>
@@ -78,57 +120,41 @@ export function PhysicalMetricsEditForm({}) {
         <div className="form-field full">
           <label className="form-label">Уровень активности</label>
           <div className="radio-card-group">
-            <div className="radio-card">
-              <input type="radio" name="activity" id="act-low" />
-              <label htmlFor="act-low">
-                <div>
-                  <div className="rc-title">Низкая</div>
-                  <div className="rc-sub">
-                    Малоподвижный образ жизни, редкие тренировки
+            {tabsDictionary.map((item) => (
+              <div className="radio-card" key={item.key}>
+                <input
+                  type="radio"
+                  name="activity"
+                  id={item.key}
+                  checked={item.key === bodyMetrics.levelActivity}
+                  onChange={() => onChange("levelActivity", item.key)}
+                />
+                <label htmlFor={item.key}>
+                  <div>
+                    <div className="rc-title">{item.label}</div>
+                    <div className="rc-sub">{item.sub}</div>
                   </div>
-                </div>
-                <span className="rc-check"></span>
-              </label>
-            </div>
-
-            <div className="radio-card">
-              <input type="radio" name="activity" id="act-mid" defaultChecked />
-              <label htmlFor="act-mid">
-                <div>
-                  <div className="rc-title">Умеренная</div>
-                  <div className="rc-sub">Тренировки 3–5 раз в неделю</div>
-                </div>
-                <span className="rc-check"></span>
-              </label>
-            </div>
-
-            <div className="radio-card">
-              <input type="radio" name="activity" id="act-high" />
-              <label htmlFor="act-high">
-                <div>
-                  <div className="rc-title">Высокая</div>
-                  <div className="rc-sub">
-                    Интенсивные тренировки 6–7 раз в неделю
-                  </div>
-                </div>
-                <span className="rc-check"></span>
-              </label>
-            </div>
+                  <span className="rc-check"></span>
+                </label>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
       <div className="preview-strip">
         <div className="ps-item">
-          <span className="ps-val green">23.5</span>
+          <span className="ps-val" style={{ color: bmiStatus.color }}>
+            {bmi.toFixed(1)}
+          </span>
           <span className="ps-label">ИМТ</span>
         </div>
         <div className="ps-item">
-          <span className="ps-val accent">2 732</span>
+          <span className="ps-val accent">{Math.round(tdee)}</span>
           <span className="ps-label">TDEE ккал</span>
         </div>
         <div className="ps-item">
-          <span className="ps-val blue">78.0</span>
+          <span className="ps-val blue">{bodyMetrics.weight}</span>
           <span className="ps-label">Вес, кг</span>
         </div>
       </div>
@@ -146,7 +172,9 @@ export function PhysicalMetricsEditForm({}) {
           <line x1="12" y1="16" x2="12" y2="12" />
           <line x1="12" y1="8" x2="12.01" y2="8" />
         </svg>
-        Показатели пересчитаются автоматически после сохранения
+        {personalInfo.gender === "other"
+          ? "Показатели обновляются автоматически • TDEE рассчитан приблизительно — формула пока не учитывает вариант «Другое»"
+          : "Показатели обновляются автоматически"}
       </div>
     </div>
   );

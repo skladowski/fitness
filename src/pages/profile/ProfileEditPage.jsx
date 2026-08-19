@@ -56,6 +56,7 @@ export function ProfileEditPage() {
           <PhysicalMetricsEditForm
             bodyMetrics={draftProfile.bodyMetrics}
             onChange={handleBodyMetricsChange}
+            personalInfo={draftProfile.personalInfo}
           />
         </div>
       </div>

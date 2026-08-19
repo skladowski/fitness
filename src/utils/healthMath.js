@@ -20,9 +20,14 @@ const dictionary = {
   Active: 1.725,
 };
 
-export function calculateTDEE(weight, height, age, activityLevel, gender) {
+export function calculateTDEE(weight, height, age, levelActivity, gender) {
   const baseBMR = 10 * weight + 6.25 * height - 5 * age;
   const BMR = baseBMR + (gender === "male" ? +5 : -161);
-  const TDEE = BMR * dictionary[activityLevel];
+  const TDEE = BMR * dictionary[levelActivity];
   return TDEE;
+}
+
+const nowDate = new Date();
+export function calculateAge(birthDate) {
+  return nowDate.getFullYear() - new Date(birthDate).getFullYear();
 }

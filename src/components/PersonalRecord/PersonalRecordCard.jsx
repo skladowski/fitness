@@ -1,6 +1,6 @@
 import "./PersonalRecordCard.css";
 import { activities } from "../../constant/activities";
-import { getRecordWord } from "../../utils/formatters";
+import { getWordForm } from "../../utils/formatters";
 
 export function PersonalRecordCard({ records }) {
   return (
@@ -8,7 +8,8 @@ export function PersonalRecordCard({ records }) {
       <div className="card-header">
         <span className="card-title">Личные рекорды</span>
         <span className="span-record">
-          🏆{records.length} {getRecordWord(records.length)}
+          🏆{records.length}{" "}
+          {getWordForm(records.length, "рекорд", "рекорда", "рекордов")}
         </span>
       </div>
       <div className="pr-list">

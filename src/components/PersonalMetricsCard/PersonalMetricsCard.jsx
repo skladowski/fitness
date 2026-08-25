@@ -1,6 +1,16 @@
 import "./PersonalMetricsCard.css";
+import { getWordForm } from "../../utils/formatters";
+import { GENDERS } from "../../constant/genders";
+import { calculateAge } from "../../utils/healthMath";
+import { getMonthSince } from "../../utils/formatters";
+import { activities } from "../../constant/activities";
+export function PersonalMetricsCard({ personalInfo }) {
+  const age = calculateAge(personalInfo.birthDate);
+  const genderLabel = GENDERS.find(
+    (item) => item.key === personalInfo.gender,
+  ).label;
+  const monthSince = getMonthSince(personalInfo.hereSince);
 
-export function PersonalMetricsCard() {
   return (
     <div className="card">
       <div className="card-header">
@@ -37,9 +47,12 @@ export function PersonalMetricsCard() {
         >
           Спортивные предпочтения
         </div>
-        <div className="pref-chips">
-          <span className="pref-chip">🏃 Бег</span>
-          <span className="pref-chip">🚴 Велоспорт</span>
+        <div className="pref-chip">
+          {personalInfo.fitnessPreferences.map((key) => (
+            <span key={key} className="pref-chip on">
+              {activities[key].icon} {activities[key].label}
+            </span>
+          ))}
         </div>
       </div>
       <div className="info-list">
@@ -60,7 +73,9 @@ export function PersonalMetricsCard() {
             </svg>
             Возраст
           </span>
-          <span className="info-val">32 года</span>
+          <span className="info-val">
+            {age} {getWordForm(age, "год", "года", "лет")}
+          </span>
         </div>
         <div className="info-row">
           <span className="info-key">
@@ -76,7 +91,7 @@ export function PersonalMetricsCard() {
             </svg>
             Пол
           </span>
-          <span className="info-val">Мужской</span>
+          <span className="info-val">{genderLabel} </span>
         </div>
         <div className="info-row">
           <span className="info-key">
@@ -93,7 +108,7 @@ export function PersonalMetricsCard() {
             </svg>
             Город
           </span>
-          <span className="info-val">Москва</span>
+          <span className="info-val">{personalInfo.city}</span>
         </div>
         <div className="info-row">
           <span className="info-key">
@@ -110,7 +125,7 @@ export function PersonalMetricsCard() {
             </svg>
             Email
           </span>
-          <span className="info-val">alexey@example.com</span>
+          <span className="info-val">{personalInfo.email}</span>
         </div>
         <div className="info-row">
           <span className="info-key">
@@ -129,7 +144,12 @@ export function PersonalMetricsCard() {
             </svg>
             На платформе с
           </span>
-          <span className="info-val">Сентябрь 2025</span>
+          <span className="info-val">
+            {new Date(personalInfo.hereSince).toLocaleString("ru-RU", {
+              month: "long",
+              year: "numeric",
+            })}
+          </span>
         </div>
       </div>
 
@@ -138,21 +158,27 @@ export function PersonalMetricsCard() {
           <span className="footer-stat-icon">📅</span>
           <div>
             <div className="footer-stat-label">На платформе</div>
-            <div className="footer-stat-val">8 месяцев</div>
+            <div className="footer-stat-val">
+              {" "}
+              {monthSince}{" "}
+              {getWordForm(monthSince, "месяц", "месяца", "месяцев")}
+            </div>
           </div>
         </div>
         <div className="footer-stat">
           <span className="footer-stat-icon">🎯</span>
           <div>
             <div className="footer-stat-label">Выполнено целей</div>
-            <div className="footer-stat-val">47</div>
+            <div className="footer-stat-val">{personalInfo.goalsReached}</div>
           </div>
         </div>
         <div className="footer-stat">
           <span className="footer-stat-icon">🏆</span>
           <div>
             <div className="footer-stat-label">Личных рекордов</div>
-            <div className="footer-stat-val">4</div>
+            <div className="footer-stat-val">
+              {personalInfo.personalRecords}
+            </div>
           </div>
         </div>
       </div>

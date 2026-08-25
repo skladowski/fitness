@@ -7,7 +7,7 @@ export const ProfileData = {
     email: "ilya@example.com",
     hereSince: "2026-05-01",
     birthDate: "2002-12-28",
-    level: 24,
+    level: 34,
     daysInARow: 21,
     isConfirmed: true,
     goalsReached: 47,

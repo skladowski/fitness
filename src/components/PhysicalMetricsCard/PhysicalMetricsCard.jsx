@@ -1,6 +1,32 @@
 import "./PhysicalMetricsCard.css";
+import {
+  calculateBMI,
+  getBMIStatus,
+  calculateTDEE,
+  calculateAge,
+} from "../../utils/healthMath";
+import { ACTIVITY_LEVELS } from "../../constant/activityLevels";
 
-export function PhysicalMetricsCard() {
+export function PhysicalMetricsCard({ profile }) {
+  const bmi = calculateBMI(
+    profile.bodyMetrics.weight,
+    profile.bodyMetrics.height,
+  );
+  const bmiStatus = getBMIStatus(bmi);
+  const age = calculateAge(profile.personalInfo.birthDate);
+  const { tdee, bmr } = calculateTDEE(
+    profile.bodyMetrics.weight,
+    profile.bodyMetrics.height,
+    age,
+    profile.bodyMetrics.levelActivity,
+    profile.personalInfo.gender,
+  );
+  const MAX_BMI = 40;
+  const MIN_BMI = 15;
+  const bmiPosition = ((bmi - MIN_BMI) / (MAX_BMI - MIN_BMI)) * 100;
+  const fatMass =
+    profile.bodyMetrics.weight * (profile.bodyMetrics.fatPercent / 100);
+  const leanMass = profile.bodyMetrics.weight - fatMass;
   return (
     <div className="card">
       <div className="card-header">
@@ -32,30 +58,38 @@ export function PhysicalMetricsCard() {
 
       <div className="metrics-grid">
         <div className="metric-tile">
-          <div className="mt-val">78.0</div>
+          <div className="mt-val">{profile.bodyMetrics.weight.toFixed(1)}</div>
           <div className="mt-label">Вес, кг</div>
         </div>
         <div className="metric-tile">
-          <div className="mt-val">23.5</div>
+          <div className="mt-val" style={{ color: bmiStatus.color }}>
+            {" "}
+            {bmi.toFixed(1)}
+          </div>
           <div className="mt-label">ИМТ</div>
         </div>
         <div className="metric-tile">
-          <div className="mt-val">17.0%</div>
+          <div className="mt-val">
+            {profile.bodyMetrics.fatPercent.toFixed(1)}%
+          </div>
           <div className="mt-label">Жир тела</div>
         </div>
       </div>
 
       <div className="bmi-section">
         <div className="bmi-top">
-          <span className="bmi-number" style={{ color: "var(--green)" }}>
-            23.5
+          <span className="bmi-number" style={{ color: bmiStatus.color }}>
+            {bmi.toFixed(1)}
           </span>
-          <span className="bmi-category" style={{ color: "var(--green)" }}>
-            Норма
+          <span className="bmi-category" style={{ color: bmiStatus.color }}>
+            {bmiStatus.label}
           </span>
         </div>
         <div className="bmi-track">
-          <div className="bmi-pointer" style={{ left: "45%" }}></div>
+          <div
+            className="bmi-pointer"
+            style={{ left: `${bmiPosition}%` }}
+          ></div>
         </div>
         <div className="bmi-labels">
           <span className="bmi-label-item">Дефицит</span>
@@ -67,11 +101,18 @@ export function PhysicalMetricsCard() {
 
       <div className="tdee-box">
         <div className="tdee-title">Суточный расход энергии (TDEE)</div>
-        <div className="tdee-value">2 732</div>
+        <div className="tdee-value">{tdee.toFixed(0)}</div>
         <div className="tdee-sub">Рекомендуемое потребление ккал/день</div>
         <div className="tdee-breakdown">
-          <span className="tdee-chip">BMR: 1 763</span>
-          <span className="tdee-chip">Активность: умеренная</span>
+          <span className="tdee-chip">BMR: {Math.round(bmr)}</span>
+          <span className="tdee-chip">
+            Активность:{" "}
+            {
+              ACTIVITY_LEVELS.find(
+                (item) => profile.bodyMetrics.levelActivity === item.key,
+              ).label
+            }
+          </span>
         </div>
       </div>
 
@@ -82,10 +123,12 @@ export function PhysicalMetricsCard() {
               className="comp-dot"
               style={{ background: "var(--green)" }}
             ></span>
-            Мышцы: <b style={{ color: "var(--text1)" }}>64.7 кг</b>
+            Мышцы:{" "}
+            <b style={{ color: "var(--text1)" }}>{leanMass.toFixed(1)} кг</b>
           </span>
           <span className="comp-item">
-            Жир: <b style={{ color: "var(--text1)" }}>13.3 кг</b>
+            Жир:{" "}
+            <b style={{ color: "var(--text1)" }}>{fatMass.toFixed(1)} кг</b>
             <span
               className="comp-dot"
               style={{ background: "var(--orange)" }}
@@ -93,8 +136,8 @@ export function PhysicalMetricsCard() {
           </span>
         </div>
         <div className="comp-bar">
-          <div className="comp-lean" style={{ flex: 64.7 }}></div>
-          <div className="comp-fat" style={{ flex: 13.3 }}></div>
+          <div className="comp-lean" style={{ flex: leanMass }}></div>
+          <div className="comp-fat" style={{ flex: fatMass }}></div>
         </div>
       </div>
     </div>

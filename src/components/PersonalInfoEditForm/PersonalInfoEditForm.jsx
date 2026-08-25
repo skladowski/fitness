@@ -1,20 +1,6 @@
 import "./PersonalInfoEditForm.css";
 import { activities } from "../../constant/activities";
-
-const GENDERS = [
-  {
-    key: "male",
-    label: "Мужской",
-  },
-  {
-    key: "female",
-    label: "Женский",
-  },
-  {
-    key: "other",
-    label: "Другое",
-  },
-];
+import { GENDERS } from "../../constant/genders";
 
 const sportKeys = Object.keys(activities).filter(
   (key) => activities[key].isSport,

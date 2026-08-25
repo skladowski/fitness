@@ -49,14 +49,21 @@ export function lastOneNumber(param) {
 export function lastTwoNumbers(param) {
   return param % 100;
 }
-export function getRecordWord(count) {
+export function getWordForm(count, one, few, many) {
   if ([11, 12, 13, 14].includes(lastTwoNumbers(count))) {
-    return "рекордов";
+    return many;
   } else if (lastOneNumber(count) === 1) {
-    return "рекорд";
+    return one;
   } else if ([2, 3, 4].includes(lastOneNumber(count))) {
-    return "рекорда";
+    return few;
   } else {
-    return "рекордов";
+    return many;
   }
+}
+export function getMonthSince(startDate) {
+  const nowYear = new Date().getFullYear();
+  const startYear = new Date(startDate).getFullYear();
+  const nowMonth = new Date().getMonth();
+  const startMonth = new Date(startDate).getMonth();
+  return (nowYear - startYear) * 12 + (nowMonth - startMonth);
 }

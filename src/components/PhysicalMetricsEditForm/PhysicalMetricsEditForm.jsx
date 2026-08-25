@@ -5,24 +5,7 @@ import {
   calculateTDEE,
   calculateAge,
 } from "../../utils/healthMath";
-
-const tabsDictionary = [
-  {
-    key: "Sedentary",
-    label: "Низкая",
-    sub: "Малоподвижный образ жизни, редкие тренировки",
-  },
-  {
-    key: "Moderate",
-    label: "Средняя",
-    sub: "Тренировки 3-5 раз в неделю",
-  },
-  {
-    key: "Active",
-    label: "Высокая",
-    sub: "Интенсивные тренировки 6-7 раз в неделю",
-  },
-];
+import { ACTIVITY_LEVELS } from "../../constant/activityLevels";
 
 export function PhysicalMetricsEditForm({
   bodyMetrics,
@@ -32,7 +15,7 @@ export function PhysicalMetricsEditForm({
   const bmi = calculateBMI(bodyMetrics.weight, bodyMetrics.height);
   const bmiStatus = getBMIStatus(bmi);
   const age = calculateAge(personalInfo.birthDate);
-  const tdee = calculateTDEE(
+  const { tdee } = calculateTDEE(
     bodyMetrics.weight,
     bodyMetrics.height,
     age,
@@ -120,7 +103,7 @@ export function PhysicalMetricsEditForm({
         <div className="form-field full">
           <label className="form-label">Уровень активности</label>
           <div className="radio-card-group">
-            {tabsDictionary.map((item) => (
+            {ACTIVITY_LEVELS.map((item) => (
               <div className="radio-card" key={item.key}>
                 <input
                   type="radio"

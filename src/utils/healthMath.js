@@ -24,7 +24,10 @@ export function calculateTDEE(weight, height, age, levelActivity, gender) {
   const baseBMR = 10 * weight + 6.25 * height - 5 * age;
   const BMR = baseBMR + (gender === "male" ? +5 : -161);
   const TDEE = BMR * dictionary[levelActivity];
-  return TDEE;
+  return {
+    bmr: BMR,
+    tdee: TDEE,
+  };
 }
 
 const nowDate = new Date();

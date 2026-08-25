@@ -4,7 +4,10 @@ import { ProfileHeaderActions } from "../../components/Header/ProfileHeaderActio
 import { PersonalMetricsCard } from "../../components/PersonalMetricsCard/PersonalMetricsCard";
 import { PhysicalMetricsCard } from "../../components/PhysicalMetricsCard/PhysicalMetricsCard";
 import { ProfileHero } from "../../components/ProfileHero/ProfileHero";
+import { useContext } from "react";
+import { profileContext } from "../../context/ProfileContext";
 export function ProfilePage() {
+  const { profile } = useContext(profileContext);
   return (
     <div>
       <Header title={"Профиль"} subtitle={"Вторник, 27 мая 2026 · Неделя 22"}>
@@ -12,10 +15,10 @@ export function ProfilePage() {
       </Header>
 
       <div className="content">
-        <ProfileHero />
+        <ProfileHero profile={profile} />
         <div className="page-grid">
-          <PersonalMetricsCard />
-          <PhysicalMetricsCard />
+          <PersonalMetricsCard personalInfo={profile.personalInfo} />
+          <PhysicalMetricsCard profile={profile} />
         </div>
       </div>
     </div>

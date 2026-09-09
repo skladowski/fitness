@@ -8,6 +8,7 @@ import { GoalsProvider } from "./context/goalsProvider";
 import { ProfileEditPage } from "./pages/profile/ProfileEditPage";
 import { ProfilePage } from "./pages/profile/ProfilePage";
 import { ProfileProvider } from "./context/ProfileProvider";
+import { AddWorkoutPage } from "./pages/workout/AddWorkoutPage";
 
 function App() {
   return (
@@ -23,10 +24,7 @@ function App() {
               <Route path="/goals" element={<GoalsPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/profile/edit" element={<ProfileEditPage />} />
-              <Route
-                path="/workout/new"
-                element={<div> Страница в разработке </div>}
-              />
+              <Route path="/workout" element={<AddWorkoutPage />} />
             </Routes>
           </main>
         </div>

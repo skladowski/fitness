@@ -15,7 +15,7 @@ export function DefaultHeaderActions() {
         </svg>
         Статистика
       </Link>
-      <button className="btn btn-primary">
+      <Link to="/workout" className="btn btn-primary">
         <svg
           width="14"
           height="14"
@@ -29,7 +29,7 @@ export function DefaultHeaderActions() {
           <line x1="8" y1="12" x2="16" y2="12" />
         </svg>
         Начать тренировку
-      </button>
+      </Link>
     </>
   );
 }

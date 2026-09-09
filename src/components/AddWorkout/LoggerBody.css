@@ -1,0 +1,10 @@
+.logger-body {
+  padding: 28px 32px 140px;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .logger-body { padding: 20px 18px 30px; }
+}

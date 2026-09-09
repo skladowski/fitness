@@ -172,3 +172,33 @@ select.form-input {
   .form-grid { grid-template-columns: 1fr; }
   .form-field.full { grid-column: auto; }
 }
+.logger-body {
+  padding: 28px 32px 140px;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+}
+ 
+@media (max-width: 768px) {
+  .logger-body { padding: 20px 18px 30px; }
+}
+ .cardio-label {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px;
+  color: var(--text3); margin-bottom: 14px;
+}
+ 
+.cardio-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 44px;
+  color: var(--text1);
+  font-variant-numeric: tabular-nums;
+}
+.cardio-input::placeholder { color: var(--bg4); }
+.cardio-unit { font-size: 13px; color: var(--text3); margin-top: 6px; }
+ 

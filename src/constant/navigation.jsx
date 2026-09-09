@@ -64,8 +64,8 @@ export const NAV_LINKS = [
   },
   {
     id: "uuid-5",
-    path: "/activity",
-    label: "activity",
+    path: "/workout",
+    label: "workout",
     icon: (
       <svg
         width="20"

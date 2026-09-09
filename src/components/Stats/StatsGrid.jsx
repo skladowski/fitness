@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { goalContext } from "../../context/goalContext.jsx";
 
 export function StatsGrid({ stats }) {
-  const { goal, setGoal } = useContext(goalContext);
+  const { goal } = useContext(goalContext);
   return (
     <div className="stats-grid">
       {stats?.map((item) => {

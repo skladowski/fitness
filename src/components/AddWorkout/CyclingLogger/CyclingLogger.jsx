@@ -1,6 +1,6 @@
 import "../LoggerBody.css";
 import "./CyclingLogger.css";
-export function CyclingLogger() {
+export function CyclingLogger({ onChange, sessionDetails }) {
   return (
     <div className="logger-body">
       <div className="cycling-area">
@@ -12,7 +12,8 @@ export function CyclingLogger() {
               type="text"
               inputMode="decimal"
               placeholder="0.0"
-              defaultValue="14.6"
+              value={sessionDetails.distance}
+              onChange={(e) => onChange("distance", e.target.value)}
             />
             <span className="cycling-hero-unit">км</span>
           </div>
@@ -28,7 +29,8 @@ export function CyclingLogger() {
                 type="text"
                 inputMode="decimal"
                 placeholder="0.0"
-                defaultValue="21.3"
+                value={sessionDetails.speed}
+                onChange={(e) => onChange("speed", e.target.value)}
               />
             </div>
             <span className="substat-unit">км/ч</span>
@@ -42,7 +44,8 @@ export function CyclingLogger() {
                 type="text"
                 inputMode="numeric"
                 placeholder="0"
-                defaultValue="84"
+                value={sessionDetails.cadence}
+                onChange={(e) => onChange("cadence", e.target.value)}
               />
             </div>
             <span className="substat-unit">об/мин</span>
@@ -56,7 +59,8 @@ export function CyclingLogger() {
                 type="text"
                 inputMode="numeric"
                 placeholder="0"
-                defaultValue="212"
+                value={sessionDetails.elevation}
+                onChange={(e) => onChange("elevation", e.target.value)}
               />
             </div>
             <span className="substat-unit">м</span>

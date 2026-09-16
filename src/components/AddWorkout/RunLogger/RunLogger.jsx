@@ -1,6 +1,6 @@
 import "../LoggerBody.css";
 import "./RunLogger.css";
-export function RunLogger() {
+export function RunLogger({ sessionDetails, onChange }) {
   return (
     <div className="logger-body">
       <div className="cardio-area">
@@ -11,7 +11,8 @@ export function RunLogger() {
             type="text"
             inputMode="decimal"
             placeholder="0.0"
-            defaultValue="4.2"
+            value={sessionDetails.distance}
+            onChange={(e) => onChange("distance", e.target.value)}
           />
           <div className="cardio-unit">км</div>
         </div>
@@ -22,7 +23,8 @@ export function RunLogger() {
             type="text"
             inputMode="numeric"
             placeholder="0:00"
-            defaultValue="5:44"
+            value={sessionDetails.pace}
+            onChange={(e) => onChange("pace", e.target.value)}
           />
           <div className="cardio-unit">мин/км</div>
         </div>

@@ -10,6 +10,7 @@ export function NutritionCard({ nutrition }) {
     (metricName) => metricName !== "calories",
   );
   const calories = currentDayData.metrics.calories;
+  //<button className="btn btn-primary"> Добавить еду</button>
   return (
     <div className="card">
       <div className="card-header">

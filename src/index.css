@@ -22,10 +22,11 @@
   --red: #f87171;
   --amber: #fbbf24;
   --blue: #38bdf8;
-  --orange: #fb923c; /* добавлено для метрик */
+  --orange: #fb923c;
   --border: rgba(255,255,255,0.07);
   --radius: 16px;
   --radius-sm: 10px;
+  --sidebar-width: 72px;
 }
 
 body {

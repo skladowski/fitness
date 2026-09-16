@@ -1,6 +1,6 @@
 import "../LoggerBody.css";
 import "./YogaLogger.css";
-export function YogaLogger() {
+export function YogaLogger({ sessionDetails, onChange }) {
   return (
     <div className="logger-body">
       <div className="recovery-area">
@@ -11,7 +11,8 @@ export function YogaLogger() {
             type="text"
             inputMode="numeric"
             placeholder="0:00"
-            defaultValue="30:00"
+            value={sessionDetails.time}
+            onChange={(e) => onChange("time", e.target.value)}
           />
           <div className="cardio-unit">мин</div>
         </div>
@@ -21,6 +22,8 @@ export function YogaLogger() {
           <textarea
             className="recovery-textarea"
             placeholder="Какие асаны, что получилось, на чём сфокусироваться в следующий раз…"
+            value={sessionDetails.note}
+            onChange={(e) => onChange("note", e.target.value)}
           />
         </div>
       </div>

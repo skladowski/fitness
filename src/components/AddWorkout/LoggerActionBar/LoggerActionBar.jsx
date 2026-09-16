@@ -1,5 +1,5 @@
 import "./LoggerActionBar.css";
-export function LoggerActionBar() {
+export function LoggerActionBar({ onFinish }) {
   return (
     <div className="logger-actionbar">
       <div className="calorie-indicator">
@@ -9,7 +9,9 @@ export function LoggerActionBar() {
           <div className="calorie-val">248</div>
         </div>
       </div>
-      <button className="finish-btn">Завершить тренировку</button>
+      <button className="finish-btn" onClick={() => onFinish()}>
+        Завершить тренировку
+      </button>
     </div>
   );
 }

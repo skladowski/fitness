@@ -10,7 +10,37 @@ import { LoggerActionBar } from "../../components/AddWorkout/LoggerActionBar/Log
 export function AddWorkoutPage() {
   const [stage, setStage] = useState("picker");
   const [workoutType, setWorkoutType] = useState(null);
-  const [exercises, setExercises] = useState([]);
+  const [exercises, setExercises] = useState([
+    {
+      name: "Жим лёжа",
+      subtitle: "Штанга · грудь",
+      id: "uud12",
+      sets: [
+        { id: "uud1", weight: 60, reps: 10, isChecked: true },
+        { id: "uud2", weight: 60, reps: 15, isChecked: false },
+      ],
+    },
+    {
+      name: "Тяга верхнего блока",
+      subtitle: "Тренажёр · спина",
+      id: "uud22",
+      sets: [
+        { id: "uud21", weight: 80, reps: 10, isChecked: true },
+        { id: "uud221", weight: 90, reps: 15, isChecked: false },
+        { id: "uud23", weight: 95, reps: 7, isChecked: false },
+      ],
+    },
+    {
+      name: "Приседания",
+      subtitle: "Гантели · ягодицы",
+      id: "uud32",
+      sets: [
+        { id: "uud31", weight: 120, reps: 10, isChecked: true },
+        { id: "uud32", weight: 100, reps: 15, isChecked: false },
+        { id: "uud33", weight: 95, reps: 7, isChecked: false },
+      ],
+    },
+  ]);
   const [timer, setTimer] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [sessionDetails, setSessionDetails] = useState({});
@@ -24,7 +54,9 @@ export function AddWorkoutPage() {
   }
   let activeLogger;
   if (workoutType === "POWER") {
-    activeLogger = <PowerLogger />;
+    activeLogger = (
+      <PowerLogger onChange={handleSetChange} exercises={exercises} />
+    );
   } else if (workoutType === "YOGA") {
     activeLogger = (
       <YogaLogger
@@ -74,6 +106,26 @@ export function AddWorkoutPage() {
       clearInterval(timerId);
     };
   }, [checkStage]);
+
+  function handleSetChange(exerciseId, setRowId, field, value) {
+    const change = exercises.map((item) => {
+      if (item.id === exerciseId) {
+        return {
+          ...item,
+          sets: item.sets.map((set) => {
+            if (set.id === setRowId) {
+              return { ...set, [field]: value };
+            } else {
+              return set;
+            }
+          }),
+        };
+      } else {
+        return item;
+      }
+    });
+    setExercises(change);
+  }
 
   return (
     <>

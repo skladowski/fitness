@@ -7,6 +7,7 @@ import { RunLogger } from "../../components/AddWorkout/RunLogger/RunLogger";
 import { WorkoutSummary } from "../../components/AddWorkout/WorkoutSummary/WorkoutSummary";
 import { LoggerHeader } from "../../components/AddWorkout/LoggerHeader/LoggerHeader";
 import { LoggerActionBar } from "../../components/AddWorkout/LoggerActionBar/LoggerActionBar";
+import { calculateTotalTonnage } from "../../utils/formatters";
 export function AddWorkoutPage() {
   const [stage, setStage] = useState("picker");
   const [workoutType, setWorkoutType] = useState(null);
@@ -55,7 +56,11 @@ export function AddWorkoutPage() {
   let activeLogger;
   if (workoutType === "POWER") {
     activeLogger = (
-      <PowerLogger onChange={handleSetChange} exercises={exercises} />
+      <PowerLogger
+        onChange={handleSetChange}
+        exercises={exercises}
+        addSet={handleAddSet}
+      />
     );
   } else if (workoutType === "YOGA") {
     activeLogger = (
@@ -98,7 +103,6 @@ export function AddWorkoutPage() {
     if (checkStage) {
       timerId = setInterval(() => {
         setTimer((prev) => prev + 1);
-        console.log(timerId);
       }, 1000);
     }
 
@@ -127,6 +131,22 @@ export function AddWorkoutPage() {
     setExercises(change);
   }
 
+  function handleAddSet(exerciseId) {
+    const addSet = exercises.map((item) => {
+      if (item.id === exerciseId) {
+        return {
+          ...item,
+          sets: [
+            ...item.sets,
+            { id: crypto.randomUUID(), weight: "", reps: "", isChecked: false },
+          ],
+        };
+      } else return { ...item };
+    });
+    setExercises(addSet);
+  }
+  const totalTonnage = calculateTotalTonnage(exercises);
+
   return (
     <>
       {stage === "picker" && <CategoryPicker onSelect={handleSelect} />}
@@ -142,7 +162,9 @@ export function AddWorkoutPage() {
           <LoggerActionBar onFinish={handleFinish} />
         </>
       )}
-      {stage === "summary" && <WorkoutSummary />}
+      {stage === "summary" && (
+        <WorkoutSummary timer={timer} tonnage={totalTonnage} />
+      )}
     </>
   );
 }

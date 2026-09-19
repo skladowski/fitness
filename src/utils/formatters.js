@@ -67,3 +67,10 @@ export function getMonthSince(startDate) {
   const startMonth = new Date(startDate).getMonth();
   return (nowYear - startYear) * 12 + (nowMonth - startMonth);
 }
+
+export function calculateTotalTonnage(exercises) {
+  const sets = exercises.flatMap((ex) => ex.sets);
+  return sets.reduce((acc, set) => {
+    return set.reps * set.weight + acc;
+  }, 0);
+}

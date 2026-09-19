@@ -1,7 +1,7 @@
 import "../LoggerBody.css";
 import "./PowerLogger.css";
 import { SetRow } from "../SetRow/SetRow";
-export function PowerLogger({ onChange, exercises }) {
+export function PowerLogger({ onChange, exercises, addSet }) {
   return (
     <div className="logger-body">
       {exercises.map((item) => {
@@ -24,7 +24,9 @@ export function PowerLogger({ onChange, exercises }) {
               );
             })}
 
-            <button className="add-set-btn">+ Добавить подход</button>
+            <button className="add-set-btn" onClick={() => addSet(item.id)}>
+              + Добавить подход
+            </button>
           </div>
         );
       })}

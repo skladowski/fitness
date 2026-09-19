@@ -1,5 +1,6 @@
 import "./WorkoutSummary.css";
-export function WorkoutSummary() {
+import { formatDurationTimer } from "../../../utils/formatDuration";
+export function WorkoutSummary({ timer, tonnage }) {
   return (
     <section className="summary-overlay">
       <div className="summary-card">
@@ -9,11 +10,11 @@ export function WorkoutSummary() {
 
         <div className="summary-stats">
           <div className="summary-stat">
-            <div className="summary-stat-val">1780</div>
+            <div className="summary-stat-val">{tonnage}</div>
             <div className="summary-stat-label">Тоннаж, кг</div>
           </div>
           <div className="summary-stat">
-            <div className="summary-stat-val">00:42:18</div>
+            <div className="summary-stat-val">{formatDurationTimer(timer)}</div>
             <div className="summary-stat-label">Время</div>
           </div>
           <div className="summary-stat">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { CategoryPicker } from "../../components/AddWorkout/CategoryPicker/CategoryPicker";
 import { PowerLogger } from "../../components/AddWorkout/PowerLogger/PowerLogger";
 import { YogaLogger } from "../../components/AddWorkout/YogaLogger/YogaLogger";
@@ -8,6 +8,13 @@ import { WorkoutSummary } from "../../components/AddWorkout/WorkoutSummary/Worko
 import { LoggerHeader } from "../../components/AddWorkout/LoggerHeader/LoggerHeader";
 import { LoggerActionBar } from "../../components/AddWorkout/LoggerActionBar/LoggerActionBar";
 import { calculateTotalTonnage } from "../../utils/formatters";
+import {
+  calculateTDEE,
+  calculateWorkoutCalories,
+} from "../../utils/healthMath";
+import { profileContext } from "../../context/ProfileContext";
+import { calculateAge } from "../../utils/healthMath";
+
 export function AddWorkoutPage() {
   const [stage, setStage] = useState("picker");
   const [workoutType, setWorkoutType] = useState(null);
@@ -45,6 +52,18 @@ export function AddWorkoutPage() {
   const [timer, setTimer] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [sessionDetails, setSessionDetails] = useState({});
+
+  const { profile } = useContext(profileContext);
+  const age = calculateAge(profile.personalInfo.birthDate);
+  const tdee = calculateTDEE(
+    profile.bodyMetrics.weight,
+    profile.bodyMetrics.height,
+    age,
+    profile.bodyMetrics.levelActivity,
+    profile.personalInfo.gender,
+  );
+  const workoutCalories = calculateWorkoutCalories(tdee.tdee, timer);
+
   function handleSelect(type) {
     setWorkoutType(type);
     setStage("logging");
@@ -163,7 +182,12 @@ export function AddWorkoutPage() {
         </>
       )}
       {stage === "summary" && (
-        <WorkoutSummary timer={timer} tonnage={totalTonnage} />
+        <WorkoutSummary
+          timer={timer}
+          tonnage={totalTonnage}
+          workoutCalories={workoutCalories}
+          workoutType={workoutType}
+        />
       )}
     </>
   );

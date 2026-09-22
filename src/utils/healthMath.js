@@ -29,6 +29,10 @@ export function calculateTDEE(weight, height, age, levelActivity, gender) {
     tdee: TDEE,
   };
 }
+export function calculateWorkoutCalories(tdee, timer) {
+  const dayFraction = timer / 86400;
+  return tdee * dayFraction;
+}
 
 const nowDate = new Date();
 export function calculateAge(birthDate) {

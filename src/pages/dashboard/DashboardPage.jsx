@@ -7,7 +7,6 @@ import { getDisplayDate } from "../../utils/formatters.js";
 import { statsData } from "../../mocks/StatsData.jsx";
 import { WorkoutsData } from "../../mocks/WorkoutsData.jsx";
 import { NutritionData } from "../../mocks/NutritionData.jsx";
-import { AddWorkoutPage } from "../workout/AddWorkoutPage.jsx";
 
 const TODAY = "2026-07-07";
 

@@ -6,6 +6,7 @@ export function WorkoutSummary({
   tonnage,
   workoutCalories,
   workoutType,
+  onSave,
 }) {
   return (
     <section className="summary-overlay">
@@ -35,7 +36,9 @@ export function WorkoutSummary({
 
         <div className="summary-actions">
           <button className="btn">Назад к записи</button>
-          <button className="btn btn-primary">Сохранить в историю</button>
+    
+            Сохранить в историю
+          </button>
         </div>
       </div>
     </section>

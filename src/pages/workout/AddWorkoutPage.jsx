@@ -14,8 +14,11 @@ import {
 } from "../../utils/healthMath";
 import { profileContext } from "../../context/ProfileContext";
 import { calculateAge } from "../../utils/healthMath";
-
+import { workoutContext } from "../../context/WorkoutContext";
+import { activities } from "../../constant/activities";
 export function AddWorkoutPage() {
+  const { workoutHistory, setWorkoutHistory, addWorkout } =
+    useContext(workoutContext);
   const [stage, setStage] = useState("picker");
   const [workoutType, setWorkoutType] = useState(null);
   const [exercises, setExercises] = useState([
@@ -166,6 +169,47 @@ export function AddWorkoutPage() {
   }
   const totalTonnage = calculateTotalTonnage(exercises);
 
+  function handleNewWorkout() {
+    let specificMetrics;
+    if (workoutType === "RUN") {
+      specificMetrics = {
+        distance: { current: sessionDetails.distance, target: null },
+        pace: { current: sessionDetails.pace, target: null },
+      };
+    } else if (workoutType === "CYCLING") {
+      specificMetrics = {
+        distance: { current: sessionDetails.distance, target: null },
+        avgSpeed: { current: sessionDetails.speed, target: null },
+        cadence: { current: sessionDetails.cadence, target: null },
+        elevation: { current: sessionDetails.elevation, target: null },
+      };
+    } else if (workoutType === "YOGA") {
+      specificMetrics = {
+        note: { current: sessionDetails.note, target: null },
+      };
+    }
+    let extraFields;
+    if (workoutType === "POWER") {
+      extraFields = { exercises };
+    }
+    const newWorkout = {
+      id: crypto.randomUUID(),
+      type: workoutType,
+      title: activities[workoutType].label,
+      timestamp: new Date().toISOString(),
+      metrics: {
+        duration: {
+          current: timer,
+          target: workoutType === "YOGA" ? sessionDetails.time : null,
+        },
+        burnedKcal: { current: Math.round(workoutCalories), target: null },
+        ...specificMetrics,
+      },
+      ...extraFields,
+    };
+    addWorkout(newWorkout);
+  }
+
   return (
     <>
       {stage === "picker" && <CategoryPicker onSelect={handleSelect} />}
@@ -187,6 +231,7 @@ export function AddWorkoutPage() {
           tonnage={totalTonnage}
           workoutCalories={workoutCalories}
           workoutType={workoutType}
+          onSave={handleNewWorkout}
         />
       )}
     </>

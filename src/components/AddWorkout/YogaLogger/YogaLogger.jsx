@@ -11,7 +11,7 @@ export function YogaLogger({ sessionDetails, onChange }) {
             type="text"
             inputMode="numeric"
             placeholder="0:00"
-            value={sessionDetails.time}
+            value={sessionDetails.time || ""}
             onChange={(e) => onChange("time", e.target.value)}
           />
           <div className="cardio-unit">мин</div>
@@ -22,7 +22,7 @@ export function YogaLogger({ sessionDetails, onChange }) {
           <textarea
             className="recovery-textarea"
             placeholder="Какие асаны, что получилось, на чём сфокусироваться в следующий раз…"
-            value={sessionDetails.note}
+            value={sessionDetails.note || ""}
             onChange={(e) => onChange("note", e.target.value)}
           />
         </div>

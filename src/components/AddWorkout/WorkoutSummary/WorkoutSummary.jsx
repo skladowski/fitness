@@ -36,7 +36,7 @@ export function WorkoutSummary({
 
         <div className="summary-actions">
           <button className="btn">Назад к записи</button>
-    
+          <button className="btn btn-primary" onClick={() => onSave()}>
             Сохранить в историю
           </button>
         </div>

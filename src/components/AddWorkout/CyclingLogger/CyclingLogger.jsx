@@ -12,7 +12,7 @@ export function CyclingLogger({ onChange, sessionDetails }) {
               type="text"
               inputMode="decimal"
               placeholder="0.0"
-              value={sessionDetails.distance}
+              value={sessionDetails.distance || ""}
               onChange={(e) => onChange("distance", e.target.value)}
             />
             <span className="cycling-hero-unit">км</span>
@@ -29,7 +29,7 @@ export function CyclingLogger({ onChange, sessionDetails }) {
                 type="text"
                 inputMode="decimal"
                 placeholder="0.0"
-                value={sessionDetails.speed}
+                value={sessionDetails.speed || ""}
                 onChange={(e) => onChange("speed", e.target.value)}
               />
             </div>
@@ -44,7 +44,7 @@ export function CyclingLogger({ onChange, sessionDetails }) {
                 type="text"
                 inputMode="numeric"
                 placeholder="0"
-                value={sessionDetails.cadence}
+                value={sessionDetails.cadence || ""}
                 onChange={(e) => onChange("cadence", e.target.value)}
               />
             </div>
@@ -59,7 +59,7 @@ export function CyclingLogger({ onChange, sessionDetails }) {
                 type="text"
                 inputMode="numeric"
                 placeholder="0"
-                value={sessionDetails.elevation}
+                value={sessionDetails.elevation || ""}
                 onChange={(e) => onChange("elevation", e.target.value)}
               />
             </div>

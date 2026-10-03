@@ -11,7 +11,7 @@ export function RunLogger({ sessionDetails, onChange }) {
             type="text"
             inputMode="decimal"
             placeholder="0.0"
-            value={sessionDetails.distance}
+            value={sessionDetails.distance || ""}
             onChange={(e) => onChange("distance", e.target.value)}
           />
           <div className="cardio-unit">км</div>
@@ -23,7 +23,7 @@ export function RunLogger({ sessionDetails, onChange }) {
             type="text"
             inputMode="numeric"
             placeholder="0:00"
-            value={sessionDetails.pace}
+            value={sessionDetails.pace || ""}
             onChange={(e) => onChange("pace", e.target.value)}
           />
           <div className="cardio-unit">мин/км</div>

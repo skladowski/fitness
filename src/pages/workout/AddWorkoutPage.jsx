@@ -17,8 +17,7 @@ import { calculateAge } from "../../utils/healthMath";
 import { workoutContext } from "../../context/WorkoutContext";
 import { activities } from "../../constant/activities";
 export function AddWorkoutPage() {
-  const { workoutHistory, setWorkoutHistory, addWorkout } =
-    useContext(workoutContext);
+  const { addWorkout } = useContext(workoutContext);
   const [stage, setStage] = useState("picker");
   const [workoutType, setWorkoutType] = useState(null);
   const [exercises, setExercises] = useState([
@@ -69,7 +68,10 @@ export function AddWorkoutPage() {
 
   function handleSelect(type) {
     setWorkoutType(type);
+    console.log(sessionDetails);
+
     setStage("logging");
+    setSessionDetails({});
   }
   function handleFinish() {
     setIsPaused(true);
@@ -117,7 +119,6 @@ export function AddWorkoutPage() {
       [key]: value,
     });
   }
-
   const checkStage = stage === "logging";
 
   useEffect(() => {

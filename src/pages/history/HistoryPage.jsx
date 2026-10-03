@@ -4,7 +4,6 @@ import { DefaultHeaderActions } from "../../components/Header/DefaultHeaderActio
 import { StreakCard } from "../../components/Streak/StreakCard";
 import { StatCard } from "../../components/Stats/StatCard";
 import { WorkoutItem } from "../../components/Workout/WorkoutItem";
-import { WorkoutsData } from "../../mocks/WorkoutsData";
 import { HistoryDataYear } from "../../mocks/HistoryDataYear";
 import { HistoryData3Month } from "../../mocks/HistoryData3Month";
 import { HistoryDataMonth } from "../../mocks/HistoryDataMonth";
@@ -14,13 +13,14 @@ import { PeriodSelector } from "../../components/PeriodSelector/PeriodSelector";
 import { Charts } from "../../components/Charts/Charts";
 import { PersonalRecordCard } from "../../components/PersonalRecord/PersonalRecordCard";
 import { EmptyState } from "../../components/EmptyState/EmptyState";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext } from "react";
 import { activities } from "../../constant/activities";
 import { calculateStreak } from "../../utils/formatters";
 import { getPersonalRecords } from "../../utils/records";
 import { statsData } from "../../mocks/StatsData";
 import { getChartDataByType } from "../../utils/chartAdapters";
 import { secondsToHours } from "../../utils/formatters";
+import { workoutContext } from "../../context/WorkoutContext";
 const today = new Date().toLocaleDateString("ru-RU", {
   weekday: "long",
   day: "numeric",
@@ -59,11 +59,12 @@ const metricConfigMap = {
   },
 };
 export function HistoryPage() {
+  const { workoutHistory } = useContext(workoutContext);
   const allWorkouts = useMemo(() => {
-    return WorkoutsData.flatMap((day) => day.workouts).sort(
-      (a, b) => new Date(b.timestamp) - new Date(a.timestamp),
-    );
-  }, []);
+    return workoutHistory
+      .flatMap((day) => day.workouts)
+      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  }, [workoutHistory]);
   const [activePeriod, setActivePeriod] = useState("Месяц");
   const [visibleWorkouts, setVisibleWorkouts] = useState(5);
   const [activeMetric, setActiveMetric] = useState("Шаги");

@@ -20,13 +20,20 @@ export function getDisplayDate(date: Date) {
   return dateString.charAt(0).toUpperCase() + dateString.slice(1);
 }
 
-export function calculateStreak(workouts, anchorDate = new Date()) {
+type WorkoutEntity = {
+  timestamp: string;
+};
+
+export function calculateStreak(
+  workouts: WorkoutEntity[],
+  anchorDate: Date | string = new Date(),
+) {
   const uniqueDatesRaw = workouts.map((trainingObject) => {
     const date = new Date(trainingObject.timestamp);
     return date.toDateString(); // новый массив строк-дат, где могут быть повторы
   });
   const uniqueDates = [...new Set(uniqueDatesRaw)]; // убираем дубликаты и возвращаем в обычный массив
-  uniqueDates.sort((a, b) => new Date(b) - new Date(a)); // сортируем по дате новизне
+  uniqueDates.sort((a, b) => new Date(b).getTime() - new Date(a).getTime()); // сортируем по дате новизне
   const today = new Date(anchorDate); // создаем сегодняшнюю дату
   let streak = 0;
 
@@ -49,7 +56,12 @@ export function lastOneNumber(param: number) {
 export function lastTwoNumbers(param: number) {
   return param % 100;
 }
-export function getWordForm(count, one, few, many) {
+export function getWordForm(
+  count: number,
+  one: string,
+  few: string,
+  many: string,
+) {
   if ([11, 12, 13, 14].includes(lastTwoNumbers(count))) {
     return many;
   } else if (lastOneNumber(count) === 1) {
@@ -60,7 +72,7 @@ export function getWordForm(count, one, few, many) {
     return many;
   }
 }
-export function getMonthSince(startDate) {
+export function getMonthSince(startDate: string) {
   const nowYear = new Date().getFullYear();
   const startYear = new Date(startDate).getFullYear();
   const nowMonth = new Date().getMonth();
@@ -68,9 +80,13 @@ export function getMonthSince(startDate) {
   return (nowYear - startYear) * 12 + (nowMonth - startMonth);
 }
 
-export function calculateTotalTonnage(exercises) {
+type ExerciseSet = {
+  weight: number | string;
+  reps: number | string;
+};
+export function calculateTotalTonnage(exercises: ExerciseSet[]) {
   const sets = exercises.flatMap((ex) => ex.sets);
   return sets.reduce((acc, set) => {
-    return set.reps * set.weight + acc;
+    return Number(set.reps * set.weight) + acc;
   }, 0);
 }

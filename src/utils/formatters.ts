@@ -1,15 +1,15 @@
-export function secondsToMinutes(val) {
+export function secondsToMinutes(val: number) {
   return Math.floor(val / 60);
 }
-export function secondsToHours(val) {
+export function secondsToHours(val: number) {
   return Math.floor(val / 3600);
 }
 
-export function metersToKilometers(val) {
+export function metersToKilometers(val: number) {
   return (val / 1000).toFixed(1);
 }
 
-export function getDisplayDate(date) {
+export function getDisplayDate(date: Date) {
   let dateString = new Date(date).toLocaleString("ru-RU", {
     weekday: "long",
     day: "numeric",
@@ -43,10 +43,10 @@ export function calculateStreak(workouts, anchorDate = new Date()) {
   }
   return streak;
 }
-export function lastOneNumber(param) {
+export function lastOneNumber(param: number) {
   return param % 10;
 }
-export function lastTwoNumbers(param) {
+export function lastTwoNumbers(param: number) {
   return param % 100;
 }
 export function getWordForm(count, one, few, many) {

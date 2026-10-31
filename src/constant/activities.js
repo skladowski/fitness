@@ -33,7 +33,7 @@ export const activities = {
     isSport: true,
     label: "Силовая тренировка",
     icon: "🏋️",
-    color: "rgba(251,146,60,0.16);",
+    color: "rgba(251,146,60,0.16)",
     metrics: {
       duration: {
         isPrimary: true,

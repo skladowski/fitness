@@ -80,12 +80,12 @@ export function getMonthSince(startDate: string) {
   return (nowYear - startYear) * 12 + (nowMonth - startMonth);
 }
 
-type ExerciseSet = {
+type ExerciseSetEntity = {
   weight: number | string;
   reps: number | string;
 };
 type ExerciseEntity = {
-  sets: ExerciseSet[];
+  sets: ExerciseSetEntity[];
 };
 
 export function calculateTotalTonnage(exercises: ExerciseEntity[]) {

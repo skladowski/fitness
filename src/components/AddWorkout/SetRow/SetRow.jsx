@@ -9,7 +9,12 @@ export function SetRow({ set, onChange, exerciseId, setRowId, index }) {
           inputMode="numeric"
           value={set.weight}
           onChange={(e) =>
-            onChange(exerciseId, setRowId, "weight", e.target.value)
+            onChange(
+              exerciseId,
+              setRowId,
+              "weight",
+              e.target.value.replace(",", "."),
+            )
           }
         />
         <span className="set-input-unit">кг</span>

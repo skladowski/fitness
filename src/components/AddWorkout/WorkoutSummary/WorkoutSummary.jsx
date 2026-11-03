@@ -19,7 +19,7 @@ export function WorkoutSummary({
 
         <div className="summary-stats">
           <div className="summary-stat">
-            <div className="summary-stat-val">{tonnage}</div>
+            <div className="summary-stat-val">{Number(tonnage.toFixed(1))}</div>
             <div className="summary-stat-label">Тоннаж, кг</div>
           </div>
           <div className="summary-stat">

@@ -84,9 +84,13 @@ type ExerciseSet = {
   weight: number | string;
   reps: number | string;
 };
-export function calculateTotalTonnage(exercises: ExerciseSet[]) {
+type ExerciseEntity = {
+  sets: ExerciseSet[];
+};
+
+export function calculateTotalTonnage(exercises: ExerciseEntity[]) {
   const sets = exercises.flatMap((ex) => ex.sets);
   return sets.reduce((acc, set) => {
-    return Number(set.reps * set.weight) + acc;
+    return Number(set.reps) * Number(set.weight) + acc;
   }, 0);
 }

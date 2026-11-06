@@ -1,4 +1,28 @@
-export function transformStatsForChart(statsData, { getValueFn, transform }) {
+type CurrentSet = {
+  current: number;
+};
+type Metrics = {
+  [MetricKey: string]: CurrentSet;
+};
+type StatsSet = {
+  type: string;
+  metrics: Metrics;
+};
+type Day = {
+  date: string;
+  stats: StatsSet[];
+};
+
+export function transformStatsForChart(
+  statsData: Day[],
+  {
+    getValueFn,
+    transform,
+  }: {
+    getValueFn: (stats: StatsSet[]) => number;
+    transform: (val: number) => number;
+  },
+) {
   const transformedData = statsData.map((day, index) => {
     const showMonth =
       index === statsData.length - 1 ||
@@ -17,10 +41,10 @@ export function transformStatsForChart(statsData, { getValueFn, transform }) {
 }
 
 export function getChartDataByType(
-  statsData,
-  type,
-  metricKey,
-  transformFn = (val) => val,
+  statsData: Day[],
+  type: string,
+  metricKey: string,
+  transformFn = (val: number) => val,
 ) {
   return transformStatsForChart(statsData, {
     getValueFn: (stats) =>

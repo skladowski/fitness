@@ -1,7 +1,8 @@
-export function formatRelativeDate(timestamp) {
+export function formatRelativeDate(timestamp: string) {
   const date = new Date(timestamp);
   const currentDate = new Date();
-  const differenceDate = (currentDate - date) / (1000 * 60 * 60 * 24);
+  const differenceDate =
+    (currentDate.getTime() - date.getTime()) / (1000 * 60 * 60 * 24);
   const yesterday = new Date(currentDate);
   yesterday.setDate(yesterday.getDate() - 1);
   let label;

@@ -1,19 +1,32 @@
 import { metersToKilometers } from "./formatters";
-
-function calculateVolume(workout) {
-  if (workout.type !== "POWER") return 0;
+import { WorkoutEntity } from "../types/workout";
+function calculateVolume(workout: WorkoutEntity) {
+  if (workout.type !== "POWER" || !workout.exercises) return 0;
   return workout.exercises.reduce((total, exercise) => {
     return (
       total +
       exercise.sets.reduce(
-        (subTotal, set) => subTotal + set.weight * set.reps,
+        (subTotal, set) => subTotal + Number(set.weight) * Number(set.reps),
         0,
       )
     );
   }, 0);
 }
 
-function findMaxWorkout(workouts, { filterFn, getValueFn, unit, title }) {
+function findMaxWorkout(
+  workouts: WorkoutEntity[],
+  {
+    filterFn,
+    getValueFn,
+    unit,
+    title,
+  }: {
+    filterFn: (w: WorkoutEntity) => boolean;
+    getValueFn: (w: WorkoutEntity) => number;
+    unit: string;
+    title: string;
+  },
+) {
   const filtered = workouts.filter(filterFn);
 
   if (filtered.length === 0) return null;
@@ -38,7 +51,7 @@ function findMaxWorkout(workouts, { filterFn, getValueFn, unit, title }) {
   };
 }
 
-function findMaxByDistance(workouts, type) {
+function findMaxByDistance(workouts: WorkoutEntity[], type: string) {
   return findMaxWorkout(workouts, {
     filterFn: (w) => w.type === type,
     getValueFn: (w) => w.metrics.distance.current,
@@ -47,7 +60,7 @@ function findMaxByDistance(workouts, type) {
   });
 }
 
-function findMaxByVolume(workouts) {
+function findMaxByVolume(workouts: WorkoutEntity[]) {
   return findMaxWorkout(workouts, {
     filterFn: (w) => w.type === "POWER",
     getValueFn: (w) => calculateVolume(w),
@@ -56,15 +69,15 @@ function findMaxByVolume(workouts) {
   });
 }
 
-export function getPersonalRecords(workouts) {
+export function getPersonalRecords(workouts: WorkoutEntity[]) {
   if (!workouts || workouts.length === 0) return [];
 
   const runRecord = findMaxByDistance(workouts, "RUN");
-  if (runRecord) runRecord.value = metersToKilometers(runRecord.value);
+  if (runRecord) runRecord.value = Number(metersToKilometers(runRecord.value));
 
   const cyclingRecord = findMaxByDistance(workouts, "CYCLING");
   if (cyclingRecord)
-    cyclingRecord.value = metersToKilometers(cyclingRecord.value);
+    cyclingRecord.value = Number(metersToKilometers(cyclingRecord.value));
 
   const powerRecord = findMaxByVolume(workouts);
 

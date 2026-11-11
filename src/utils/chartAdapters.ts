@@ -1,9 +1,4 @@
-type CurrentSet = {
-  current: number;
-};
-type Metrics = {
-  [MetricKey: string]: CurrentSet;
-};
+import { Metrics } from "../types/metrics";
 type StatsSet = {
   type: string;
   metrics: Metrics;

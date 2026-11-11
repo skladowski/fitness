@@ -1,3 +1,8 @@
+import {
+  WorkoutEntity,
+  ExerciseEntity,
+  ExerciseSetEntity,
+} from "../types/workout";
 export function secondsToMinutes(val: number) {
   return Math.floor(val / 60);
 }
@@ -19,11 +24,6 @@ export function getDisplayDate(date: Date) {
   });
   return dateString.charAt(0).toUpperCase() + dateString.slice(1);
 }
-
-type WorkoutEntity = {
-  timestamp: string;
-};
-
 export function calculateStreak(
   workouts: WorkoutEntity[],
   anchorDate: Date | string = new Date(),
@@ -79,14 +79,6 @@ export function getMonthSince(startDate: string) {
   const startMonth = new Date(startDate).getMonth();
   return (nowYear - startYear) * 12 + (nowMonth - startMonth);
 }
-
-type ExerciseSetEntity = {
-  weight: number | string;
-  reps: number | string;
-};
-type ExerciseEntity = {
-  sets: ExerciseSetEntity[];
-};
 
 export function calculateTotalTonnage(exercises: ExerciseEntity[]) {
   const sets = exercises.flatMap((ex) => ex.sets);

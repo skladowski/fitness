@@ -1,4 +1,10 @@
-export const ACTIVITY_LEVELS = [
+import { ActivityLevel } from "../types/profile";
+type ActivityLevelEntity = {
+  key: ActivityLevel;
+  label: string;
+  sub: string;
+};
+export const ACTIVITY_LEVELS: ActivityLevelEntity[] = [
   {
     key: "Sedentary",
     label: "Низкая",

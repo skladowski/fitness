@@ -2,7 +2,26 @@ import { secondsToHours } from "../utils/formatters";
 import { secondsToMinutes } from "../utils/formatters";
 import { metersToKilometers } from "../utils/formatters";
 
-export const activities = {
+type ActivityConfigEntity = {
+  metrics: ActivityMetrics;
+  label: string;
+  icon?: string;
+  color?: string;
+  textColor?: string;
+  showRatio?: boolean;
+  isSport?: boolean;
+};
+
+type MetricConfigEntity = {
+  isPrimary?: boolean;
+  color?: string;
+  label: string;
+  unit: string;
+  transform?: (val: number) => string | number;
+};
+type ActivityMetrics = Record<string, MetricConfigEntity>;
+
+export const activities: Record<string, ActivityConfigEntity> = {
   RUN: {
     isSport: true,
     label: "Бег",
@@ -24,7 +43,6 @@ export const activities = {
         isPrimary: true,
         label: "Калории",
         unit: "ккал",
-        transform: "",
       },
       heartRate: { label: "Пульс", unit: "уд/мин" },
     },
@@ -45,7 +63,6 @@ export const activities = {
         isPrimary: true,
         label: "Калории",
         unit: "ккал",
-        transform: "",
       },
       exercisesCount: {
         label: "Упражнений",

@@ -1,4 +1,9 @@
-export const GENDERS = [
+import { Gender } from "../types/profile";
+type GenderEntity = {
+  key: Gender;
+  label: string;
+};
+export const GENDERS: GenderEntity[] = [
   {
     key: "male",
     label: "Мужской",

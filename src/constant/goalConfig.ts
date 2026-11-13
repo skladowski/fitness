@@ -1,4 +1,23 @@
-export const goalConfig = {
+type GoalConfig = {
+  STEPS: GoalConfigItem;
+  CALORIES: GoalConfigItem;
+  ACTIVE_MINUTES: GoalConfigItem;
+  SLEEP: GoalConfigItem;
+};
+type GoalConfigItem = {
+  slider: Slider;
+  presets: Preset[];
+};
+type Preset = {
+  label: string;
+  value: number;
+};
+type Slider = {
+  min: number;
+  max: number;
+  step: number;
+};
+export const goalConfig: GoalConfig = {
   STEPS: {
     slider: {
       min: 2000,

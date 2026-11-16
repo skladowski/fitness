@@ -1,6 +1,7 @@
 import { secondsToHours } from "../utils/formatters";
 import { secondsToMinutes } from "../utils/formatters";
 import { metersToKilometers } from "../utils/formatters";
+import { ActivityType } from "../types/activity";
 
 type ActivityConfigEntity = {
   metrics: ActivityMetrics;
@@ -21,7 +22,7 @@ type MetricConfigEntity = {
 };
 type ActivityMetrics = Record<string, MetricConfigEntity>;
 
-export const activities: Record<string, ActivityConfigEntity> = {
+export const activities: Record<ActivityType, ActivityConfigEntity> = {
   RUN: {
     isSport: true,
     label: "Бег",

@@ -1,5 +1,6 @@
 import { metersToKilometers } from "./formatters";
 import { WorkoutEntity } from "../types/workout";
+import { ActivityType } from "../types/activity";
 function calculateVolume(workout: WorkoutEntity) {
   if (workout.type !== "POWER" || !workout.exercises) return 0;
   return workout.exercises.reduce((total, exercise) => {
@@ -51,7 +52,7 @@ function findMaxWorkout(
   };
 }
 
-function findMaxByDistance(workouts: WorkoutEntity[], type: string) {
+function findMaxByDistance(workouts: WorkoutEntity[], type: ActivityType) {
   return findMaxWorkout(workouts, {
     filterFn: (w) => w.type === type,
     getValueFn: (w) => w.metrics.distance.current,

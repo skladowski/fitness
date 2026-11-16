@@ -1,6 +1,7 @@
+import { ActivityType } from "../types/activity";
 import { Metrics } from "../types/metrics";
 type StatsSet = {
-  type: string;
+  type: ActivityType;
   metrics: Metrics;
 };
 type Day = {
@@ -37,7 +38,7 @@ export function transformStatsForChart(
 
 export function getChartDataByType(
   statsData: Day[],
-  type: string,
+  type: ActivityType,
   metricKey: string,
   transformFn = (val: number) => val,
 ) {

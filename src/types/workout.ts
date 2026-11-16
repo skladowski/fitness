@@ -1,7 +1,8 @@
 import { Metrics } from "./metrics";
+import { ActivityType } from "./activity";
 export type WorkoutEntity = {
   timestamp: string;
-  type: string;
+  type: ActivityType;
   exercises?: ExerciseEntity[];
   metrics: Metrics;
 };

@@ -1,4 +1,15 @@
-export const NAV_LINKS = [
+import { ReactNode } from "react";
+type NavLinkEntity = {
+  id: string;
+  path: string;
+  label: string;
+  icon?: ReactNode;
+  iconText?: string;
+  avatarText?: string;
+  variant?: "logo" | "avatar";
+  isBottom?: boolean;
+};
+export const NAV_LINKS: NavLinkEntity[] = [
   {
     id: "uuid-1",
     path: "/",

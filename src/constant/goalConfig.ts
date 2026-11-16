@@ -1,9 +1,4 @@
-type GoalConfig = {
-  STEPS: GoalConfigItem;
-  CALORIES: GoalConfigItem;
-  ACTIVE_MINUTES: GoalConfigItem;
-  SLEEP: GoalConfigItem;
-};
+import { GoalType } from "../types/goal";
 type GoalConfigItem = {
   slider: Slider;
   presets: Preset[];
@@ -17,7 +12,7 @@ type Slider = {
   max: number;
   step: number;
 };
-export const goalConfig: GoalConfig = {
+export const goalConfig: Record<GoalType, GoalConfigItem> = {
   STEPS: {
     slider: {
       min: 2000,

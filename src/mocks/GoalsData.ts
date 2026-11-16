@@ -1,0 +1,7 @@
+import { GoalType } from "../types/goal";
+export const Goals: Record<GoalType, number> = {
+  STEPS: 8000,
+  CALORIES: 2000,
+  ACTIVE_MINUTES: 45,
+  SLEEP: 8,
+};

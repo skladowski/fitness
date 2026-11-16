@@ -1,10 +1,11 @@
-export const HistoryDataMonth = [
+import { HistorySummaryEntity } from "../types/history";
+export const HistoryDataWeek: HistorySummaryEntity[] = [
   {
     id: "uuid-1",
     type: "STEPS",
     trend: 12,
     metrics: {
-      steps: { current: 247194, target: null },
+      steps: { current: 50394, target: null },
     },
   },
   {
@@ -13,7 +14,7 @@ export const HistoryDataMonth = [
     type: "CALORIES",
     trend: 12,
     metrics: {
-      burned: { current: 14820, target: null },
+      burned: { current: 1220, target: null },
     },
   },
   {
@@ -22,7 +23,7 @@ export const HistoryDataMonth = [
     type: "TRAINING_COUNT",
     trend: 3,
     metrics: {
-      number: { current: 18, target: null },
+      number: { current: 4, target: null },
     },
   },
   {
@@ -31,7 +32,7 @@ export const HistoryDataMonth = [
     type: "ACTIVE_MINUTES",
     trend: -4,
     metrics: {
-      active: { current: 1920, target: null },
+      active: { current: 320, target: null },
     },
   },
 ];

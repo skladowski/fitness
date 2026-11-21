@@ -11,3 +11,7 @@ export type ActivityType =
   | "SLEEP"
   | "ACTIVE_MINUTES"
   | "TRAINING_COUNT";
+export type SportType = Extract<
+  ActivityType,
+  "RUN" | "CYCLING" | "YOGA" | "SWIMMING" | "POWER"
+>;

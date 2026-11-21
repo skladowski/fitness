@@ -1,4 +1,14 @@
-export const NutritionData = [
+import { Metrics } from "../types/metrics";
+type NutritionDayEntity = {
+  date: string;
+  nutrition: NutritionEntity[];
+};
+type NutritionEntity = {
+  type: "NUTRITION";
+  id: string;
+  metrics: Metrics;
+};
+export const NutritionData: NutritionDayEntity[] = [
   {
     date: "2026-07-07",
     nutrition: [

@@ -1,21 +1,21 @@
 import { ActivityType } from "../types/activity";
-import { StatsDayEntity, StatsData } from "../types/stats";
+import { StatsDayEntity, StatsEntity } from "../types/stats";
 
 export function transformStatsForChart(
-  statsData: StatsDayEntity[],
+  StatsEntity: StatsDayEntity[],
   {
     getValueFn,
     transform,
   }: {
-    getValueFn: (stats: StatsData[]) => number;
+    getValueFn: (stats: StatsEntity[]) => number;
     transform: (val: number) => number;
   },
 ) {
-  const transformedData = statsData.map((day, index) => {
+  const transformedData = StatsEntity.map((day, index) => {
     const showMonth =
-      index === statsData.length - 1 ||
+      index === StatsEntity.length - 1 ||
       new Date(day.date).getMonth() !==
-        new Date(statsData[index + 1].date).getMonth();
+        new Date(StatsEntity[index + 1].date).getMonth();
 
     return {
       name: new Date(day.date).toLocaleDateString(
@@ -29,12 +29,12 @@ export function transformStatsForChart(
 }
 
 export function getChartDataByType(
-  statsData: StatsDayEntity[],
+  StatsEntity: StatsDayEntity[],
   type: ActivityType,
   metricKey: string,
   transformFn = (val: number) => val,
 ) {
-  return transformStatsForChart(statsData, {
+  return transformStatsForChart(StatsEntity, {
     getValueFn: (stats) =>
       stats.find((stat) => stat.type === type)?.metrics[metricKey]?.current ||
       0,

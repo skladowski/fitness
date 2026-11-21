@@ -1,2 +1,2 @@
-import { StatsData } from "../types/stats";
-export const HistoryDataYear: StatsData[] = [];
+import { StatsEntity } from "../types/stats";
+export const HistoryDataYear: StatsEntity[] = [];

@@ -4,7 +4,7 @@ import { NutritionCard } from "../../components/Nutrition/NutritionCard.jsx";
 import { Header } from "../../components/Header/Header.jsx";
 import { DefaultHeaderActions } from "../../components/Header/DefaultHeaderActions.jsx";
 import { getDisplayDate } from "../../utils/formatters.js";
-import { statsData } from "../../mocks/StatsData.jsx";
+import { StatsEntity } from "../../mocks/StatsEntity.jsx";
 import { NutritionData } from "../../mocks/NutritionData.jsx";
 import { workoutContext } from "../../context/WorkoutContext.jsx";
 import { useContext } from "react";
@@ -15,7 +15,7 @@ export function DashboardPage() {
   const { workoutHistory } = useContext(workoutContext);
   const today = getDisplayDate(new Date());
   const todayStats =
-    statsData.find((element) => element.date === TODAY)?.stats || [];
+    StatsEntity.find((element) => element.date === TODAY)?.stats || [];
   const todayWorkouts = workoutHistory
     .flatMap((day) => day.workouts)
     .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))

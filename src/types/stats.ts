@@ -1,6 +1,6 @@
 import { ActivityType } from "./activity";
 import { Metrics } from "./metrics";
-export type StatsData = {
+export type StatsEntity = {
   id: string;
   type: ActivityType;
   trend: number;
@@ -9,5 +9,5 @@ export type StatsData = {
 
 export type StatsDayEntity = {
   date: string;
-  stats: StatsData[];
+  stats: StatsEntity[];
 };

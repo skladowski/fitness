@@ -17,7 +17,7 @@ import { useState, useMemo, useContext } from "react";
 import { activities } from "../../constant/activities";
 import { calculateStreak } from "../../utils/formatters";
 import { getPersonalRecords } from "../../utils/records";
-import { statsData } from "../../mocks/StatsData";
+import { StatsEntity } from "../../mocks/StatsEntity";
 import { getChartDataByType } from "../../utils/chartAdapters";
 import { secondsToHours } from "../../utils/formatters";
 import { workoutContext } from "../../context/WorkoutContext";
@@ -73,10 +73,10 @@ export function HistoryPage() {
   const records = useMemo(() => {
     return getPersonalRecords(allWorkouts);
   }, [allWorkouts]);
-  const periodStatsData = statsData.slice(0, periodDaysMap[activePeriod]);
+  const periodStatsEntity = StatsEntity.slice(0, periodDaysMap[activePeriod]);
   const { type, metricKey, transform, goal } = metricConfigMap[activeMetric];
   const chartData = getChartDataByType(
-    periodStatsData,
+    periodStatsEntity,
     type,
     metricKey,
     transform,

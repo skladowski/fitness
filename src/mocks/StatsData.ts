@@ -1,5 +1,5 @@
 import { StatsDayEntity } from "../types/stats";
-export const statsData: StatsDayEntity[] = [
+export const StatsEntity: StatsDayEntity[] = [
   {
     date: "2026-07-15",
     stats: [

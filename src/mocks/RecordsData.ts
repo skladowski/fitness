@@ -1,4 +1,5 @@
-export const RecordsData = [
+import { WorkoutEntity } from "../types/workout";
+export const RecordsData: WorkoutEntity[] = [
   {
     id: "uuid-1",
     type: "RUN",

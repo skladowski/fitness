@@ -1,4 +1,10 @@
-export const WorkoutsData = [
+import { WorkoutEntity } from "../types/workout";
+type WorkoutDayEntity = {
+  date: string;
+  workouts: WorkoutEntity[];
+};
+
+export const WorkoutsData: WorkoutDayEntity[] = [
   // --- СТРИК (15 июля - 7 июля) ---
   {
     date: "2026-07-15",

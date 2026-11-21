@@ -1,21 +1,13 @@
 import { ActivityType } from "../types/activity";
-import { Metrics } from "../types/metrics";
-type StatsSet = {
-  type: ActivityType;
-  metrics: Metrics;
-};
-type Day = {
-  date: string;
-  stats: StatsSet[];
-};
+import { StatsDayEntity, StatsData } from "../types/stats";
 
 export function transformStatsForChart(
-  statsData: Day[],
+  statsData: StatsDayEntity[],
   {
     getValueFn,
     transform,
   }: {
-    getValueFn: (stats: StatsSet[]) => number;
+    getValueFn: (stats: StatsData[]) => number;
     transform: (val: number) => number;
   },
 ) {
@@ -37,7 +29,7 @@ export function transformStatsForChart(
 }
 
 export function getChartDataByType(
-  statsData: Day[],
+  statsData: StatsDayEntity[],
   type: ActivityType,
   metricKey: string,
   transformFn = (val: number) => val,

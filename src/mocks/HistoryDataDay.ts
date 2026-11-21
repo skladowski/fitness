@@ -1,5 +1,5 @@
-import { HistorySummaryEntity } from "../types/history";
-export const HistoryDataDay: HistorySummaryEntity[] = [
+import { StatsData } from "../types/stats";
+export const HistoryDataDay: StatsData[] = [
   {
     id: "uuid-1",
     type: "STEPS",
